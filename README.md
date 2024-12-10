@@ -1,34 +1,72 @@
 # E-Commerce Fragrance Store
 
-A modern, feature-rich E-Commerce fragrance store built with **React**, **GraphQL**, **Apollo Client**, **Redux**, **Stripe**, **PayPal**, **Context API**, and **Firebase Authentication**. This project allows users to browse, search, and purchase fragrances, offering a seamless shopping experience with secure payments via **Stripe** and **PayPal**.
+A modern, feature-rich E-Commerce fragrance store built with **React**, **TypeScript**, **Redux Toolkit**, **ExpressJS**, **NodeJS**, **Stripe**, **PayPal**, **JWT**, and **MongoDB**. This project allows users to browse, search, and purchase fragrances, offering a seamless shopping experience with secure payments and advanced features such as promotions, discounts, and wishlist management.
 
 ---
 
-### Features:
-- **Product Catalog**: View a wide selection of fragrances with images, descriptions, and pricing.
-- **Search & Filters**: Filter products by category, brand, and price range.
-- **User Authentication**: Secure sign-up and login with **Firebase Authentication** (including **Google OAuth** authentication).
+## Features
+
+- **Product Catalog**: Browse a wide selection of fragrances with images, descriptions, pricing, and promotional details.
+- **Search & Filters**: Filter products by category, brand, price range, and promotional discounts.
+- **User Authentication**: Secure registration and login with **JWT** authentication (supports **Google OAuth** and **Facebook OAuth**).
 - **Shopping Cart**: Add products to the cart, update quantities, and proceed to checkout.
-- **Stripe & PayPal Payments**: Secure payment options for users via **Stripe** and **PayPal**.
-- **Order History**: Users can view their past orders.
-- **Responsive Design**: Fully responsive for desktop and mobile devices.
+- **Secure Payments**: Choose between payment methods via **Stripe**, **PayPal**, or **Cash on Delivery**.
+- **Order Management**: Track the status of current orders and view order history.
+- **Wishlist**: Save favorite products for future purchase.
+- **Promotions**: Manage promotional codes and set up discounts for products, categories, or brands.
 - **Product Reviews**: Customers can leave reviews and rate fragrances.
-- **Real-time Data with GraphQL**: Fetch product data, user information, and order details efficiently using **GraphQL**.
-- **Global State Management**: Manage application state using **Redux** and **Context API** for handling cart and user data.
+- **Responsive Design**: Fully responsive for desktop, tablet, and mobile devices.
+- **Efficient Data Management with Redux Toolkit & GraphQL**: Main application state is managed with **Redux Toolkit**, while **GraphQL** is used selectively for specific data fetching needs, ensuring optimized performance for complex queries or real-time data requirements.
+- **Global State Management**: Leverage **Redux Toolkit** and **Context API** for seamless management of cart, wishlist, and user data.
+- **Enhanced Search with Elasticsearch**: Enable advanced search capabilities with **Elasticsearch**, ensuring fast and accurate results.
 
 ---
 
-### Tech Stack:
-- **React**: A JavaScript library for building user interfaces.
-- **GraphQL**: A query language for APIs, used to fetch and mutate data.
-- **Apollo Client**: The client for interacting with GraphQL APIs.
-- **Redux**: State management for cart, user authentication, and orders.
-- **Context API**: For global state management (e.g., user authentication status).
-- **Stripe**: Payment gateway for handling secure card transactions.
-- **PayPal**: Payment integration for seamless PayPal transactions.
-- **Firebase Authentication**: For user authentication and social login (Google OAuth, Email/Password).
-- **JWT**: JSON Web Tokens for secure user authentication.
-- **MongoDB**: NoSQL database for storing product data, user information, and orders.
-- **Google OAuth**: For easy and secure Google-based authentication.
+## Tech Stack
+
+### Frontend
+
+- **React with TypeScript**: A modern framework for building scalable user interfaces.
+- **Redux Toolkit**: For state management of cart, orders, and user authentication.
+- **TailwindCSS**: Utility-first CSS framework for responsive design.
+- **Material UI**: Pre-built React components for fast development.
+- **Jest & RTL (React Testing Library)**: For unit and integration testing of components.
+- **Cypress**: End-to-end testing for a seamless user experience.
+- **Storybook**: For developing and documenting UI components in isolation.
+- **Helmet**: For improving security by setting HTTP headers.
+
+### Backend
+
+- **Node.js**: For server-side logic.
+- **Express.js**: Lightweight framework for building API routes.
+- **MongoDB**: NoSQL database for storing product data, user information, orders, and promotions.
+- **Redis**: For caching frequently accessed data (e.g., products and promotions).
+- **GraphQL & Apollo Server**: For efficient data fetching and mutation.
+- **Elasticsearch**: For advanced and fast search functionalities.
+- **JWT**: JSON Web Tokens for secure user authentication and API protection.
+- **Zod**: For request validation and schema enforcement.
+- **Express-Rate-Limit**: To prevent abuse of API endpoints.
+- **Multer**: For handling file uploads (e.g., product images).
+- **Stripe & PayPal**: For secure payment processing.
+
+### CI/CD & DevOps
+
+- **GitLab**: For version control and CI/CD pipelines.
+- **Docker**: For containerized application development and deployment.
+- **Postman**: For API testing and debugging.
+
+---
+
+## Additional Functionalities
+
+- **Promotions & Discounts**:
+  - Add promo codes for specific products, categories, or brands.
+  - Apply dynamic pricing logic without altering the original product price.
+- **Wishlist Management**:
+  - Associate wishlist with authenticated users.
+  - Allow adding/removing products from the wishlist easily.
+- **Advanced Search**:
+  - Enable users to search by product name, brand, or category using Elasticsearch.
+  - Support keyword suggestions and filters for better user experience.
 
 ---
