@@ -61,7 +61,14 @@ const Footer = () => {
             <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>
               About Us
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "5px",
+                fontSize: "14px",
+              }}
+            >
               <Link href="#" color="inherit" underline="hover">
                 About Us
               </Link>
@@ -80,7 +87,14 @@ const Footer = () => {
             <Typography variant="subtitle1" sx={{ fontWeight: "bold", mb: 1 }}>
               Contacts & Help
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "5px",
+                fontSize: "14px",
+              }}
+            >
               <Link href="#" color="inherit" underline="hover">
                 FAQ
               </Link>

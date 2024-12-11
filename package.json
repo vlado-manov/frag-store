@@ -21,12 +21,6 @@
     "type": "git",
     "url": "git+https://github.com/vlado-manov/frag-store.git"
   },
-  "keywords": [
-    "fragrance",
-    "perfumes",
-    "store",
-    "ecom"
-  ],
   "author": "Vladimir Manov",
   "license": "MIT",
   "bugs": {

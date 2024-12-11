@@ -7,6 +7,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
+import { ThemeProvider } from "@mui/material";
 import App from "./App";
 import Home from "./views/Home";
 import CategoryView from "./views/CategoryView";
@@ -24,6 +25,7 @@ import ShippingView from "./views/user/ShippingView";
 import SignIn from "./views/auth/SignIn";
 import SignUp from "./views/auth/SignUp";
 import RecoverPassword from "./views/auth/RecoverPassword";
+import { lightTheme } from "./styles/theme";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -62,6 +64,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={lightTheme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
