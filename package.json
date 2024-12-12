@@ -1,8 +1,9 @@
 {
   "dependencies": {
-    "@types/express": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "mongodb": "^6.12.0",
     "mongoose": "^8.8.4",
     "typescript": "^5.7.2"
   },
@@ -15,7 +16,9 @@
     "start": "tsx backend/server.ts",
     "server": "nodemon --exec tsx backend/server.ts",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "tsx backend/seeder.ts",
+    "data:destroy": "tsx backend/seeder.ts -d"
   },
   "repository": {
     "type": "git",
@@ -28,6 +31,9 @@
   },
   "homepage": "https://github.com/vlado-manov/frag-store#readme",
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/express": "^5.0.0",
+    "@types/mongoose": "^5.11.96",
     "concurrently": "^9.1.0",
     "nodemon": "^3.1.7",
     "tsx": "^4.19.2"
