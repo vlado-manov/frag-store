@@ -2,6 +2,16 @@ import express, { Request, Response } from "express";
 import asyncHandler from "../middleware/asyncHandler";
 import Product from "../models/productModel";
 
+const getProducts = asyncHandler(async (req: Request, res: Response) => {
+  const products = await Product.find({});
+  res.status(200).json(products);
+});
+
+const getProductById = asyncHandler(async (req: Request, res: Response) => {
+  const product = await Product.findById(req.params.id);
+  res.status(200).json(product);
+});
+
 const createProduct = asyncHandler(async (req: Request, res: Response) => {
   const { name, description, brand, category, gender, variants } = req.body;
 
@@ -62,4 +72,30 @@ const createProduct = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { createProduct };
+const updateProduct = asyncHandler(async (req: Request, res: Response) => {
+  res.send("Update product");
+});
+
+const deleteProduct = asyncHandler(async (req: Request, res: Response) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    await Product.deleteOne({ _id: product._id });
+    res.status(200).json({ message: "Product deleted!" });
+  } else {
+    res.status(404);
+    throw new Error("Product not found!");
+  }
+});
+
+const createReview = asyncHandler(async (req: Request, res: Response) => {
+  res.send("Create review");
+});
+
+export {
+  getProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+  createReview,
+};
