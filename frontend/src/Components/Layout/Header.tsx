@@ -28,7 +28,12 @@ import {
   AccountCircle,
 } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useLogoutMutation } from "../../slices/userSlice";
+import { useDispatch } from "react-redux";
+import { logout } from "../../slices/authSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const theme = createTheme({
   palette: {
@@ -53,6 +58,10 @@ const Header = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
   const openMenu = Boolean(anchorEl);
+  const [logoutApiCall] = useLogoutMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state: RootState) => state.auth);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -75,6 +84,16 @@ const Header = () => {
 
   const handleSearch = () => {
     console.log("Searching for:", searchText);
+  };
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <ThemeProvider theme={theme}>
@@ -165,26 +184,44 @@ const Header = () => {
                 <IconButton color="inherit" onClick={handleMenuOpen}>
                   <AccountCircle />
                 </IconButton>
+                {userInfo ? <Typography>{userInfo.name}</Typography> : ""}
               </Box>
             </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
 
-      <Menu anchorEl={anchorEl} open={openMenu} onClose={handleMenuClose}>
-        <MenuItem
-          sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
-          onClick={handleMenuClose}
-        >
-          Profile
-        </MenuItem>
-        <MenuItem
-          sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
-          onClick={handleMenuClose}
-        >
-          Logout
-        </MenuItem>
-      </Menu>
+      {userInfo ? (
+        <Menu anchorEl={anchorEl} open={openMenu} onClose={handleMenuClose}>
+          <MenuItem
+            sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
+            onClick={handleMenuClose}
+          >
+            Profile
+          </MenuItem>
+          <MenuItem
+            sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
+            onClick={logoutHandler}
+          >
+            Logout
+          </MenuItem>
+        </Menu>
+      ) : (
+        <Menu anchorEl={anchorEl} open={openMenu} onClose={handleMenuClose}>
+          <MenuItem
+            sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
+            onClick={handleMenuClose}
+          >
+            Sign In
+          </MenuItem>
+          <MenuItem
+            sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
+            onClick={logoutHandler}
+          >
+            Sign Up
+          </MenuItem>
+        </Menu>
+      )}
 
       <Drawer
         anchor="left"
@@ -269,7 +306,7 @@ const Header = () => {
         sx={{
           padding: "10px",
           background: isMobile
-            ? "#171717"
+            ? "#221b22"
             : "linear-gradient(10deg, #171717 0%, #2d1e2d 50%, #2e0145 100%)",
         }}
       >

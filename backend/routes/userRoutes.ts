@@ -12,12 +12,17 @@ import {
   updateUser,
   updateUserByAdmin,
 } from "../controllers/userController";
+import { protect, admin } from "../middleware/authMiddleware";
 const router = express.Router();
 
-router.route("/").post(registerUser).get(getUsers);
+router.route("/").post(registerUser).get(protect, admin, getUsers);
 router.route("/login").post(authUser);
 router.route("/logout").post(logoutUser);
-router.route("/profile").get(getUserProfile).put(updateUser);
-router.route("/:id").delete(deleteUser).get(getUserById).put(updateUserByAdmin);
+router.route("/profile").get(protect, getUserProfile).put(protect, updateUser);
+router
+  .route("/:id")
+  .delete(protect, admin, deleteUser)
+  .get(protect, admin, getUserById)
+  .put(protect, admin, updateUserByAdmin);
 
 export default router;

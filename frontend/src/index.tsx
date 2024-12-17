@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import { ThemeProvider } from "@mui/material";
+import { Provider } from "react-redux";
+import store from "./store";
 import App from "./App";
 import Home from "./views/Home";
 import CategoryView from "./views/CategoryView";
@@ -26,6 +28,7 @@ import SignIn from "./views/auth/SignIn";
 import SignUp from "./views/auth/SignUp";
 import RecoverPassword from "./views/auth/RecoverPassword";
 import { lightTheme } from "./styles/theme";
+import PrivateRoute from "./components/RouteProtection/PrivateRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -47,14 +50,16 @@ const router = createBrowserRouter(
       <Route path="/login" element={<SignIn />} />
       <Route path="/register" element={<SignUp />} />
       <Route path="/recoverpassword" element={<RecoverPassword />} />
-      {/* TODO: Make private */}
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/orders" element={<OrdersList />} />
-      <Route path="/orders/page/:pageNumber" element={<OrdersList />} />
-      <Route path="/order/:id" element={<OrderView />} />
-      <Route path="/shipping" element={<ShippingView />} />
-      <Route path="/payment" element={<PaymentView />} />
-      <Route path="/placeorder" element={<PlaceOrder />} />
+      <Route path="" element={<PrivateRoute />}>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/orders" element={<OrdersList />} />
+        <Route path="/orders/page/:pageNumber" element={<OrdersList />} />
+        <Route path="/order/:id" element={<OrderView />} />
+        <Route path="/shipping" element={<ShippingView />} />
+        <Route path="/payment" element={<PaymentView />} />
+        <Route path="/placeorder" element={<PlaceOrder />} />
+      </Route>
+      {/* TODO: Place admin routes */}
     </Route>
   )
 );
@@ -64,8 +69,10 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={lightTheme}>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={lightTheme}>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>
 );

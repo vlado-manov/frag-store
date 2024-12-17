@@ -1,7 +1,8 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
+import { Link as RouterLink } from "react-router-dom";
+import { Link as MuiLink } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -64,9 +65,9 @@ function RecoverPassword() {
           </Button>
 
           <Box>
-            <Link href="/register" variant="body2">
+            <MuiLink component={RouterLink} to="/register" variant="body2">
               {"Don't have an account? Sign Up"}
-            </Link>
+            </MuiLink>
           </Box>
         </Box>
       </Box>

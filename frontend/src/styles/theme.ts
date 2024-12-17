@@ -20,7 +20,7 @@ const lightTheme = createTheme({
     // },
   },
   typography: {
-    fontFamily: "Roboto, Arial, sans-serif", // Основен шрифт
+    fontFamily: "Poppins, Arial, sans-serif", // Основен шрифт
     h1: {
       fontFamily: "Poppins, Arial, sans-serif",
       fontSize: 96,
@@ -60,7 +60,8 @@ const lightTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          background: "#996f99",
+          // background: "#996f99",
+          background: "#221b22",
           textTransform: "none",
           padding: "8px 16px",
           fontSize: "16px",

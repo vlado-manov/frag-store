@@ -11,6 +11,7 @@ interface IAddress {
 }
 
 interface IUser extends Document {
+  _id: string | mongoose.Types.ObjectId;
   name: string;
   email: string;
   password: string;
@@ -116,6 +117,7 @@ userSchema.methods.matchPassword = async function (
 };
 
 userSchema.pre("save", async function (next) {
+  this.email = this.email.toLowerCase();
   if (!this.isModified("password")) {
     next();
   }
@@ -127,4 +129,5 @@ userSchema.pre("save", async function (next) {
 
 const User = mongoose.model<IUser>("User", userSchema);
 
+export { IUser };
 export default User;
