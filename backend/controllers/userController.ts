@@ -142,9 +142,22 @@ const updateUserByAdmin = asyncHandler(async (req: Request, res: Response) => {
   if (user) {
     user.name = req.body.name?.trim() || user.name;
     user.email = req.body.email?.toLowerCase() || user.email;
+    user.phone = req.body.phone || user.phone;
+    user.image = req.body.image || user.image;
 
     if (req.body.password) {
       user.password = req.body.password;
+    }
+
+    if (req.body.addresses && Array.isArray(req.body.addresses)) {
+      user.addresses = req.body.addresses.map((address: any) => ({
+        addressLine1: address.addressLine1 || "",
+        addressLine2: address.addressLine2 || "",
+        city: address.city || "",
+        postalCode: address.postalCode || "",
+        country: address.country || "",
+        isPrimary: address.isPrimary || false,
+      }));
     }
 
     const updatedUser = await user.save();
@@ -153,6 +166,9 @@ const updateUserByAdmin = asyncHandler(async (req: Request, res: Response) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
+      phone: updatedUser.phone,
+      image: updatedUser.image,
+      addresses: updatedUser.addresses,
       isAdmin: updatedUser.isAdmin,
     });
   } else {

@@ -16,13 +16,7 @@ import { RootState } from "../../store";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
 import Message from "../../components/ui/Message";
-
-interface ErrorResponse {
-  message: string;
-  data?: {
-    message: string;
-  };
-}
+import { ErrorResponse } from "../../types/errorTypes";
 
 interface FormData {
   name: string;
@@ -36,7 +30,6 @@ function SignIn() {
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitError, setSubmitError] = useState<string>("");
 
   const dispatch = useDispatch();

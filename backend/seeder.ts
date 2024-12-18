@@ -1,18 +1,20 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import users from "./testData/users.js";
-import User from "./models/userModel.js";
+import products from "./data/products.js";
+import Product from "./models/productModel.js";
 import connectDB from "./config/db.js";
 dotenv.config();
 connectDB();
 
 const importData = async (): Promise<void> => {
   try {
-    await User.deleteMany();
+    // await User.deleteMany();
+    await Product.deleteMany();
 
-    const createdUsers = await User.insertMany(users);
+    // const createdUsers = await User.insertMany(users);
+    const createdProducts = await Product.insertMany(products);
 
-    const adminUser = createdUsers[0]._id;
+    // const adminUser = createdUsers[0]._id;
     console.log("Data Imported!");
 
     process.exit();
@@ -25,7 +27,8 @@ const importData = async (): Promise<void> => {
 
 const destroyData = async (): Promise<void> => {
   try {
-    await User.deleteMany();
+    // await User.deleteMany();
+    await Product.deleteMany();
     console.log("Data Destroyed!");
 
     process.exit();

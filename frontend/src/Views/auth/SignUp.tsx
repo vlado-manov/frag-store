@@ -17,13 +17,7 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 import Message from "../../components/ui/Message";
 import { baseSchema } from "../../types/formValidation";
-
-interface ErrorResponse {
-  message: string;
-  data?: {
-    message: string;
-  };
-}
+import { ErrorResponse } from "../../types/errorTypes";
 
 interface FormData {
   name: string;

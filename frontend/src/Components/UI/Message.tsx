@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert, AlertTitle } from "@mui/material";
+import { Alert } from "@mui/material";
 
 interface MessageProps {
   severity: "error" | "info" | "warning" | "success";

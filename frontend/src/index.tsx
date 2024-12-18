@@ -11,11 +11,11 @@ import { ThemeProvider } from "@mui/material";
 import { Provider } from "react-redux";
 import store from "./store";
 import App from "./App";
-import Home from "./views/Home";
-import CategoryView from "./views/CategoryView";
-import ProductView from "./views/ProductView";
-import BrandView from "./views/BrandView";
-import ProductsList from "./views/ProductsList";
+import Home from "./views/pages/Home";
+import CategoryView from "./views/pages/CategoryView";
+import ProductView from "./views/pages/ProductView";
+import BrandView from "./views/pages/BrandView";
+import ProductsList from "./views/pages/ProductsList";
 import WishList from "./views/user/WishList";
 import Profile from "./views/user/Profile";
 import Cart from "./views/user/Cart";
@@ -28,7 +28,7 @@ import SignIn from "./views/auth/SignIn";
 import SignUp from "./views/auth/SignUp";
 import RecoverPassword from "./views/auth/RecoverPassword";
 import { lightTheme } from "./styles/theme";
-import PrivateRoute from "./components/RouteProtection/PrivateRoute";
+import PrivateRoute from "./routes/PrivateRoute";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
