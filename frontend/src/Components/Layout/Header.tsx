@@ -193,12 +193,14 @@ const Header = () => {
 
       {userInfo ? (
         <Menu anchorEl={anchorEl} open={openMenu} onClose={handleMenuClose}>
-          <MenuItem
-            sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
-            onClick={handleMenuClose}
-          >
-            Profile
-          </MenuItem>
+          <Link to="/profile">
+            <MenuItem
+              sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
+              onClick={handleMenuClose}
+            >
+              Profile
+            </MenuItem>
+          </Link>
           <MenuItem
             sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
             onClick={logoutHandler}
@@ -208,18 +210,22 @@ const Header = () => {
         </Menu>
       ) : (
         <Menu anchorEl={anchorEl} open={openMenu} onClose={handleMenuClose}>
-          <MenuItem
-            sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
-            onClick={handleMenuClose}
-          >
-            Sign In
-          </MenuItem>
-          <MenuItem
-            sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
-            onClick={logoutHandler}
-          >
-            Sign Up
-          </MenuItem>
+          <Link to="/login">
+            <MenuItem
+              sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
+              onClick={handleMenuClose}
+            >
+              Sign In
+            </MenuItem>
+          </Link>
+          <Link to="/register">
+            <MenuItem
+              sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
+              onClick={logoutHandler}
+            >
+              Sign Up
+            </MenuItem>
+          </Link>
         </Menu>
       )}
 

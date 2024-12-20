@@ -5,7 +5,7 @@ interface IReview {
   name: string;
   rating: number;
   comment: string;
-  createdAt?: Date;
+  // createdAt?: Date;
 }
 
 interface IVariant {
@@ -22,23 +22,26 @@ interface IProduct extends Document {
   name: string;
   description: string;
   brand: string;
-  category: string;
+  category: "designer" | "niche" | "arabic";
   gender: "male" | "female" | "unisex";
   rating?: number;
   numReviews?: number;
   reviews?: IReview[];
   variants: IVariant[];
-  createdAt?: Date;
-  updatedAt?: Date;
+  // createdAt?: Date;
+  // updatedAt?: Date;
 }
 
-const reviewSchema = new Schema<IReview>({
-  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  name: { type: String, required: true },
-  rating: { type: Number, required: true },
-  comment: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
-});
+const reviewSchema = new Schema<IReview>(
+  {
+    user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    // createdAt: { type: Date, default: Date.now },
+  },
+  { timestamps: true }
+);
 
 const variantSchema = new Schema<IVariant>(
   {
