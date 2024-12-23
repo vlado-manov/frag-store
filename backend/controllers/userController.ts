@@ -91,6 +91,7 @@ const logoutUser = asyncHandler(async (req: Request, res: Response) => {
 // @route   GET /api/users/profile
 // @access  Public
 const getUserProfile = asyncHandler(async (req: Request, res: Response) => {
+  console.log("Current User:", req.user);
   res.send("Get User Profile");
 });
 
@@ -127,6 +128,7 @@ const getUsers = asyncHandler(async (req: Request, res: Response) => {
 // @route   PUT /api/users/profile
 // @access  Private
 const updateUser = asyncHandler(async (req: Request, res: Response) => {
+  console.log("Current User:", req.user);
   res.send("Update user profile");
 });
 

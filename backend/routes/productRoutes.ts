@@ -7,6 +7,7 @@ import {
   getProducts,
   updateProduct,
 } from "../controllers/productController";
+import { protect } from "../middleware/authMiddleware";
 const router = express.Router();
 router.route("/").post(createProduct).get(getProducts);
 router
@@ -14,6 +15,6 @@ router
   .delete(deleteProduct)
   .get(getProductById)
   .put(updateProduct);
-router.route("/:id/reviews").post(createReview);
+router.route("/:id/reviews").post(protect, createReview);
 
 export default router;

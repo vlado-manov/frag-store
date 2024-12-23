@@ -1,21 +1,20 @@
 import mongoose, { Document, Schema, SchemaDefinitionProperty } from "mongoose";
 
-interface IReview {
+export interface IReview {
   user: SchemaDefinitionProperty<string>;
   name: string;
   rating: number;
   comment: string;
-  // createdAt?: Date;
 }
 
 interface IVariant {
-  size?: string;
-  price?: number;
+  size: string;
+  price: number;
   discountPrice?: number;
-  countInStock?: number;
+  countInStock: number;
   images?: string[];
   video?: string;
-  onSale?: boolean;
+  onSale: boolean;
 }
 
 interface IProduct extends Document {
@@ -24,12 +23,10 @@ interface IProduct extends Document {
   brand: string;
   category: "designer" | "niche" | "arabic";
   gender: "male" | "female" | "unisex";
-  rating?: number;
-  numReviews?: number;
-  reviews?: IReview[];
+  rating: number;
+  numReviews: number;
+  reviews: IReview[];
   variants: IVariant[];
-  // createdAt?: Date;
-  // updatedAt?: Date;
 }
 
 const reviewSchema = new Schema<IReview>(
@@ -38,7 +35,6 @@ const reviewSchema = new Schema<IReview>(
     name: { type: String, required: true },
     rating: { type: Number, required: true },
     comment: { type: String, required: true },
-    // createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );

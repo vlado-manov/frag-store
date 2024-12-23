@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import asyncHandler from "../middleware/asyncHandler";
 import Product from "../models/productModel";
+import { IReview } from "../models/productModel";
 
 const getProducts = asyncHandler(async (req: Request, res: Response) => {
   const products = await Product.find({});
@@ -87,10 +88,48 @@ const deleteProduct = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-const createReview = asyncHandler(async (req: Request, res: Response) => {
-  const { rating, comment } = req.body;
-  const product = await Product.findById(req.params.id);
-});
+const createReview = asyncHandler(
+  async (req: Request, res: Response): Promise<void> => {
+    const { rating, comment }: { rating: number; comment: string } = req.body;
+
+    const product = await Product.findById(req.params.id);
+
+    if (!req.user || !req.user._id || !req.user.name) {
+      res.status(400);
+      throw new Error("User information is missing or incomplete");
+    }
+
+    if (product) {
+      const alreadyReviewed = product.reviews.find(
+        (review: IReview) => review.user.toString() === req.user?._id.toString()
+      );
+
+      if (alreadyReviewed) {
+        res.status(400);
+        throw new Error("User already reviewed this product");
+      }
+
+      const review: IReview = {
+        name: req.user?.name,
+        rating: Number(rating),
+        comment,
+        user: req.user._id.toString(),
+      };
+
+      product.reviews.push(review);
+      product.numReviews = product.reviews.length;
+      product.rating =
+        product.reviews.reduce((acc, review) => acc + review.rating, 0) /
+        product.reviews.length;
+
+      await product.save();
+      res.status(200).json({ message: "Review added" });
+    } else {
+      res.status(404);
+      throw new Error("Review was not added");
+    }
+  }
+);
 
 export {
   getProducts,

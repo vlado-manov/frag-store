@@ -7,11 +7,11 @@ interface IAddress {
   city: string;
   postalCode: string;
   country: string;
-  isPrimary?: boolean;
+  isPrimary: boolean;
 }
 
 interface IUser extends Document {
-  _id: string | mongoose.Types.ObjectId;
+  _id: mongoose.Types.ObjectId | string;
   name: string;
   email: string;
   password: string;

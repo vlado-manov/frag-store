@@ -24,7 +24,7 @@ const protect = asyncHandler(
           res.status(401);
           throw new Error("Not authorized, user not found");
         }
-        req.currentUser = user;
+        req.user = user;
         next();
       } catch (error) {
         res.status(401);
@@ -38,7 +38,7 @@ const protect = asyncHandler(
 );
 const admin = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
-    if (req.currentUser && req.currentUser.isAdmin) {
+    if (req.user && req.user.isAdmin) {
       next();
     } else {
       res.status(401);
