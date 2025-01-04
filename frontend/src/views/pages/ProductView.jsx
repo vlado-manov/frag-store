@@ -157,42 +157,120 @@ const ProductView = () => {
                 : "bg-indigo-500"
             }`}
           ></div>
-          <div className="relative z-10 min-h-screen p-4">
+          <div className="relative z-10 p-0 py-4 md:p-4">
             <div className="flex items-center justify-center">
-              <div className="bg-white shadow-lg rounded-lg max-w-6xl flex">
-                <div className="relative w-1/2 p-6">
-                  <img
-                    src={images[currentIndex]}
-                    alt={`Slide ${currentIndex + 1}`}
-                    className="w-full h-auto object-cover h-full"
-                  />
-                  <button
-                    onClick={handlePrev}
-                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black hover:text-gray-700"
-                  >
-                    <FaChevronLeft size={40} />
-                  </button>
-                  <button
-                    onClick={handleNext}
-                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black hover:text-gray-700"
-                  >
-                    <FaChevronRight size={40} />
-                  </button>
-                  <div className="flex justify-center gap-2 absolute left-1/2 -translate-x-1/2 bottom-12">
-                    {images.map((_, index) => (
-                      <span
-                        key={index}
-                        onClick={() => handleDotClick(index)}
-                        className={`w-3 h-3 rounded-full cursor-pointer ${
-                          index === currentIndex ? "bg-gray-900" : "bg-gray-400"
-                        } hover:bg-gray-600`}
-                      ></span>
-                    ))}
+              <div className="bg-white shadow-lg rounded-none md:rounded-lg max-w-max md:max-w-5xl flex flex-col md:flex-row">
+                <div className="relative w-full md:w-1/2 p-6">
+                  <div className="md:hidden">
+                    <nav className="text-sm text-gray-600 mb-4 flex items-center justify-center">
+                      <ul className="flex items-center flex-wrap gap-1">
+                        <li>
+                          <Link
+                            to="/"
+                            className="text-gray-500 hover:underline"
+                          >
+                            Home
+                          </Link>
+                        </li>
+                        <li>
+                          <span className="text-gray-400">/</span>
+                        </li>
+                        <li>
+                          <Link
+                            to="/products"
+                            className="text-gray-500 hover:underline"
+                          >
+                            Fragrances
+                          </Link>
+                        </li>
+                        <li>
+                          <span className="text-gray-400">/</span>
+                        </li>
+                        <li>
+                          <Link
+                            to={`/products/${product.category}`}
+                            className="text-gray-500 hover:underline"
+                          >
+                            {product.category.charAt(0).toUpperCase() +
+                              product.category.slice(1)}
+                          </Link>
+                        </li>
+                        <span className="text-gray-400">/</span>
+                        <li>
+                          <Link
+                            to={`/products/${product.brand}`}
+                            className="text-gray-500 hover:underline"
+                          >
+                            {product.brand}
+                          </Link>
+                        </li>
+                        <li>
+                          <span className="text-gray-400">/</span>
+                        </li>
+                        <li className="text-gray-500 font-semibold">
+                          {product.name}
+                        </li>
+                      </ul>
+                    </nav>
+                    <h1 className="text-2xl font-bold text-gray-800 mb-2">
+                      {product.name} - {selectedVariant?.size}
+                    </h1>
+                    <div className="text-center mb-4">
+                      <h5 className="text-l font-semibold text-gray-500">
+                        {product.brand}
+                      </h5>
+                      <div
+                        className="flex justify-center items-center"
+                        onClick={scrollToReviews}
+                      >
+                        <Rating
+                          name="read-only"
+                          value={product.rating}
+                          size="small"
+                          sx={{ marginTop: 1 }}
+                          precision={0.5}
+                          readOnly
+                        />
+                      </div>
+                      <hr className="mt-4 border-gray-300" />
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <img
+                      src={images[currentIndex]}
+                      alt={`Slide ${currentIndex + 1}`}
+                      className="w-full h-auto object-cover h-full"
+                    />
+                    <button
+                      onClick={handlePrev}
+                      className="absolute left-1 top-1/2 transform -translate-y-1/2 text-black hover:text-gray-700"
+                    >
+                      <FaChevronLeft size={40} />
+                    </button>
+                    <button
+                      onClick={handleNext}
+                      className="absolute right-1 top-1/2 transform -translate-y-1/2 text-black hover:text-gray-700"
+                    >
+                      <FaChevronRight size={40} />
+                    </button>
+                    <div className="flex justify-center gap-2 absolute left-1/2 -translate-x-1/2 bottom-6">
+                      {images.map((_, index) => (
+                        <span
+                          key={index}
+                          onClick={() => handleDotClick(index)}
+                          className={`w-3 h-3 rounded-full cursor-pointer ${
+                            index === currentIndex
+                              ? "bg-gray-900"
+                              : "bg-gray-400"
+                          } hover:bg-gray-600`}
+                        ></span>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
                 <div
-                  className={`w-1/2 p-8 ${
+                  className={`w-full md:w-1/2 p-8 ${
                     product.gender === "female"
                       ? "bg-rose-50"
                       : product.gender === "male"
@@ -200,74 +278,79 @@ const ProductView = () => {
                       : "bg-indigo-50"
                   }`}
                 >
-                  <nav className="text-sm text-gray-600 mb-4 flex items-center justify-center">
-                    <ul className="flex items-center flex-wrap space-x-2">
-                      <li>
-                        <Link to="/" className="text-gray-500 hover:underline">
-                          Home
-                        </Link>
-                      </li>
-                      <li>
+                  <div className="hidden md:block">
+                    <nav className="text-sm text-gray-600 mb-4 flex items-center justify-center">
+                      <ul className="flex items-center flex-wrap gap-1">
+                        <li>
+                          <Link
+                            to="/"
+                            className="text-gray-500 hover:underline"
+                          >
+                            Home
+                          </Link>
+                        </li>
+                        <li>
+                          <span className="text-gray-400">/</span>
+                        </li>
+                        <li>
+                          <Link
+                            to="/products"
+                            className="text-gray-500 hover:underline"
+                          >
+                            Fragrances
+                          </Link>
+                        </li>
+                        <li>
+                          <span className="text-gray-400">/</span>
+                        </li>
+                        <li>
+                          <Link
+                            to={`/products/${product.category}`}
+                            className="text-gray-500 hover:underline"
+                          >
+                            {product.category.charAt(0).toUpperCase() +
+                              product.category.slice(1)}
+                          </Link>
+                        </li>
                         <span className="text-gray-400">/</span>
-                      </li>
-                      <li>
-                        <Link
-                          to="/products"
-                          className="text-gray-500 hover:underline"
-                        >
-                          Fragrances
-                        </Link>
-                      </li>
-                      <li>
-                        <span className="text-gray-400">/</span>
-                      </li>
-                      <li>
-                        <Link
-                          to={`/products/${product.category}`}
-                          className="text-gray-500 hover:underline"
-                        >
-                          {product.category.charAt(0).toUpperCase() +
-                            product.category.slice(1)}
-                        </Link>
-                      </li>
-                      <span className="text-gray-400">/</span>
-                      <li>
-                        <Link
-                          to={`/products/${product.brand}`}
-                          className="text-gray-500 hover:underline"
-                        >
-                          {product.brand}
-                        </Link>
-                      </li>
-                      <li>
-                        <span className="text-gray-400">/</span>
-                      </li>
-                      <li className="text-gray-500 font-semibold">
-                        {product.name}
-                      </li>
-                    </ul>
-                  </nav>
-                  <h1 className="text-2xl font-bold text-gray-800 mb-2">
-                    {product.name} - {selectedVariant?.size}
-                  </h1>
-                  <div className="text-center mb-4">
-                    <h5 className="text-l font-semibold text-gray-500">
-                      {product.brand}
-                    </h5>
-                    <div
-                      className="flex justify-center items-center"
-                      onClick={scrollToReviews}
-                    >
-                      <Rating
-                        name="read-only"
-                        value={product.rating}
-                        size="small"
-                        sx={{ marginTop: 1 }}
-                        precision={0.5}
-                        readOnly
-                      />
+                        <li>
+                          <Link
+                            to={`/products/${product.brand}`}
+                            className="text-gray-500 hover:underline"
+                          >
+                            {product.brand}
+                          </Link>
+                        </li>
+                        <li>
+                          <span className="text-gray-400">/</span>
+                        </li>
+                        <li className="text-gray-500 font-semibold">
+                          {product.name}
+                        </li>
+                      </ul>
+                    </nav>
+                    <h1 className="text-2xl font-bold text-gray-800 mb-2">
+                      {product.name} - {selectedVariant?.size}
+                    </h1>
+                    <div className="text-center mb-4">
+                      <h5 className="text-l font-semibold text-gray-500">
+                        {product.brand}
+                      </h5>
+                      <div
+                        className="flex justify-center items-center"
+                        onClick={scrollToReviews}
+                      >
+                        <Rating
+                          name="read-only"
+                          value={product.rating}
+                          size="small"
+                          sx={{ marginTop: 1 }}
+                          precision={0.5}
+                          readOnly
+                        />
+                      </div>
+                      <hr className="mt-4 border-gray-300" />
                     </div>
-                    <hr className="mt-4 border-gray-300" />
                   </div>
                   <p className="text-gray-600 mb-6">{product.description}</p>
                   <div className="text-2xl font-bold text-gray-800 mb-4">
@@ -356,9 +439,9 @@ const ProductView = () => {
               </div>
             </div>
           </div>
-          <div className="relative z-10 py-12" ref={reviewsRef}>
+          <div className="relative z-10 pt-4 pb-8" ref={reviewsRef}>
             <div className="flex items-center justify-center">
-              <div className="bg-white shadow-lg rounded-lg max-w-4xl flex w-full">
+              <div className="bg-white shadow-lg rounded-none md:rounded-lg max-w-5xl flex w-full">
                 <div className="relative w-full p-6">
                   <h2 className="text-xl font-bold text-gray-800 mb-4">
                     Reviews
