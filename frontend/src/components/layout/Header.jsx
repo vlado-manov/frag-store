@@ -307,30 +307,6 @@ const Header = () => {
           <Tab label="Brand 3" sx={{ fontSize: "12px" }} />
         </Tabs>
       </Box>
-      <Box
-        sx={{
-          padding: "10px",
-          background: isMobile
-            ? "#221b22"
-            : "linear-gradient(10deg, #171717 0%, #2d1e2d 50%, #2e0145 100%)",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            color: "white",
-            justifyContent: "center",
-          }}
-        >
-          <Typography sx={{ fontSize: "12px", marginRight: 2 }}>
-            Phone: +1 234 567 890
-          </Typography>
-          <Typography sx={{ fontSize: "12px" }}>
-            Email: contact@mystore.com
-          </Typography>
-        </Box>
-      </Box>
     </ThemeProvider>
   );
 };

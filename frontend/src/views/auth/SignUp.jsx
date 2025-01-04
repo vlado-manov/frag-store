@@ -103,12 +103,12 @@ function SignUp() {
 
     try {
       const fieldSchema = baseSchema.shape[name];
-      fieldSchema.parse(value); // Валидиране на отделното поле
+      fieldSchema.parse(value);
       setErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     } catch (err) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        [name]: err.message,
+        [name]: err.errors[0]?.message,
       }));
     }
 

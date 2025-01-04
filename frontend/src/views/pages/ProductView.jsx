@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   useCreateReviewMutation,
   useGetProductQuery,
 } from "../../slices/productSlice";
-import { FaRegHeart } from "react-icons/fa6";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaHeart,
+  FaRegHeart,
+} from "react-icons/fa6";
 import { Box, Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import Message from "../../components/ui/Message";
 import Loader from "../../components/ui/Loader";
+import { formatDistanceToNow, parseISO, format } from "date-fns";
 
 const labels = {
   0: "Useless",
@@ -19,6 +25,19 @@ const labels = {
   3: "Good",
   4: "Verry good",
   5: "Excellent",
+};
+
+const formatDate = (dateString) => {
+  const now = new Date();
+  const postedDate = parseISO(dateString);
+
+  const distance = formatDistanceToNow(postedDate, { addSuffix: true });
+
+  if (now - postedDate <= 2 * 24 * 60 * 60 * 1000) {
+    return distance;
+  } else {
+    return format(postedDate, "MM/dd/yyyy HH:mm");
+  }
 };
 
 function getLabelText(value) {
@@ -46,7 +65,7 @@ const ProductView = () => {
   const selectedVariant = product?.variants?.[selectedVariantIndex];
 
   const { userInfo } = useSelector((state) => state.auth);
-
+  const reviewsRef = useRef(null);
   const handleVariantChange = (index) => {
     setSelectedVariantIndex(index);
     setQuantity(1);
@@ -56,6 +75,12 @@ const ProductView = () => {
     const newQuantity = quantity + delta;
     if (newQuantity > 0 && newQuantity <= selectedVariant.countInStock) {
       setQuantity(newQuantity);
+    }
+  };
+
+  const scrollToReviews = () => {
+    if (reviewsRef.current) {
+      reviewsRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -80,6 +105,29 @@ const ProductView = () => {
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
+  };
+
+  const images = [
+    "https://www.parfimo.bg/data/cache/thumb_min500_max1000-min500_max1000-12/products/56279/1530460699/creed-aventus-parfyumna-voda-dla-mezczyzn-75-ml-238781.jpg",
+    "https://essenceforhim.com/cdn/shop/files/Products_2_Creed_Aventus.jpg",
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handleDotClick = (index) => {
+    setCurrentIndex(index);
   };
   return (
     <>
@@ -114,20 +162,32 @@ const ProductView = () => {
               <div className="bg-white shadow-lg rounded-lg max-w-6xl flex">
                 <div className="relative w-1/2 p-6">
                   <img
-                    src="https://img.freepik.com/premium-photo/isolated-perfume-bottle-white-background_875825-38234.jpg"
-                    alt="Chanel Chance Perfume"
+                    src={images[currentIndex]}
+                    alt={`Slide ${currentIndex + 1}`}
                     className="w-full h-auto object-cover h-full"
                   />
-                  <button className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800">
-                    ❮
+                  <button
+                    onClick={handlePrev}
+                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-black hover:text-gray-700"
+                  >
+                    <FaChevronLeft size={40} />
                   </button>
-                  <button className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-gray-800">
-                    ❯
+                  <button
+                    onClick={handleNext}
+                    className="absolute right-4 top-1/2 transform -translate-y-1/2 text-black hover:text-gray-700"
+                  >
+                    <FaChevronRight size={40} />
                   </button>
-                  <div className="flex justify-center gap-2 mt-4">
-                    <span className="w-2 h-2 bg-gray-600 rounded-full"></span>
-                    <span className="w-2 h-2 bg-gray-300 rounded-full"></span>
-                    <span className="w-2 h-2 bg-gray-300 rounded-full"></span>
+                  <div className="flex justify-center gap-2 absolute left-1/2 -translate-x-1/2 bottom-12">
+                    {images.map((_, index) => (
+                      <span
+                        key={index}
+                        onClick={() => handleDotClick(index)}
+                        className={`w-3 h-3 rounded-full cursor-pointer ${
+                          index === currentIndex ? "bg-gray-900" : "bg-gray-400"
+                        } hover:bg-gray-600`}
+                      ></span>
+                    ))}
                   </div>
                 </div>
 
@@ -141,9 +201,9 @@ const ProductView = () => {
                   }`}
                 >
                   <nav className="text-sm text-gray-600 mb-4 flex items-center justify-center">
-                    <ul className="flex items-center space-x-2">
+                    <ul className="flex items-center flex-wrap space-x-2">
                       <li>
-                        <Link to="/" className="text-blue-500 hover:underline">
+                        <Link to="/" className="text-gray-500 hover:underline">
                           Home
                         </Link>
                       </li>
@@ -153,9 +213,9 @@ const ProductView = () => {
                       <li>
                         <Link
                           to="/products"
-                          className="text-blue-500 hover:underline"
+                          className="text-gray-500 hover:underline"
                         >
-                          Products
+                          Fragrances
                         </Link>
                       </li>
                       <li>
@@ -164,15 +224,25 @@ const ProductView = () => {
                       <li>
                         <Link
                           to={`/products/${product.category}`}
-                          className="text-blue-500 hover:underline"
+                          className="text-gray-500 hover:underline"
                         >
-                          {product.category}
+                          {product.category.charAt(0).toUpperCase() +
+                            product.category.slice(1)}
+                        </Link>
+                      </li>
+                      <span className="text-gray-400">/</span>
+                      <li>
+                        <Link
+                          to={`/products/${product.brand}`}
+                          className="text-gray-500 hover:underline"
+                        >
+                          {product.brand}
                         </Link>
                       </li>
                       <li>
                         <span className="text-gray-400">/</span>
                       </li>
-                      <li className="text-gray-800 font-semibold">
+                      <li className="text-gray-500 font-semibold">
                         {product.name}
                       </li>
                     </ul>
@@ -184,7 +254,10 @@ const ProductView = () => {
                     <h5 className="text-l font-semibold text-gray-500">
                       {product.brand}
                     </h5>
-                    <div className="flex justify-center items-center">
+                    <div
+                      className="flex justify-center items-center"
+                      onClick={scrollToReviews}
+                    >
                       <Rating
                         name="read-only"
                         value={product.rating}
@@ -232,47 +305,58 @@ const ProductView = () => {
                   </div>
 
                   {/* Quantity Selection */}
-                  <div className="mb-6">
-                    <h3 className="text-sm font-bold text-gray-800 mb-2">
-                      QUANTITY
-                    </h3>
-                    <div className="flex items-center gap-4">
-                      <button
-                        onClick={() => handleQuantityChange(-1)}
-                        disabled={
-                          quantity === 1 || selectedVariant.countInStock === 0
-                        }
-                        className="w-8 h-8 bg-black text-white rounded-md flex items-center justify-center hover:bg-gray-800"
-                      >
-                        -
-                      </button>
-                      <span className="text-lg">{quantity}</span>
-                      <button
-                        onClick={() => handleQuantityChange(1)}
-                        disabled={
-                          quantity === selectedVariant.countInStock ||
-                          selectedVariant.countInStock === 0
-                        }
-                        className="w-8 h-8 bg-black text-white rounded-md flex items-center justify-center hover:bg-gray-800"
-                      >
-                        +
-                      </button>
+                  {selectedVariant.countInStock === 0 ? (
+                    <Message
+                      severity="error"
+                      // variant="outlined"
+                      sx={{ marginBottom: 2 }}
+                    >
+                      This fragrance is currently out of stock
+                    </Message>
+                  ) : (
+                    <div className="mb-6">
+                      <h3 className="text-sm font-bold text-gray-800 mb-2">
+                        QUANTITY
+                      </h3>
+                      <div className="flex items-center gap-4">
+                        <button
+                          onClick={() => handleQuantityChange(-1)}
+                          disabled={
+                            quantity === 1 || selectedVariant.countInStock === 0
+                          }
+                          className="w-8 h-8 bg-black text-white rounded-md flex items-center justify-center hover:bg-gray-800"
+                        >
+                          -
+                        </button>
+                        <span className="text-lg">{quantity}</span>
+                        <button
+                          onClick={() => handleQuantityChange(1)}
+                          disabled={
+                            quantity === selectedVariant.countInStock ||
+                            selectedVariant.countInStock === 0
+                          }
+                          className="w-8 h-8 bg-black text-white rounded-md flex items-center justify-center hover:bg-gray-800"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="flex gap-4">
                     <button className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition">
                       ADD TO CART
                     </button>
-                    <button className=" bg-white py-3 px-5 rounded hover:bg-gray-50 transition">
-                      <FaRegHeart />
+                    <button className=" bg-rose-500 py-3 px-5 rounded hover:bg-rose-400 transition">
+                      <FaRegHeart className="text-white" />
+                      {/* <FaHeart className="text-white" /> */}
                     </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="relative z-10 py-12">
+          <div className="relative z-10 py-12" ref={reviewsRef}>
             <div className="flex items-center justify-center">
               <div className="bg-white shadow-lg rounded-lg max-w-4xl flex w-full">
                 <div className="relative w-full p-6">
@@ -281,7 +365,11 @@ const ProductView = () => {
                   </h2>
                   <div id="reviews" className="space-y-4">
                     {product.reviews?.map((review, key) => (
-                      <div key={key} className="bg-gray-100 p-4 rounded-md">
+                      <div key={key} className="bg-gray-100 p-6 rounded-md">
+                        <p className="text-md text-black font-bold mb-3">
+                          {review.name} said:
+                        </p>
+                        <hr className="mb-3" />
                         <Rating
                           name="read-only"
                           value={review.rating}
@@ -289,7 +377,9 @@ const ProductView = () => {
                           readOnly
                         />
                         <p className="text-gray-800">"{review.comment}"</p>
-                        <p className="text-sm text-gray-500">- {review.name}</p>
+                        <p className="text-sm text-gray-500">
+                          - {formatDate(review.createdAt)}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -333,7 +423,7 @@ const ProductView = () => {
                           )}
                         </Box>
                         <textarea
-                          className="w-full p-2 border rounded-md"
+                          className="w-full p-4 border rounded-md"
                           placeholder="Write your review here..."
                           value={comment}
                           onChange={(e) => setComment(e.target.value)}
@@ -347,9 +437,16 @@ const ProductView = () => {
                         </button>
                       </form>
                     ) : (
-                      <Message severity="info" variant="standard">
-                        Please <Link to="/login">sign in</Link> to leave a
-                        review
+                      <Message
+                        severity="info"
+                        variant="standard"
+                        sx={{ margin: 2 }}
+                      >
+                        Please{" "}
+                        <Link to="/login" className="underline">
+                          sign in
+                        </Link>{" "}
+                        to leave a review
                       </Message>
                     )}
                   </div>
