@@ -14,10 +14,15 @@ const Footer = () => {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          background: "linear-gradient(10deg, #2d1e2d 0%, #171717 100%)",
-          color: "#fff",
+          background:
+            // "linear-gradient(10deg, #2d1e2d 0%, #171717 100%)",
+            // "linear-gradient(10deg, #f43f5e 0%, #6366f1 50%, #0ea5e9 100%)",
+            "#fff",
+
+          color: "#000",
           padding: isMobile ? "16px 32px" : "32px",
           marginTop: "auto",
+          boxShadow: "1px 1px 16px 4px rgba(0,0,0,.1)",
         }}
       >
         <Grid
@@ -49,9 +54,9 @@ const Footer = () => {
               <Typography variant="body1" sx={{ fontWeight: "bold" }}>
                 Payment Methods:
               </Typography>
-              <FaCcVisa style={{ fontSize: "2rem", color: "#fff" }} />
-              <FaCcMastercard style={{ fontSize: "2rem", color: "#fff" }} />
-              <FaCcPaypal style={{ fontSize: "2rem", color: "#fff" }} />
+              <FaCcVisa style={{ fontSize: "2rem", color: "#000" }} />
+              <FaCcMastercard style={{ fontSize: "2rem", color: "#000" }} />
+              <FaCcPaypal style={{ fontSize: "2rem", color: "#000" }} />
             </Box>
           </Grid>
         </Grid>
@@ -114,7 +119,7 @@ const Footer = () => {
           container
           justifyContent="space-between"
           alignItems="center"
-          sx={{ mt: 3, borderTop: "1px solid rgba(255,255,255,0.3)", pt: 2 }}
+          sx={{ mt: 3, borderTop: "1px solid rgba(0,0,0,0.3)", pt: 2 }}
         >
           <Grid item xs={12} sm={6}>
             <Typography

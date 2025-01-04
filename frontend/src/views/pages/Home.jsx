@@ -1,6 +1,7 @@
 import React from "react";
 import { useGetProductsQuery } from "../../slices/productSlice";
 import { Link } from "react-router-dom";
+import ProductCard from "../../components/ProductCard";
 
 const Home = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
@@ -11,7 +12,14 @@ const Home = () => {
   return (
     <div className="product-list-container">
       <h1>Product List</h1>
-      <div className="product-list">
+      <div className="flex items-center justify-center">
+        <div className="grid grid-cols-1 max-w-max md:max-w-6xl sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {products?.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
+      </div>
+      {/* <div className="product-list">
         {products?.map((product) => (
           <div key={product._id} className="product-card">
             <Link to={`/products/${product._id}`}>
@@ -38,7 +46,7 @@ const Home = () => {
             <button className="add-to-cart-btn">Add to Cart</button>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

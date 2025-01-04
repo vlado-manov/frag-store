@@ -100,7 +100,9 @@ const Header = () => {
         <Toolbar
           sx={{
             background:
-              "linear-gradient(10deg, #2e0145 0%, #2d1e2d 50%, #171717 100%)",
+              // "linear-gradient(10deg, #2e0145 0%, #2d1e2d 50%, #171717 100%)",
+              // "linear-gradient(10deg, #bae6fd 0%, #c7d2fe 50%, #fecdd3 100%)",
+              "linear-gradient(10deg, #0ea5e9 0%, #6366f1 50%, #f43f5e 100%)",
           }}
         >
           <Grid container alignItems="center" spacing={2} sx={{ padding: 1 }}>

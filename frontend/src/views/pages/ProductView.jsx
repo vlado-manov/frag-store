@@ -157,7 +157,7 @@ const ProductView = () => {
                 : "bg-indigo-500"
             }`}
           ></div>
-          <div className="relative z-10 p-0 py-4 md:p-4">
+          <div className="relative z-10 p-0 pb-4 md:p-4">
             <div className="flex items-center justify-center">
               <div className="bg-white shadow-lg rounded-none md:rounded-lg max-w-max md:max-w-5xl flex flex-col md:flex-row">
                 <div className="relative w-full md:w-1/2 p-6">
@@ -441,7 +441,7 @@ const ProductView = () => {
           </div>
           <div className="relative z-10 pt-4 pb-8" ref={reviewsRef}>
             <div className="flex items-center justify-center">
-              <div className="bg-white shadow-lg rounded-none md:rounded-lg max-w-5xl flex w-full">
+              <div className="bg-white shadow-lg rounded-none lg:rounded-lg max-w-5xl flex w-full">
                 <div className="relative w-full p-6">
                   <h2 className="text-xl font-bold text-gray-800 mb-4">
                     Reviews
