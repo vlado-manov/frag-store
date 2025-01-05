@@ -4,6 +4,7 @@ const products = [
     description:
       "Chanel No. 5 is a floral aldehyde fragrance composed of rose, jasmine, and sandalwood, creating a timeless and sophisticated scent.",
     brand: "Chanel",
+    brand_slug: "chanel",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -35,6 +36,7 @@ const products = [
     description:
       "Dior Sauvage is a woody aromatic fragrance for men with notes of Calabrian bergamot, Sichuan pepper, and ambroxan.",
     brand: "Dior",
+    brand_slug: "dior",
     category: "designer",
     gender: "male",
     rating: 0,
@@ -66,6 +68,7 @@ const products = [
     description:
       "Tom Ford Black Orchid is a luxurious fragrance featuring dark chocolate, vanilla, and floral notes, perfect for evening wear.",
     brand: "Tom Ford",
+    brand_slug: "tom-ford",
     category: "designer",
     gender: "unisex",
     rating: 0,
@@ -97,6 +100,7 @@ const products = [
     description:
       "Creed Aventus is a woody chypre fragrance with notes of pineapple, birch, and musk. A symbol of success and strength.",
     brand: "Creed",
+    brand_slug: "creed",
     category: "niche",
     gender: "male",
     rating: 0,
@@ -128,6 +132,7 @@ const products = [
     description:
       "Yves Saint Laurent Libre is an elegant fragrance blending lavender, orange blossom, and vanilla for a fresh, floral scent.",
     brand: "Yves Saint Laurent",
+    brand_slug: "yves-saint-laurent",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -159,6 +164,7 @@ const products = [
     description:
       "Gucci Guilty is a seductive fragrance with floral and citrus notes, ideal for those who enjoy bold, passionate scents.",
     brand: "Gucci",
+    brand_slug: "gucci",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -190,6 +196,7 @@ const products = [
     description:
       "Acqua di Gio is a fresh aquatic fragrance with notes of jasmine, lime, and rosemary, a classic scent for men.",
     brand: "Giorgio Armani",
+    brand_slug: "giorgio-armani",
     category: "designer",
     gender: "male",
     rating: 0,
@@ -212,6 +219,7 @@ const products = [
     description:
       "Jean Paul Gaultier Le Male is a spicy, fresh fragrance with mint, lavender, and vanilla, offering a bold and warm scent.",
     brand: "Jean Paul Gaultier",
+    brand_slug: "jean-paul-gaultier",
     category: "designer",
     gender: "male",
     rating: 0,
@@ -234,6 +242,7 @@ const products = [
     description:
       "Tom Ford Oud Wood is a warm, woody fragrance with notes of oud, vanilla, and amber, perfect for colder weather.",
     brand: "Tom Ford",
+    brand_slug: "tom-ford",
     category: "designer",
     gender: "unisex",
     rating: 0,
@@ -265,6 +274,7 @@ const products = [
     description:
       "Chloé Eau de Parfum is a delicate, feminine fragrance with notes of rose, peony, and lychee, perfect for everyday wear.",
     brand: "Chloé",
+    brand_slug: "chloe",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -287,6 +297,7 @@ const products = [
     description:
       "Viktor & Rolf Flowerbomb is a floral fragrance with notes of jasmine, orange blossom, and patchouli, creating a rich and bold scent.",
     brand: "Viktor & Rolf",
+    brand_slug: "viktor-rolf",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -318,6 +329,7 @@ const products = [
     description:
       "Calvin Klein Eternity is a fresh, floral fragrance with lily, jasmine, and violet notes.",
     brand: "Calvin Klein",
+    brand_slug: "calvin-klein",
     category: "designer",
     gender: "female",
     rating: 4.3,
@@ -340,6 +352,7 @@ const products = [
     description:
       "Creed Green Irish Tweed is a fresh, green fragrance with a blend of lemon, verbena, and ambergris.",
     brand: "Creed",
+    brand_slug: "creed",
     category: "niche",
     gender: "male",
     rating: 4.8,
@@ -362,6 +375,7 @@ const products = [
     description:
       "Baccarat Rouge 540 is a luxurious fragrance with amber, saffron, and cedarwood notes, known for its bold and elegant scent.",
     brand: "Maison Francis Kurkdjian",
+    brand_slug: "maison-francis-kurkdjian",
     category: "niche",
     gender: "unisex",
     rating: 5.0,
@@ -384,6 +398,7 @@ const products = [
     description:
       "Paco Rabanne 1 Million is a spicy and woody fragrance with notes of cinnamon, leather, and amber, designed for a bold and confident man.",
     brand: "Paco Rabanne",
+    brand_slug: "paco-rabanne",
     category: "designer",
     gender: "male",
     rating: 0,
@@ -415,6 +430,7 @@ const products = [
     description:
       "Versace Bright Crystal is a fresh, floral fragrance featuring pomegranate, peony, and lotus flower.",
     brand: "Versace",
+    brand_slug: "versace",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -437,6 +453,7 @@ const products = [
     description:
       "Hugo Boss Bottled is a classic fragrance for men, with apple, cinnamon, and sandalwood notes.",
     brand: "Hugo Boss",
+    brand_slug: "hugo-boss",
     category: "designer",
     gender: "male",
     rating: 0,
@@ -459,6 +476,7 @@ const products = [
     description:
       "Chanel Chance Eau Tendre is a delicate fragrance with notes of grapefruit, jasmine, and musk, offering a light and refreshing scent.",
     brand: "Chanel",
+    brand_slug: "chanel",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -467,19 +485,10 @@ const products = [
     variants: [
       {
         size: "50ml",
-        price: 100.0,
+        price: 110.0,
         discountPrice: 90.0,
-        countInStock: 10,
+        countInStock: 12,
         images: ["https://example.com/chanceeautendre50ml.jpg"],
-        video: "",
-        onSale: true,
-      },
-      {
-        size: "100ml",
-        price: 150.0,
-        discountPrice: 130.0,
-        countInStock: 5,
-        images: ["https://example.com/chanceeautendre100ml.jpg"],
         video: "",
         onSale: true,
       },
@@ -490,6 +499,7 @@ const products = [
     description:
       "Dolce & Gabbana Light Blue is a vibrant fragrance with notes of Sicilian lemon, apple, and cedarwood.",
     brand: "Dolce & Gabbana",
+    brand_slug: "dolce-gabbana",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -512,6 +522,7 @@ const products = [
     description:
       "Givenchy Gentlemen Only is an elegant fragrance with spicy and woody notes of pepper, birch leaf, and leather.",
     brand: "Givenchy",
+    brand_slug: "givenchy",
     category: "designer",
     gender: "male",
     rating: 0,
@@ -543,6 +554,7 @@ const products = [
     description:
       "Acqua di Parma Colonia is a classic citrus fragrance with notes of Sicilian citrus, lavender, and rosemary, ideal for a refreshing feel.",
     brand: "Acqua di Parma",
+    brand_slug: "acqua-di-parma",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -574,6 +586,7 @@ const products = [
     description:
       "Guerlain Shalimar is an oriental fragrance with rich notes of vanilla, iris, and incense, creating a luxurious and warm aura.",
     brand: "Guerlain",
+    brand_slug: "guerlain",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -605,6 +618,7 @@ const products = [
     description:
       "Hermès Eau d'Orange Verte is a fresh, zesty fragrance with notes of orange, mint, and moss, perfect for casual wear.",
     brand: "Hermès",
+    brand_slug: "hermes",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -636,6 +650,7 @@ const products = [
     description:
       "Narciso Rodriguez For Her is a soft, sensual fragrance with musky, floral notes, including rose, peach, and amber.",
     brand: "Narciso Rodriguez",
+    brand_slug: "narciso-rodriguez",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -658,6 +673,7 @@ const products = [
     description:
       "Terre de Lumière is a warm, radiant fragrance with notes of honey, lavender, and almond, offering a cozy and inviting feel.",
     brand: "L'Occitane",
+    brand_slug: "loccitane",
     category: "niche",
     gender: "female",
     rating: 0,
@@ -680,6 +696,7 @@ const products = [
     description:
       "Bvlgari Man in Black is a bold and intense fragrance with notes of rum, leather, and spices, perfect for an adventurous spirit.",
     brand: "Bvlgari",
+    brand_slug: "bvlgari",
     category: "designer",
     gender: "male",
     rating: 0,
@@ -703,6 +720,7 @@ const products = [
     description:
       "Bonbon by Viktor & Rolf is a sweet fragrance with notes of caramel, orange, and jasmine, perfect for those who love gourmand scents.",
     brand: "Viktor & Rolf",
+    brand_slug: "viktor-rolf",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -725,6 +743,7 @@ const products = [
     description:
       "Chanel Coco Mademoiselle is a vibrant, elegant fragrance with notes of orange, jasmine, and patchouli.",
     brand: "Chanel",
+    brand_slug: "chanel",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -747,6 +766,7 @@ const products = [
     description:
       "Bond No. 9 New York Oud is a luxurious and complex fragrance with oud, rose, and amber, designed to evoke the spirit of New York.",
     brand: "Bond No. 9",
+    brand_slug: "bond-no-9",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -769,6 +789,7 @@ const products = [
     description:
       "Rose 31 by Le Labo is a unique, woody floral fragrance with notes of rose, cumin, and cedarwood.",
     brand: "Le Labo",
+    brand_slug: "le-labo",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -791,6 +812,7 @@ const products = [
     description:
       "La Panthère by Cartier is a feline-inspired fragrance with notes of gardenia, musk, and chypre.",
     brand: "Cartier",
+    brand_slug: "cartier",
     category: "niche",
     gender: "female",
     rating: 0,
@@ -813,6 +835,7 @@ const products = [
     description:
       "Montale Intense Cafe is a warm, gourmand fragrance with notes of rose, vanilla, and coffee, offering a cozy and inviting vibe.",
     brand: "Montale",
+    brand_slug: "montale",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -835,6 +858,7 @@ const products = [
     description:
       "Burberry Her is a fruity-floral fragrance with notes of blackberry, jasmine, and amber.",
     brand: "Burberry",
+    brand_slug: "burberry",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -857,6 +881,7 @@ const products = [
     description:
       "Calvin Klein Euphoria is a rich, exotic fragrance with notes of pomegranate, orchid, and mahogany.",
     brand: "Calvin Klein",
+    brand_slug: "calvin-klein",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -874,11 +899,13 @@ const products = [
       },
     ],
   },
+
   {
     name: "Issey Miyake L'Eau d'Issey",
     description:
       "Issey Miyake L'Eau d'Issey is a fresh, aquatic fragrance with lotus, rose, and woodsy notes.",
     brand: "Issey Miyake",
+    brand_slug: "issey-miyake",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -901,6 +928,7 @@ const products = [
     description:
       "Jean Patou Joy is a luxurious floral fragrance with notes of rose, jasmine, and ylang-ylang.",
     brand: "Jean Patou",
+    brand_slug: "jean-patou",
     category: "niche",
     gender: "female",
     rating: 0,
@@ -923,6 +951,7 @@ const products = [
     description:
       "Byredo Gypsy Water is a woody fragrance with notes of bergamot, juniper berries, and sandalwood.",
     brand: "Byredo",
+    brand_slug: "byredo",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -945,6 +974,7 @@ const products = [
     description:
       "Replica Jazz Club is a warm, smoky fragrance with rum, tobacco, and vanilla notes.",
     brand: "Maison Margiela",
+    brand_slug: "maison-margiela",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -967,6 +997,7 @@ const products = [
     description:
       "Le Labo Santal 33 is a woody fragrance with sandalwood, cedarwood, and leather notes.",
     brand: "Le Labo",
+    brand_slug: "le-labo",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -989,6 +1020,7 @@ const products = [
     description:
       "Tom Ford Neroli Portofino is a citrusy fragrance with neroli, bergamot, and orange blossom notes.",
     brand: "Tom Ford",
+    brand_slug: "tom-ford",
     category: "designer",
     gender: "unisex",
     rating: 0,
@@ -1011,6 +1043,7 @@ const products = [
     description:
       "Aerin Lauder Rose de Grasse is a luxurious floral fragrance with rose, jasmine, and bergamot notes.",
     brand: "Aerin Lauder",
+    brand_slug: "aerin-lauder",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -1033,6 +1066,7 @@ const products = [
     description:
       "Hermès Terre d'Hermès is a woody, earthy fragrance with orange, pepper, and vetiver notes.",
     brand: "Hermès",
+    brand_slug: "hermes",
     category: "designer",
     gender: "male",
     rating: 0,
@@ -1055,6 +1089,7 @@ const products = [
     description:
       "Jo Malone London English Pear & Freesia is a fresh, floral fragrance with pear, freesia, and patchouli notes.",
     brand: "Jo Malone London",
+    brand_slug: "jo-malone-london",
     category: "designer",
     gender: "unisex",
     rating: 0,
@@ -1077,6 +1112,7 @@ const products = [
     description:
       "Diptyque Philosykos is a fresh, green fragrance with fig, coconut, and cedarwood notes.",
     brand: "Diptyque",
+    brand_slug: "diptyque",
     category: "niche",
     gender: "unisex",
     rating: 0,
@@ -1099,6 +1135,7 @@ const products = [
     description:
       "Bvlgari Omnia Crystalline is a fresh, floral fragrance with notes of bamboo, pear, and lotus flower.",
     brand: "Bvlgari",
+    brand_slug: "bvlgari",
     category: "designer",
     gender: "female",
     rating: 0,
@@ -1121,6 +1158,7 @@ const products = [
     description:
       "Tom Ford Tobacco Vanille is a warm, spicy fragrance with tobacco, vanilla, and dried fruit notes.",
     brand: "Tom Ford",
+    brand_slug: "tom-ford",
     category: "designer",
     gender: "unisex",
     rating: 0,

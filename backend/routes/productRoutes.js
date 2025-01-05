@@ -3,6 +3,8 @@ import {
   createProduct,
   createReview,
   deleteProduct,
+  getBrandProducts,
+  getBrands,
   getProductById,
   getProducts,
   updateProduct,
@@ -11,6 +13,8 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
 router.route("/").post(protect, admin, createProduct).get(getProducts);
+router.route("/brands").get(getBrands);
+router.route("/brands/:brand").get(getBrandProducts);
 router
   .route("/:id")
   .delete(protect, admin, deleteProduct)

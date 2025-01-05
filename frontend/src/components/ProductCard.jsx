@@ -1,9 +1,14 @@
 import { Rating } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
+  const [variantIndex, setVariantIndex] = useState(0);
+  const selectedVariant = product.variants?.[variantIndex];
+  const handleVariantChange = (index) => {
+    setVariantIndex(index);
+  };
   return (
     <div
       className={`bg-white hover:shadow-custom ${
@@ -73,17 +78,33 @@ const ProductCard = ({ product }) => {
 
         <div className="flex justify-center items-center gap-1 mt-2">
           {product.variants.map((variant, index) => (
-            <p className="text-xs py-1 px-2 font-bold bg-slate-200 rounded-lg hover:cursor-pointer hover:bg-slate-300">
+            <p
+              onClick={() => handleVariantChange(index)}
+              className={`text-xs py-1 px-2 font-bold rounded-lg hover:cursor-pointer ${
+                index === variantIndex
+                  ? "bg-slate-800 text-white"
+                  : "bg-slate-200 hover:bg-slate-300"
+              }`}
+            >
               {variant.size}
             </p>
           ))}
         </div>
         <p className="text-center mt-2 font-bold text-lg">
-          ${parseFloat(product.variants[0].price).toFixed(2)}
+          $
+          {selectedVariant
+            ? parseFloat(selectedVariant.price).toFixed(2)
+            : "N/A"}
         </p>
         <p className="text-center text-xs text-rose-600">
-          ${parseFloat(product.variants[0].discountPrice).toFixed(2)} with promo
-          code: <b>XMAS</b>
+          $
+          {selectedVariant && selectedVariant.discountPrice
+            ? parseFloat(selectedVariant.discountPrice).toFixed(2)
+            : "N/A"}{" "}
+          with promo code:{" "}
+          <b>
+            <u>XMAS</u>
+          </b>
         </p>
       </div>
     </div>

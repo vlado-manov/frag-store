@@ -28,6 +28,7 @@ const productSchema = new mongoose.Schema(
     name: { type: String, required: true },
     description: { type: String, required: true },
     brand: { type: String, required: true },
+    brand_slug: { type: String, required: true },
     category: {
       type: String,
       enum: ["designer", "niche", "arabic", "tester"],

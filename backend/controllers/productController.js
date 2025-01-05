@@ -22,6 +22,28 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
+// @desc    Fetch unique brands
+// @route   PUT /api/products/brands
+// @access  Public
+const getBrands = asyncHandler(async (req, res) => {
+  const products = await Product.find({});
+  const uniqueBrands = [...new Set(products.map((product) => product.brand))];
+  res.status(200).json(uniqueBrands);
+});
+
+// @desc    Fetch unique brands
+// @route   PUT /api/products/:brand
+// @access  Public
+const getBrandProducts = asyncHandler(async (req, res) => {
+  const { brand } = req.params;
+  const products = await Product.find({ brand_slug: brand });
+  if (products.length === 0) {
+    res.status(404);
+    throw new Error("Brand not found or no products available");
+  }
+  res.status(200).json(products);
+});
+
 // @desc    Create new product
 // @route   POST /api/products/
 // @access  Private/Admin
@@ -32,6 +54,8 @@ const createProduct = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error("Please provide all required fields");
   }
+
+  const normalizedBrand = brand.toLowerCase().replace(/\s+/g, "-");
 
   if (!Array.isArray(variants) || variants.length === 0) {
     res.status(400);
@@ -68,6 +92,7 @@ const createProduct = asyncHandler(async (req, res) => {
     name,
     description,
     brand,
+    brand_slug: normalizedBrand,
     category,
     gender,
     rating: 0,
@@ -145,6 +170,8 @@ const createReview = asyncHandler(async (req, res) => {
 export {
   getProducts,
   getProductById,
+  getBrands,
+  getBrandProducts,
   createProduct,
   updateProduct,
   deleteProduct,
