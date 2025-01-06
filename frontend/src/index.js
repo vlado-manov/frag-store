@@ -29,6 +29,8 @@ import SignUp from "./views/auth/SignUp.jsx";
 import RecoverPassword from "./views/auth/RecoverPassword.jsx";
 import { lightTheme } from "./styles/theme.js";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
+import { ApolloProvider } from "@apollo/client";
+import client from "./apolloClient";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,9 +39,12 @@ const router = createBrowserRouter(
       <Route path="/products" element={<ProductsList />} />
       <Route path="/products/page/:pageNumber" element={<ProductsList />} />
       <Route path="/products/:id" element={<ProductView />} />
-      <Route path="/brands/:brand" element={<BrandView />} />
-      <Route path="/brands/:brand/page/:pageNumber" element={<BrandView />} />
-      <Route path="/category/:category" element={<CategoryView />} />
+      <Route path="/products/brands/:brand" element={<BrandView />} />
+      <Route
+        path="/products/brands/:brand/page/:pageNumber"
+        element={<BrandView />}
+      />
+      <Route path="/products/categories/:category" element={<CategoryView />} />
       <Route
         path="/category/:category/page/:pageNumber"
         element={<CategoryView />}
@@ -68,10 +73,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={lightTheme}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </Provider>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <ThemeProvider theme={lightTheme}>
+          <RouterProvider router={router} />
+        </ThemeProvider>
+      </Provider>
+    </ApolloProvider>
   </React.StrictMode>
 );

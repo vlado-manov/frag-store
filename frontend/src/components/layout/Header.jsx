@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -10,14 +10,7 @@ import {
   Typography,
   Drawer,
   Box,
-  Tabs,
-  Tab,
-  Divider,
-  List,
-  ListItemButton,
-  ListItemText,
   useMediaQuery,
-  Button,
   Grid,
 } from "@mui/material";
 import {
@@ -33,6 +26,14 @@ import { useLogoutMutation } from "../../slices/userSlice";
 import { useDispatch } from "react-redux";
 import { logout } from "../../slices/authSlice";
 import { useSelector } from "react-redux";
+import { TiThMenu } from "react-icons/ti";
+import useScrollOnDrag from "react-scroll-ondrag";
+import { useQuery } from "@apollo/client";
+import {
+  GET_BRANDS,
+  GET_CATEGORIES,
+  GET_TOP_BRANDS,
+} from "../../graphql/queries";
 
 const theme = createTheme({
   palette: {
@@ -53,6 +54,11 @@ const theme = createTheme({
 });
 
 const Header = () => {
+  const { data: categoriesData } = useQuery(GET_CATEGORIES);
+  const { data: brandsData } = useQuery(GET_BRANDS);
+  const { data: topBrandsData } = useQuery(GET_TOP_BRANDS);
+  const containerRef = useRef(null);
+  const { events } = useScrollOnDrag(containerRef, {});
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedTab, setSelectedTab] = useState(0);
@@ -235,80 +241,105 @@ const Header = () => {
         open={drawerOpen}
         onClose={toggleDrawer(false)}
         sx={{
-          width: 250,
+          width: 300,
           flexShrink: 0,
           "& .MuiDrawer-paper": {
-            width: 250,
-            backgroundColor: "#333",
-            color: "white",
+            width: 300,
+            backgroundColor: "#fff",
+            color: "#000",
             transition: "transform 0.3s ease-in-out",
           },
         }}
       >
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "20px",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="h6">Categories</Typography>
-          <Divider sx={{ margin: "10px 0" }} />
-          <List>
-            <ListItemButton>
-              <ListItemText primary="Category 1" />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText primary="Category 2" />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText primary="Category 3" />
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText primary="Category 4" />
-            </ListItemButton>
-          </List>
-        </Box>
+        <div className="px-5 py-10">
+          <h2 className="text-lg text-black uppercase">Categories</h2>
+          <hr className="border-gray-400 my-1" />
+          <div className="p-2 flex flex-col">
+            {categoriesData?.categories?.map((category, index) => (
+              <Link
+                key={index}
+                to={`/products/categories/${category}`}
+                onClick={toggleDrawer(false)}
+              >
+                <p className="py-1 capitalize hover:text-gray-700">
+                  - {category}
+                </p>
+              </Link>
+            ))}
+            <h2 className="text-lg text-black uppercase mt-5">For</h2>
+            <hr className="border-gray-400 my-1" />
+            <Link
+              to={`/products/categories/designer`}
+              onClick={toggleDrawer(false)}
+            >
+              <p className="py-1 hover:text-gray-700">- Male</p>
+            </Link>
+            <Link
+              to={`/products/categories/niche`}
+              onClick={toggleDrawer(false)}
+            >
+              <p className="py-1 hover:text-gray-700">- Female</p>
+            </Link>
+            <Link
+              to={`/products/categories/arabic`}
+              onClick={toggleDrawer(false)}
+            >
+              <p className="py-1 hover:text-gray-700">- Unisex</p>
+            </Link>
+            <h2 className="text-lg text-black uppercase mt-5">Top brands</h2>
+            <hr className="border-gray-400 my-1" />
+            {topBrandsData?.topBrands?.map((topBrand, index) => (
+              <Link
+                onClick={toggleDrawer(false)}
+                key={index}
+                to={`/products/brands/${topBrand
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .replace(/[^a-z0-9\s-]/gi, "")
+                  .replace(/\s+/g, "-")
+                  .toLowerCase()}`}
+              >
+                <p key={index} className="py-1 hover:text-gray-700">
+                  - {topBrand}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
       </Drawer>
-
-      <Box
-        sx={{
-          display: "none",
-          padding: "10px",
-          backgroundColor: "#fafafa",
-          color: "#313131",
-          justifyContent: "flex-start",
-          alignItems: "center",
-          flexDirection: "row",
-          "@media (min-width:600px)": { display: "flex" },
-        }}
-      >
-        <IconButton
-          color="inherit"
+      <div className="hidden sm:flex gap-6 items-center flex-row justify-start  bg-slate-50 py-0 px-2">
+        <div
+          className="flex items-center justify-center hover:cursor-pointer hover:bg-slate-200 py-2 text-gray-900 px-2 rounded"
           onClick={toggleDrawer(true)}
-          sx={{
-            display: "flex",
-            color: "#313131",
-          }}
         >
-          <MenuIcon />
-        </IconButton>
-        <Button sx={{ marginRight: 3 }} onClick={toggleDrawer(true)}>
-          Categories
-        </Button>
-
-        <Tabs
-          value={selectedTab}
-          onChange={handleTabChange}
-          indicatorColor="secondary"
-          textColor="inherit"
+          <TiThMenu className="text-black" size={20} />
+          <p className="ml-2 text-sm font-bold uppercase">Categories</p>
+        </div>
+        <div
+          className="flex overflow-hidden whitespace-nowrap gap-5 py-5"
+          {...events}
+          ref={containerRef}
         >
-          <Tab label="Brand 1" sx={{ fontSize: "12px" }} />
-          <Tab label="Brand 2" sx={{ fontSize: "12px" }} />
-          <Tab label="Brand 3" sx={{ fontSize: "12px" }} />
-        </Tabs>
-      </Box>
+          {brandsData?.brands?.map((brand, index) => (
+            <div className="flex gap-5">
+              <Link
+                key={index}
+                to={`/products/brands/${brand
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .replace(/[^a-z0-9\s-]/gi, "")
+                  .replace(/\s+/g, "-")
+                  .toLowerCase()}`}
+              >
+                <p className="text-sm text-gray-500 font-mono w-max uppercase font-bold hover:text-gray-900">
+                  {brand}
+                </p>
+              </Link>
+              <p className="text-gray-300 text-sm">/</p>
+            </div>
+          ))}
+        </div>
+      </div>
     </ThemeProvider>
   );
 };

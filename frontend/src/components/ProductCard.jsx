@@ -79,6 +79,7 @@ const ProductCard = ({ product }) => {
         <div className="flex justify-center items-center gap-1 mt-2">
           {product.variants.map((variant, index) => (
             <p
+              key={index}
               onClick={() => handleVariantChange(index)}
               className={`text-xs py-1 px-2 font-bold rounded-lg hover:cursor-pointer ${
                 index === variantIndex

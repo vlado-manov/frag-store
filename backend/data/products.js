@@ -12,6 +12,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 75.0,
         discountPrice: 60.0,
@@ -21,11 +22,148 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "100ml",
         price: 120.0,
         discountPrice: 95.0,
         countInStock: 5,
         images: ["https://example.com/chanel100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Chanel Gabrielle",
+    description:
+      "Gabrielle by Chanel is a radiant and luminous fragrance with a blend of jasmine, orange blossom, and tuberose.",
+    brand: "Chanel",
+    brand_slug: "chanel",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 90.0,
+        discountPrice: 75.0,
+        countInStock: 0,
+        images: ["https://example.com/gabrielle50ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 150.0,
+        discountPrice: 130.0,
+        countInStock: 2,
+        images: ["https://example.com/gabrielle100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Chanel Bleu de Chanel",
+    description:
+      "Bleu de Chanel is a bold and fresh fragrance for men with notes of citrus, sandalwood, and cedar.",
+    brand: "Chanel",
+    brand_slug: "chanel",
+    category: "designer",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 95.0,
+        discountPrice: 80.0,
+        countInStock: 1,
+        images: ["https://example.com/bleu50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 155.0,
+        discountPrice: 155.0,
+        countInStock: 2,
+        images: ["https://example.com/bleu50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "200ml",
+        price: 205.0,
+        discountPrice: 195.0,
+        countInStock: 3,
+        images: ["https://example.com/bleu50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Chanel Allure Homme Sport",
+    description:
+      "Allure Homme Sport is an energizing fragrance for men with notes of mandarin, cedar, and white musk.",
+    brand: "Chanel",
+    brand_slug: "chanel",
+    category: "designer",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 110.0,
+        discountPrice: 90.0,
+        countInStock: 0,
+        images: ["https://example.com/allure100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Chanel No. 19",
+    description:
+      "Chanel No. 19 is a classic green floral fragrance with notes of iris, rose, and galbanum, perfect for sophisticated tastes.",
+    brand: "Chanel",
+    brand_slug: "chanel",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 78.0,
+        discountPrice: 65.0,
+        countInStock: 4,
+        images: ["https://example.com/no1950ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 120.0,
+        discountPrice: 100.0,
+        countInStock: 0,
+        images: ["https://example.com/no19100ml.jpg"],
         video: "",
         onSale: true,
       },
@@ -44,6 +182,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "60ml",
         price: 85.0,
         discountPrice: 70.0,
@@ -53,6 +192,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "120ml",
         price: 150.0,
         discountPrice: 130.0,
@@ -63,6 +203,211 @@ const products = [
       },
     ],
   },
+  {
+    name: "Dior Miss Dior",
+    description:
+      "Miss Dior is a floral fragrance with notes of rose, peony, and lily of the valley, blended with a touch of patchouli for elegance.",
+    brand: "Dior",
+    brand_slug: "dior",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 95.0,
+        discountPrice: 80.0,
+        countInStock: 5,
+        images: ["https://example.com/missdior50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 160.0,
+        discountPrice: 140.0,
+        countInStock: 0,
+        images: ["https://example.com/missdior100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Dior J'adore",
+    description:
+      "J'adore is a radiant floral bouquet featuring notes of ylang-ylang, Damascus rose, and jasmine sambac.",
+    brand: "Dior",
+    brand_slug: "dior",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 105.0,
+        discountPrice: 90.0,
+        countInStock: 8,
+        images: ["https://example.com/jadore50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 175.0,
+        discountPrice: 150.0,
+        countInStock: 0,
+        images: ["https://example.com/jadore100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Dior Homme",
+    description:
+      "Dior Homme is a sophisticated and sensual fragrance for men with notes of iris, amber, and leather.",
+    brand: "Dior",
+    brand_slug: "dior",
+    category: "designer",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 75.0,
+        discountPrice: 65.0,
+        countInStock: 0,
+        images: ["https://example.com/homme50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 135.0,
+        discountPrice: 120.0,
+        countInStock: 4,
+        images: ["https://example.com/homme100ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Dior Fahrenheit",
+    description:
+      "Dior Fahrenheit is a bold and masculine fragrance with notes of leather, violet, and nutmeg.",
+    brand: "Dior",
+    brand_slug: "dior",
+    category: "designer",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 80.0,
+        discountPrice: 70.0,
+        countInStock: 7,
+        images: ["https://example.com/fahrenheit50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 140.0,
+        discountPrice: 120.0,
+        countInStock: 0,
+        images: ["https://example.com/fahrenheit100ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Dior Addict",
+    description:
+      "Dior Addict is a sensual oriental fragrance with notes of mandarin leaf, orange blossom, and bourbon vanilla.",
+    brand: "Dior",
+    brand_slug: "dior",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 100.0,
+        discountPrice: 85.0,
+        countInStock: 6,
+        images: ["https://example.com/addict50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 170.0,
+        discountPrice: 150.0,
+        countInStock: 2,
+        images: ["https://example.com/addict100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Dior Poison Girl",
+    description:
+      "Poison Girl is a seductive fragrance with a blend of bitter orange, tonka bean, and vanilla.",
+    brand: "Dior",
+    brand_slug: "dior",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 95.0,
+        discountPrice: 75.0,
+        countInStock: 0,
+        images: ["https://example.com/poison50ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 150.0,
+        discountPrice: 130.0,
+        countInStock: 0,
+        images: ["https://example.com/poison100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+
   {
     name: "Tom Ford Black Orchid",
     description:
@@ -76,6 +421,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 110.0,
         discountPrice: 95.0,
@@ -85,6 +431,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "100ml",
         price: 160.0,
         discountPrice: 140.0,
@@ -108,6 +455,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "75ml",
         price: 350.0,
         discountPrice: 320.0,
@@ -117,6 +465,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "120ml",
         price: 450.0,
         discountPrice: 400.0,
@@ -140,6 +489,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 95.0,
         discountPrice: 80.0,
@@ -149,6 +499,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "75ml",
         price: 135.0,
         discountPrice: 115.0,
@@ -172,6 +523,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "75ml",
         price: 85.0,
         discountPrice: 70.0,
@@ -181,6 +533,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "100ml",
         price: 110.0,
         discountPrice: 95.0,
@@ -204,6 +557,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 100.0,
         discountPrice: 80.0,
@@ -227,6 +581,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "125ml",
         price: 85.0,
         discountPrice: 75.0,
@@ -250,6 +605,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 150.0,
         discountPrice: 130.0,
@@ -259,6 +615,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "100ml",
         price: 200.0,
         discountPrice: 180.0,
@@ -282,6 +639,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "75ml",
         price: 100.0,
         discountPrice: 85.0,
@@ -305,6 +663,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 120.0,
         discountPrice: 100.0,
@@ -314,6 +673,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "100ml",
         price: 180.0,
         discountPrice: 160.0,
@@ -332,11 +692,12 @@ const products = [
     brand_slug: "calvin-klein",
     category: "designer",
     gender: "female",
-    rating: 4.3,
+    rating: 0,
     numReviews: 850,
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 65.0,
         discountPrice: 55.0,
@@ -355,11 +716,12 @@ const products = [
     brand_slug: "creed",
     category: "niche",
     gender: "male",
-    rating: 4.8,
+    rating: 0,
     numReviews: 950,
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 380.0,
         discountPrice: 350.0,
@@ -378,11 +740,12 @@ const products = [
     brand_slug: "maison-francis-kurkdjian",
     category: "niche",
     gender: "unisex",
-    rating: 5.0,
+    rating: 0,
     numReviews: 875,
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "70ml",
         price: 300.0,
         discountPrice: 280.0,
@@ -393,6 +756,455 @@ const products = [
       },
     ],
   },
+  {
+    name: "Armani Code",
+    description:
+      "Armani Code is a sophisticated and seductive fragrance for men with notes of tonka bean, leather, and cedarwood.",
+    brand: "Giorgio Armani",
+    brand_slug: "giorgio-armani",
+    category: "designer",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 85.0,
+        discountPrice: 70.0,
+        countInStock: 8,
+        images: ["https://example.com/armanicode50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 120.0,
+        discountPrice: 100.0,
+        countInStock: 5,
+        images: ["https://example.com/armanicode100ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Si",
+    description:
+      "Si is a feminine fragrance with a blend of blackcurrant nectar, modern chypre, and musky blond wood.",
+    brand: "Giorgio Armani",
+    brand_slug: "giorgio-armani",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 90.0,
+        discountPrice: 75.0,
+        countInStock: 12,
+        images: ["https://example.com/si50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 150.0,
+        discountPrice: 130.0,
+        countInStock: 0,
+        images: ["https://example.com/si100ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Acqua di Gioia",
+    description:
+      "Acqua di Gioia is a fresh, citrusy fragrance for women, featuring notes of mint leaves, lemon, and water jasmine.",
+    brand: "Giorgio Armani",
+    brand_slug: "giorgio-armani",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "30ml",
+        price: 65.0,
+        discountPrice: 50.0,
+        countInStock: 3,
+        images: ["https://example.com/adiogioia30ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        tester: false,
+        size: "50ml",
+        price: 90.0,
+        discountPrice: 75.0,
+        countInStock: 0,
+        images: ["https://example.com/adiogioia50ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Emporio Armani Stronger With You",
+    description:
+      "Stronger With You is a warm, spicy fragrance for men, with notes of cardamom, pink pepper, and vanilla.",
+    brand: "Giorgio Armani",
+    brand_slug: "giorgio-armani",
+    category: "designer",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "60ml",
+        price: 85.0,
+        discountPrice: 70.0,
+        countInStock: 9,
+        images: ["https://example.com/strongerwithyou60ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+      {
+        tester: false,
+        size: "100ml",
+        price: 120.0,
+        discountPrice: 105.0,
+        countInStock: 0,
+        images: ["https://example.com/strongerwithyou100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Emporio Armani In Love With You",
+    description:
+      "In Love With You is a fruity floral fragrance for women, featuring notes of cherry, raspberry, and vanilla.",
+    brand: "Giorgio Armani",
+    brand_slug: "giorgio-armani",
+    category: "designer",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 90.0,
+        discountPrice: 80.0,
+        countInStock: 7,
+        images: ["https://example.com/inlovewithyou50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Armani Prive Rouge Malachite",
+    description:
+      "Rouge Malachite is an intense oriental floral fragrance with notes of tuberose, amber, and orange blossom.",
+    brand: "Giorgio Armani",
+    brand_slug: "giorgio-armani",
+    category: "designer",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 300.0,
+        discountPrice: 280.0,
+        countInStock: 2,
+        images: ["https://example.com/rougemalachite100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Amouage Jubilation XXV",
+    description:
+      "A luxurious oriental fragrance with notes of frankincense, myrrh, and oud, creating a timeless scent.",
+    brand: "Amouage",
+    brand_slug: "amouage",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 350.0,
+        discountPrice: 320.0,
+        countInStock: 5,
+        images: ["https://example.com/jubilationxxv100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Rasasi La Yuqawam",
+    description:
+      "A warm and spicy blend of leather, raspberry, and oud, offering a sophisticated and powerful scent.",
+    brand: "Rasasi",
+    brand_slug: "rasasi",
+    category: "arabic",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "75ml",
+        price: 200.0,
+        discountPrice: 180.0,
+        countInStock: 3,
+        images: ["https://example.com/layuqawam75ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Swiss Arabian Shaghaf Oud Aswad",
+    description:
+      "An intense and rich oud fragrance with notes of saffron, rose, and amber for a bold statement.",
+    brand: "Swiss Arabian",
+    brand_slug: "swiss-arabian",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "75ml",
+        price: 150.0,
+        discountPrice: 140.0,
+        countInStock: 10,
+        images: ["https://example.com/shaghafoudaswad75ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Ajmal Amber Wood",
+    description:
+      "A captivating blend of amber, cedarwood, and patchouli, delivering a woody and oriental scent.",
+    brand: "Ajmal",
+    brand_slug: "ajmal",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 220.0,
+        discountPrice: 200.0,
+        countInStock: 7,
+        images: ["https://example.com/amberwood100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Lattafa Oud Mood",
+    description:
+      "A sweet and woody oud fragrance with hints of vanilla, musk, and resin for a warm embrace.",
+    brand: "Lattafa",
+    brand_slug: "lattafa",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 120.0,
+        discountPrice: 110.0,
+        countInStock: 15,
+        images: ["https://example.com/oudmood100ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Al Haramain Amber Oud Gold Edition",
+    description:
+      "A luxurious blend of amber, oud, and citrus, creating an elegant and uplifting aroma.",
+    brand: "Al Haramain",
+    brand_slug: "al-haramain",
+    category: "arabic",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "60ml",
+        price: 180.0,
+        discountPrice: 170.0,
+        countInStock: 8,
+        images: ["https://example.com/amberoudgold60ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Khaltat Night Musk",
+    description:
+      "A rich and sensual fragrance with notes of white musk, jasmine, and sweet woods for a soothing aura.",
+    brand: "Khaltat",
+    brand_slug: "khaltat",
+    category: "arabic",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 90.0,
+        discountPrice: 80.0,
+        countInStock: 12,
+        images: ["https://example.com/nightmusk50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Arabian Oud Kalemat",
+    description:
+      "A warm and sweet oud fragrance with notes of honey, musk, and vanilla for a cozy and inviting scent.",
+    brand: "Arabian Oud",
+    brand_slug: "arabian-oud",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 250.0,
+        discountPrice: 230.0,
+        countInStock: 6,
+        images: ["https://example.com/kalemat100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Nabeel Black Musk",
+    description:
+      "A dark and mysterious fragrance with notes of musk, patchouli, and smoky woods, perfect for evening wear.",
+    brand: "Nabeel",
+    brand_slug: "nabeel",
+    category: "arabic",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 140.0,
+        discountPrice: 130.0,
+        countInStock: 10,
+        images: ["https://example.com/blackmusk100ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Afnan Supremacy in Oud",
+    description:
+      "A bold and elegant oud fragrance with hints of spices, florals, and amber for a refined scent.",
+    brand: "Afnan",
+    brand_slug: "afnan",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 190.0,
+        discountPrice: 175.0,
+        countInStock: 8,
+        images: ["https://example.com/supremacyinoud100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Armani Prive Vert Malachite",
+    description:
+      "Vert Malachite is a soft floral fragrance with green accents, featuring notes of lily, jasmine, and vanilla.",
+    brand: "Giorgio Armani",
+    brand_slug: "giorgio-armani",
+    category: "designer",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 300.0,
+        discountPrice: 280.0,
+        countInStock: 4,
+        images: ["https://example.com/vertmalachite100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+
   {
     name: "Paco Rabanne 1 Million",
     description:
@@ -406,6 +1218,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 85.0,
         discountPrice: 70.0,
@@ -415,6 +1228,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "100ml",
         price: 120.0,
         discountPrice: 105.0,
@@ -438,6 +1252,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 85.0,
         discountPrice: 75.0,
@@ -461,6 +1276,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 95.0,
         discountPrice: 80.0,
@@ -484,6 +1300,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 110.0,
         discountPrice: 90.0,
@@ -507,6 +1324,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 85.0,
         discountPrice: 75.0,
@@ -530,6 +1348,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 95.0,
         discountPrice: 85.0,
@@ -539,6 +1358,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "200ml",
         price: 160.0,
         discountPrice: 140.0,
@@ -562,6 +1382,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 150.0,
         discountPrice: 130.0,
@@ -571,6 +1392,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "150ml",
         price: 180.0,
         discountPrice: 160.0,
@@ -594,6 +1416,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "90ml",
         price: 120.0,
         discountPrice: 100.0,
@@ -603,6 +1426,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "50ml",
         price: 80.0,
         discountPrice: 65.0,
@@ -626,6 +1450,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 150.0,
         discountPrice: 140.0,
@@ -635,6 +1460,7 @@ const products = [
         onSale: true,
       },
       {
+        tester: false,
         size: "200ml",
         price: 200.0,
         discountPrice: 180.0,
@@ -642,6 +1468,246 @@ const products = [
         images: ["https://example.com/eaudorange200ml.jpg"],
         video: "",
         onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Ajmal Mukhallat Dahn Al Oudh Moattaq",
+    description:
+      "A pure and traditional oud fragrance with a blend of rose, amber, and saffron for a luxurious experience.",
+    brand: "Ajmal",
+    brand_slug: "ajmal",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "60ml",
+        price: 320.0,
+        discountPrice: 300.0,
+        countInStock: 4,
+        images: ["https://example.com/mukhallatoudh60ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Lattafa Raghba",
+    description:
+      "A sweet and smoky fragrance with notes of vanilla, oud, and incense, perfect for any occasion.",
+    brand: "Lattafa",
+    brand_slug: "lattafa",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 95.0,
+        discountPrice: 85.0,
+        countInStock: 15,
+        images: ["https://example.com/raghba100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Swiss Arabian Kashkha",
+    description:
+      "A vibrant and spicy scent with cinnamon, cardamom, and oud for a distinctive and bold aroma.",
+    brand: "Swiss Arabian",
+    brand_slug: "swiss-arabian",
+    category: "arabic",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 130.0,
+        discountPrice: 120.0,
+        countInStock: 8,
+        images: ["https://example.com/kashkha50ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Rasasi Qasamat Morhaf",
+    description:
+      "A sophisticated oriental fragrance with a unique blend of floral, amber, and oud notes.",
+    brand: "Rasasi",
+    brand_slug: "rasasi",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "65ml",
+        price: 160.0,
+        discountPrice: 150.0,
+        countInStock: 5,
+        images: ["https://example.com/qasamatmorhaf65ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Arabian Oud Majestic",
+    description:
+      "A luxurious oud and amber scent with hints of spices and musk, offering a royal experience.",
+    brand: "Arabian Oud",
+    brand_slug: "arabian-oud",
+    category: "arabic",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 300.0,
+        discountPrice: 280.0,
+        countInStock: 6,
+        images: ["https://example.com/majestic100ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Nabeel Spirit of Dubai Oud",
+    description:
+      "A masterpiece of oud with layers of floral, woody, and spicy notes for an unforgettable scent.",
+    brand: "Nabeel",
+    brand_slug: "nabeel",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "90ml",
+        price: 400.0,
+        discountPrice: 380.0,
+        countInStock: 3,
+        images: ["https://example.com/spiritofdubaioud90ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Lattafa Ana Abiyedh Rouge",
+    description:
+      "A bright and fruity fragrance with notes of saffron, jasmine, and amber, perfect for daytime wear.",
+    brand: "Lattafa",
+    brand_slug: "lattafa",
+    category: "arabic",
+    gender: "female",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "60ml",
+        price: 85.0,
+        discountPrice: 75.0,
+        countInStock: 12,
+        images: ["https://example.com/anaabiyedhrouge60ml.jpg"],
+        video: "",
+        onSale: false,
+      },
+    ],
+  },
+  {
+    name: "Ajmal Evoke Gold",
+    description:
+      "An aromatic fragrance with spicy and floral notes, complemented by a base of sandalwood and musk.",
+    brand: "Ajmal",
+    brand_slug: "ajmal",
+    category: "arabic",
+    gender: "male",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "75ml",
+        price: 110.0,
+        discountPrice: 100.0,
+        countInStock: 10,
+        images: ["https://example.com/evokegold75ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Khaltat Al Arabia Royal Blend",
+    description:
+      "A royal blend of oud, amber, and musk, with floral and fruity undertones for a balanced and elegant scent.",
+    brand: "Khaltat Al Arabia",
+    brand_slug: "khaltat-al-arabia",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "100ml",
+        price: 180.0,
+        discountPrice: 165.0,
+        countInStock: 7,
+        images: ["https://example.com/royalblend100ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+    ],
+  },
+  {
+    name: "Swiss Arabian Oud Maknoon",
+    description:
+      "A deep and mysterious oud fragrance with rich woody and smoky notes for an enigmatic presence.",
+    brand: "Swiss Arabian",
+    brand_slug: "swiss-arabian",
+    category: "arabic",
+    gender: "unisex",
+    rating: 0,
+    numReviews: 0,
+    reviews: [],
+    variants: [
+      {
+        tester: false,
+        size: "50ml",
+        price: 120.0,
+        discountPrice: 110.0,
+        countInStock: 9,
+        images: ["https://example.com/oudmaknoon50ml.jpg"],
+        video: "",
+        onSale: false,
       },
     ],
   },
@@ -658,6 +1724,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "75ml",
         price: 95.0,
         discountPrice: 80.0,
@@ -681,6 +1748,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "90ml",
         price: 85.0,
         discountPrice: 70.0,
@@ -704,6 +1772,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 115.0,
         discountPrice: 100.0,
@@ -728,6 +1797,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 120.0,
         discountPrice: 100.0,
@@ -751,6 +1821,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 140.0,
         discountPrice: 120.0,
@@ -774,6 +1845,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 450.0,
         discountPrice: 420.0,
@@ -797,6 +1869,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 175.0,
         discountPrice: 150.0,
@@ -820,6 +1893,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "75ml",
         price: 130.0,
         discountPrice: 110.0,
@@ -843,6 +1917,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 185.0,
         discountPrice: 160.0,
@@ -866,6 +1941,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 100.0,
         discountPrice: 85.0,
@@ -889,6 +1965,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 80.0,
         discountPrice: 70.0,
@@ -913,6 +1990,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "75ml",
         price: 85.0,
         discountPrice: 75.0,
@@ -936,6 +2014,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 250.0,
         discountPrice: 220.0,
@@ -959,6 +2038,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 200.0,
         discountPrice: 180.0,
@@ -982,6 +2062,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 135.0,
         discountPrice: 115.0,
@@ -1005,6 +2086,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 200.0,
         discountPrice: 180.0,
@@ -1028,6 +2110,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 160.0,
         discountPrice: 140.0,
@@ -1051,6 +2134,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 180.0,
         discountPrice: 160.0,
@@ -1074,6 +2158,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "75ml",
         price: 150.0,
         discountPrice: 130.0,
@@ -1097,6 +2182,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "100ml",
         price: 130.0,
         discountPrice: 120.0,
@@ -1120,6 +2206,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "75ml",
         price: 135.0,
         discountPrice: 120.0,
@@ -1143,6 +2230,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "65ml",
         price: 75.0,
         discountPrice: 65.0,
@@ -1166,6 +2254,7 @@ const products = [
     reviews: [],
     variants: [
       {
+        tester: false,
         size: "50ml",
         price: 210.0,
         discountPrice: 190.0,

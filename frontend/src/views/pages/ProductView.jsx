@@ -387,13 +387,8 @@ const ProductView = () => {
                     </h6>
                   </div>
 
-                  {/* Quantity Selection */}
                   {selectedVariant.countInStock === 0 ? (
-                    <Message
-                      severity="error"
-                      // variant="outlined"
-                      sx={{ marginBottom: 2 }}
-                    >
+                    <Message severity="error" sx={{ marginBottom: 2 }}>
                       This fragrance is currently out of stock
                     </Message>
                   ) : (
