@@ -12,10 +12,10 @@ const reviewSchema = new mongoose.Schema(
 
 const variantSchema = new mongoose.Schema(
   {
-    size: { type: String, required: false },
-    price: { type: Number, required: false },
+    size: { type: Number, required: true },
+    price: { type: Number, required: true },
     discountPrice: { type: Number, required: false },
-    countInStock: { type: Number, required: false },
+    countInStock: { type: Number, required: true },
     images: { type: [String], required: false },
     video: { type: String, required: false },
     onSale: { type: Boolean, required: false },
@@ -26,7 +26,7 @@ const variantSchema = new mongoose.Schema(
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    description: { type: String, required: true },
+    description: { type: String, required: false },
     brand: { type: String, required: true },
     brand_slug: { type: String, required: true },
     category: {

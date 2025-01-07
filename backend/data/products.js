@@ -12,8 +12,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 75.0,
         discountPrice: 60.0,
         countInStock: 12,
@@ -22,8 +21,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 120.0,
         discountPrice: 95.0,
         countInStock: 5,
@@ -46,8 +44,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 90.0,
         discountPrice: 75.0,
         countInStock: 0,
@@ -56,8 +53,7 @@ const products = [
         onSale: false,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 150.0,
         discountPrice: 130.0,
         countInStock: 2,
@@ -80,8 +76,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 95.0,
         discountPrice: 80.0,
         countInStock: 1,
@@ -90,8 +85,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 155.0,
         discountPrice: 155.0,
         countInStock: 2,
@@ -100,8 +94,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "200ml",
+        size: 200,
         price: 205.0,
         discountPrice: 195.0,
         countInStock: 3,
@@ -124,8 +117,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 110.0,
         discountPrice: 90.0,
         countInStock: 0,
@@ -148,8 +140,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 78.0,
         discountPrice: 65.0,
         countInStock: 4,
@@ -158,8 +149,7 @@ const products = [
         onSale: false,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 120.0,
         discountPrice: 100.0,
         countInStock: 0,
@@ -182,8 +172,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "60ml",
+        size: 60,
         price: 85.0,
         discountPrice: 70.0,
         countInStock: 10,
@@ -192,8 +181,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "120ml",
+        size: 120,
         price: 150.0,
         discountPrice: 130.0,
         countInStock: 3,
@@ -216,8 +204,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 95.0,
         discountPrice: 80.0,
         countInStock: 5,
@@ -226,8 +213,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 160.0,
         discountPrice: 140.0,
         countInStock: 0,
@@ -250,8 +236,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 105.0,
         discountPrice: 90.0,
         countInStock: 8,
@@ -260,8 +245,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 175.0,
         discountPrice: 150.0,
         countInStock: 0,
@@ -284,8 +268,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 75.0,
         discountPrice: 65.0,
         countInStock: 0,
@@ -294,8 +277,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 135.0,
         discountPrice: 120.0,
         countInStock: 4,
@@ -318,8 +300,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 80.0,
         discountPrice: 70.0,
         countInStock: 7,
@@ -328,8 +309,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 140.0,
         discountPrice: 120.0,
         countInStock: 0,
@@ -352,8 +332,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 100.0,
         discountPrice: 85.0,
         countInStock: 6,
@@ -362,8 +341,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 170.0,
         discountPrice: 150.0,
         countInStock: 2,
@@ -386,8 +364,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 95.0,
         discountPrice: 75.0,
         countInStock: 0,
@@ -396,8 +373,7 @@ const products = [
         onSale: false,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 150.0,
         discountPrice: 130.0,
         countInStock: 0,
@@ -421,8 +397,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 110.0,
         discountPrice: 95.0,
         countInStock: 15,
@@ -431,8 +406,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 160.0,
         discountPrice: 140.0,
         countInStock: 8,
@@ -455,8 +429,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 350.0,
         discountPrice: 320.0,
         countInStock: 5,
@@ -465,8 +438,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "120ml",
+        size: 120,
         price: 450.0,
         discountPrice: 400.0,
         countInStock: 0,
@@ -489,8 +461,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 95.0,
         discountPrice: 80.0,
         countInStock: 10,
@@ -499,8 +470,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 135.0,
         discountPrice: 115.0,
         countInStock: 7,
@@ -523,8 +493,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 85.0,
         discountPrice: 70.0,
         countInStock: 0,
@@ -533,8 +502,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 110.0,
         discountPrice: 95.0,
         countInStock: 20,
@@ -557,8 +525,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 100.0,
         discountPrice: 80.0,
         countInStock: 10,
@@ -581,8 +548,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "125ml",
+        size: 125,
         price: 85.0,
         discountPrice: 75.0,
         countInStock: 5,
@@ -605,8 +571,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 150.0,
         discountPrice: 130.0,
         countInStock: 8,
@@ -615,8 +580,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 200.0,
         discountPrice: 180.0,
         countInStock: 15,
@@ -639,8 +603,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 100.0,
         discountPrice: 85.0,
         countInStock: 12,
@@ -663,8 +626,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 120.0,
         discountPrice: 100.0,
         countInStock: 20,
@@ -673,8 +635,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 180.0,
         discountPrice: 160.0,
         countInStock: 5,
@@ -693,12 +654,11 @@ const products = [
     category: "designer",
     gender: "female",
     rating: 0,
-    numReviews: 850,
+    numReviews: 0,
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 65.0,
         discountPrice: 55.0,
         countInStock: 110,
@@ -721,8 +681,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 380.0,
         discountPrice: 350.0,
         countInStock: 60,
@@ -745,8 +704,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "70ml",
+        size: 70,
         price: 300.0,
         discountPrice: 280.0,
         countInStock: 50,
@@ -769,8 +727,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 85.0,
         discountPrice: 70.0,
         countInStock: 8,
@@ -779,8 +736,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 120.0,
         discountPrice: 100.0,
         countInStock: 5,
@@ -803,8 +759,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 90.0,
         discountPrice: 75.0,
         countInStock: 12,
@@ -813,8 +768,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 150.0,
         discountPrice: 130.0,
         countInStock: 0,
@@ -837,8 +791,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "30ml",
+        size: 30,
         price: 65.0,
         discountPrice: 50.0,
         countInStock: 3,
@@ -847,8 +800,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 90.0,
         discountPrice: 75.0,
         countInStock: 0,
@@ -871,8 +823,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "60ml",
+        size: 60,
         price: 85.0,
         discountPrice: 70.0,
         countInStock: 9,
@@ -881,8 +832,7 @@ const products = [
         onSale: false,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 120.0,
         discountPrice: 105.0,
         countInStock: 0,
@@ -905,8 +855,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 90.0,
         discountPrice: 80.0,
         countInStock: 7,
@@ -929,8 +878,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 300.0,
         discountPrice: 280.0,
         countInStock: 2,
@@ -953,8 +901,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 350.0,
         discountPrice: 320.0,
         countInStock: 5,
@@ -977,8 +924,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 200.0,
         discountPrice: 180.0,
         countInStock: 3,
@@ -1001,8 +947,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 150.0,
         discountPrice: 140.0,
         countInStock: 10,
@@ -1025,8 +970,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 220.0,
         discountPrice: 200.0,
         countInStock: 7,
@@ -1049,8 +993,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 120.0,
         discountPrice: 110.0,
         countInStock: 15,
@@ -1073,8 +1016,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "60ml",
+        size: 60,
         price: 180.0,
         discountPrice: 170.0,
         countInStock: 8,
@@ -1097,8 +1039,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 90.0,
         discountPrice: 80.0,
         countInStock: 12,
@@ -1121,8 +1062,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 250.0,
         discountPrice: 230.0,
         countInStock: 6,
@@ -1145,8 +1085,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 140.0,
         discountPrice: 130.0,
         countInStock: 10,
@@ -1169,8 +1108,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 190.0,
         discountPrice: 175.0,
         countInStock: 8,
@@ -1193,8 +1131,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 300.0,
         discountPrice: 280.0,
         countInStock: 4,
@@ -1218,8 +1155,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 85.0,
         discountPrice: 70.0,
         countInStock: 15,
@@ -1228,8 +1164,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 120.0,
         discountPrice: 105.0,
         countInStock: 0,
@@ -1252,8 +1187,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 85.0,
         discountPrice: 75.0,
         countInStock: 18,
@@ -1276,8 +1210,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 95.0,
         discountPrice: 80.0,
         countInStock: 20,
@@ -1300,8 +1233,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 110.0,
         discountPrice: 90.0,
         countInStock: 12,
@@ -1324,8 +1256,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 85.0,
         discountPrice: 75.0,
         countInStock: 8,
@@ -1348,8 +1279,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 95.0,
         discountPrice: 85.0,
         countInStock: 15,
@@ -1358,8 +1288,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "200ml",
+        size: 200,
         price: 160.0,
         discountPrice: 140.0,
         countInStock: 5,
@@ -1382,8 +1311,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 150.0,
         discountPrice: 130.0,
         countInStock: 18,
@@ -1392,8 +1320,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "150ml",
+        size: 150,
         price: 180.0,
         discountPrice: 160.0,
         countInStock: 0,
@@ -1416,22 +1343,20 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "90ml",
-        price: 120.0,
-        discountPrice: 100.0,
-        countInStock: 5,
-        images: ["https://example.com/shalimar90ml.jpg"],
-        video: "",
-        onSale: true,
-      },
-      {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 80.0,
         discountPrice: 65.0,
         countInStock: 12,
         images: ["https://example.com/shalimar50ml.jpg"],
+        video: "",
+        onSale: true,
+      },
+      {
+        size: 90,
+        price: 120.0,
+        discountPrice: 100.0,
+        countInStock: 5,
+        images: ["https://example.com/shalimar90ml.jpg"],
         video: "",
         onSale: true,
       },
@@ -1450,8 +1375,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 150.0,
         discountPrice: 140.0,
         countInStock: 10,
@@ -1460,8 +1384,7 @@ const products = [
         onSale: true,
       },
       {
-        tester: false,
-        size: "200ml",
+        size: 200,
         price: 200.0,
         discountPrice: 180.0,
         countInStock: 0,
@@ -1484,8 +1407,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "60ml",
+        size: 60,
         price: 320.0,
         discountPrice: 300.0,
         countInStock: 4,
@@ -1508,8 +1430,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 95.0,
         discountPrice: 85.0,
         countInStock: 15,
@@ -1532,8 +1453,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 130.0,
         discountPrice: 120.0,
         countInStock: 8,
@@ -1556,8 +1476,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "65ml",
+        size: 65,
         price: 160.0,
         discountPrice: 150.0,
         countInStock: 5,
@@ -1580,8 +1499,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 300.0,
         discountPrice: 280.0,
         countInStock: 6,
@@ -1604,8 +1522,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "90ml",
+        size: 90,
         price: 400.0,
         discountPrice: 380.0,
         countInStock: 3,
@@ -1628,8 +1545,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "60ml",
+        size: 60,
         price: 85.0,
         discountPrice: 75.0,
         countInStock: 12,
@@ -1652,8 +1568,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 110.0,
         discountPrice: 100.0,
         countInStock: 10,
@@ -1676,8 +1591,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 180.0,
         discountPrice: 165.0,
         countInStock: 7,
@@ -1700,8 +1614,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 120.0,
         discountPrice: 110.0,
         countInStock: 9,
@@ -1724,8 +1637,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 95.0,
         discountPrice: 80.0,
         countInStock: 18,
@@ -1748,8 +1660,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "90ml",
+        size: 90,
         price: 85.0,
         discountPrice: 70.0,
         countInStock: 12,
@@ -1772,8 +1683,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 115.0,
         discountPrice: 100.0,
         countInStock: 20,
@@ -1797,8 +1707,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 120.0,
         discountPrice: 100.0,
         countInStock: 15,
@@ -1821,8 +1730,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 140.0,
         discountPrice: 120.0,
         countInStock: 0,
@@ -1845,8 +1753,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 450.0,
         discountPrice: 420.0,
         countInStock: 30,
@@ -1869,8 +1776,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 175.0,
         discountPrice: 150.0,
         countInStock: 4,
@@ -1893,8 +1799,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 130.0,
         discountPrice: 110.0,
         countInStock: 25,
@@ -1917,8 +1822,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 185.0,
         discountPrice: 160.0,
         countInStock: 13,
@@ -1941,8 +1845,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 100.0,
         discountPrice: 85.0,
         countInStock: 9,
@@ -1965,8 +1868,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 80.0,
         discountPrice: 70.0,
         countInStock: 11,
@@ -1990,8 +1892,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 85.0,
         discountPrice: 75.0,
         countInStock: 12,
@@ -2014,8 +1915,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 250.0,
         discountPrice: 220.0,
         countInStock: 15,
@@ -2038,8 +1938,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 200.0,
         discountPrice: 180.0,
         countInStock: 3,
@@ -2062,8 +1961,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 135.0,
         discountPrice: 115.0,
         countInStock: 4,
@@ -2086,8 +1984,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 200.0,
         discountPrice: 180.0,
         countInStock: 17,
@@ -2110,8 +2007,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 160.0,
         discountPrice: 140.0,
         countInStock: 6,
@@ -2134,8 +2030,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 180.0,
         discountPrice: 160.0,
         countInStock: 5,
@@ -2158,8 +2053,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 150.0,
         discountPrice: 130.0,
         countInStock: 8,
@@ -2182,8 +2076,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "100ml",
+        size: 100,
         price: 130.0,
         discountPrice: 120.0,
         countInStock: 7,
@@ -2206,8 +2099,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "75ml",
+        size: 75,
         price: 135.0,
         discountPrice: 120.0,
         countInStock: 15,
@@ -2230,8 +2122,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "65ml",
+        size: 65,
         price: 75.0,
         discountPrice: 65.0,
         countInStock: 10,
@@ -2254,8 +2145,7 @@ const products = [
     reviews: [],
     variants: [
       {
-        tester: false,
-        size: "50ml",
+        size: 50,
         price: 210.0,
         discountPrice: 190.0,
         countInStock: 6,

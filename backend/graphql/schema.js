@@ -2,7 +2,7 @@ import { gql } from "graphql-tag";
 
 export const typeDefs = gql`
   type Variant {
-    size: String
+    size: Int
     price: Float
     discountPrice: Float
     countInStock: Int
@@ -36,6 +36,7 @@ export const typeDefs = gql`
     ): [Product]
     categories: [String]
     brands: [String]
+    sizes: [Int]
     availableProducts: [Product]
     topBrands: [String]
   }

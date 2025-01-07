@@ -53,6 +53,19 @@ export const resolvers = {
         throw new Error("Error fetching brands");
       }
     },
+    sizes: async () => {
+      try {
+        const sizes = await Product.aggregate([
+          { $unwind: "$variants" },
+          { $group: { _id: "$variants.size" } },
+          { $sort: { _id: 1 } },
+        ]);
+
+        return sizes.map((item) => item._id);
+      } catch (error) {
+        throw new Error("Error fetching sizes");
+      }
+    },
     availableProducts: async () => {
       try {
         return await Product.find({ "variants.countInStock": { $gt: 0 } });

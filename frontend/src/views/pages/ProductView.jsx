@@ -86,12 +86,6 @@ const ProductView = () => {
 
   const addReview = async (e) => {
     e.preventDefault();
-    console.log("UserInfo id:", userInfo);
-    console.log("UserInfo id:", userInfo.name);
-    console.log("UserInfo id:", userInfo._id);
-    console.log("comment is:", comment);
-    console.log("rating is:", rating);
-    console.log("product id is:", productId);
     try {
       await createReview({
         productId,
@@ -188,7 +182,7 @@ const ProductView = () => {
                         </li>
                         <li>
                           <Link
-                            to={`/products/${product.category}`}
+                            to={`/products/categories/${product.category}`}
                             className="text-gray-500 hover:underline"
                           >
                             {product.category.charAt(0).toUpperCase() +
@@ -198,7 +192,7 @@ const ProductView = () => {
                         <span className="text-gray-400">/</span>
                         <li>
                           <Link
-                            to={`/products/${product.brand}`}
+                            to={`/products/brands/${product.brand_slug}`}
                             className="text-gray-500 hover:underline"
                           >
                             {product.brand}
@@ -213,7 +207,7 @@ const ProductView = () => {
                       </ul>
                     </nav>
                     <h1 className="text-2xl font-bold text-gray-800 mb-2">
-                      {product.name} - {selectedVariant?.size}
+                      {product.name} - {selectedVariant?.size}ml
                     </h1>
                     <div className="text-center mb-4">
                       <h5 className="text-l font-semibold text-gray-500">
@@ -305,7 +299,7 @@ const ProductView = () => {
                         </li>
                         <li>
                           <Link
-                            to={`/products/${product.category}`}
+                            to={`/products/categories/${product.category}`}
                             className="text-gray-500 hover:underline"
                           >
                             {product.category.charAt(0).toUpperCase() +
@@ -315,7 +309,7 @@ const ProductView = () => {
                         <span className="text-gray-400">/</span>
                         <li>
                           <Link
-                            to={`/products/${product.brand}`}
+                            to={`/products/brands/${product.brand_slug}`}
                             className="text-gray-500 hover:underline"
                           >
                             {product.brand}
@@ -330,7 +324,7 @@ const ProductView = () => {
                       </ul>
                     </nav>
                     <h1 className="text-2xl font-bold text-gray-800 mb-2">
-                      {product.name} - {selectedVariant?.size}
+                      {product.name} - {selectedVariant?.size}ml
                     </h1>
                     <div className="text-center mb-4">
                       <h5 className="text-l font-semibold text-gray-500">
@@ -371,7 +365,7 @@ const ProductView = () => {
                               : "bg-white text-gray-800 hover:bg-gray-200"
                           }`}
                         >
-                          {variant.size}
+                          {variant.size}ml
                         </button>
                       ))}
                     </div>

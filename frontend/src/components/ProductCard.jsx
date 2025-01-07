@@ -87,7 +87,7 @@ const ProductCard = ({ product }) => {
                   : "bg-slate-200 hover:bg-slate-300"
               }`}
             >
-              {variant.size}
+              {variant.size}ml
             </p>
           ))}
         </div>

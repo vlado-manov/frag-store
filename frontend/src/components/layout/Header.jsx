@@ -290,8 +290,8 @@ const Header = () => {
             <hr className="border-gray-400 my-1" />
             {topBrandsData?.topBrands?.map((topBrand, index) => (
               <Link
-                onClick={toggleDrawer(false)}
                 key={index}
+                onClick={toggleDrawer(false)}
                 to={`/products/brands/${topBrand
                   .normalize("NFD")
                   .replace(/[\u0300-\u036f]/g, "")

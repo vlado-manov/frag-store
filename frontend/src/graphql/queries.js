@@ -24,11 +24,12 @@ export const GET_PRODUCTS = gql`
       brand
       brand_slug
       category
+      gender
+      rating
       variants {
         size
         price
         discountPrice
-        countInStock
         images
       }
     }
@@ -50,5 +51,10 @@ export const GET_CATEGORIES = gql`
 export const GET_BRANDS = gql`
   query GetBrands {
     brands
+  }
+`;
+export const GET_SIZES = gql`
+  query GetSizes {
+    sizes
   }
 `;
