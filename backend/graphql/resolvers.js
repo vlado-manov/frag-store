@@ -46,7 +46,7 @@ export const resolvers = {
         const brands = await Product.aggregate([
           { $group: { _id: "$brand", count: { $sum: 1 } } },
           { $sort: { count: -1 } },
-          { $limit: 20 },
+          // { $limit: 20 },
         ]);
         return brands.map((brand) => brand._id);
       } catch (error) {
@@ -78,7 +78,7 @@ export const resolvers = {
         const brands = await Product.aggregate([
           { $group: { _id: "$brand", count: { $sum: 1 } } },
           { $sort: { count: -1 } },
-          { $limit: 5 },
+          { $limit: 10 },
         ]);
         return brands.map((brand) => brand._id);
       } catch (error) {

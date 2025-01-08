@@ -4,25 +4,18 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import HeaderProductList from "../../components/HeaderProductList";
+import Filters from "../../components/Filters";
 
 const CategoryView = () => {
   const { category } = useParams();
-  const [sortBy, setSortBy] = useState(null);
+  const [sortBy, setSortBy] = useState("variants.price");
   const [sortOrder, setSortOrder] = useState("asc");
-  const currentSort =
-    sortBy === "variants.price" && sortOrder === "asc"
-      ? "lowToHigh"
-      : sortBy === "variants.price" && sortOrder === "desc"
-      ? "highToLow"
-      : sortBy === "createdAt" && sortOrder === "desc"
-      ? "newest"
-      : sortBy === "numReviews" && sortOrder === "desc"
-      ? "reviews"
-      : sortBy === "rating" && sortOrder === "desc"
-      ? "rating"
-      : "";
   const { data, loading, error } = useQuery(GET_PRODUCTS, {
-    variables: { category, sortBy, sortOrder },
+    variables: {
+      category,
+      sortBy,
+      sortOrder,
+    },
   });
 
   if (loading) return <p>Loading...</p>;
@@ -33,9 +26,11 @@ const CategoryView = () => {
       <HeaderProductList
         setSortBy={setSortBy}
         setSortOrder={setSortOrder}
-        currentSort={currentSort}
+        sortBy={sortBy}
+        sortOrder={sortOrder}
       />
-      <div className="flex items-center justify-center">
+      <div className="flex justify-center">
+        <Filters hideFilters={["category"]} />
         <div className="grid grid-cols-1 max-w-max md:max-w-6xl sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {data?.products?.length > 0 ? (
             data.products.map((product) => (

@@ -46,7 +46,7 @@ const router = createBrowserRouter(
       />
       <Route path="/products/categories/:category" element={<CategoryView />} />
       <Route
-        path="/category/:category/page/:pageNumber"
+        path="/categories/:category/page/:pageNumber"
         element={<CategoryView />}
       />
       <Route path="/cart" element={<Cart />} />

@@ -11,7 +11,6 @@ const Home = () => {
   return (
     <>
       <div className="flex items-start justify-center gap-10">
-        <Filters />
         <div className="flex-[9]">
           <HeaderProductList />
 

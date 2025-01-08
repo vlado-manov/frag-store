@@ -1,40 +1,41 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 
-const HeaderProductList = ({ setSortBy, setSortOrder, currentSort }) => {
-  const [sort, setSort] = useState("");
+const HeaderProductList = ({ setSortBy, setSortOrder, sortBy, sortOrder }) => {
+  const [value, setValue] = useState("");
 
   useEffect(() => {
-    const savedSort = localStorage.getItem("sort");
-    if (savedSort) {
-      setSort(savedSort);
-      handleSortChange({ target: { value: savedSort } }, true);
+    if (sortBy === "variants.price" && sortOrder === "asc") {
+      setValue("lowToHigh");
+    } else if (sortBy === "variants.price" && sortOrder === "desc") {
+      setValue("highToLow");
+    } else if (sortBy === "createdAt" && sortOrder === "desc") {
+      setValue("newest");
+    } else if (sortBy === "numReviews" && sortOrder === "desc") {
+      setValue("reviews");
+    } else if (sortBy === "rating" && sortOrder === "desc") {
+      setValue("rating");
     }
-  }, [setSort]);
+  }, [sortBy, sortOrder]);
 
-  const handleSortChange = (e, isInitialLoad = false) => {
-    const value = e.target.value;
-    setSort(value);
+  const handleSortChange = (e) => {
+    const selectedValue = e.target.value;
 
-    if (!isInitialLoad) {
-      localStorage.setItem("sort", value);
-    }
-
-    if (value === "lowToHigh") {
+    if (selectedValue === "lowToHigh") {
       setSortBy("variants.price");
       setSortOrder("asc");
-    } else if (value === "highToLow") {
+    } else if (selectedValue === "highToLow") {
       setSortBy("variants.price");
       setSortOrder("desc");
-    } else if (value === "newest") {
+    } else if (selectedValue === "newest") {
       setSortBy("createdAt");
       setSortOrder("desc");
-    } else if (value === "reviews") {
+    } else if (selectedValue === "reviews") {
       setSortBy("numReviews");
       setSortOrder("desc");
-    } else if (value === "rating") {
+    } else if (selectedValue === "rating") {
       setSortBy("rating");
       setSortOrder("desc");
     }
@@ -42,7 +43,7 @@ const HeaderProductList = ({ setSortBy, setSortOrder, currentSort }) => {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="flex gap-6 py-4 w-full">
+      <div className="flex gap-6 p-4 w-full">
         <div className="flex-[9]">
           <Stack spacing={2}>
             <Pagination count={10} showFirstButton showLastButton />
@@ -50,13 +51,8 @@ const HeaderProductList = ({ setSortBy, setSortOrder, currentSort }) => {
         </div>
         <div className="flex-[3]">
           <FormControl fullWidth size="small">
-            <InputLabel id="sort-label">Sort by...</InputLabel>
-            <Select
-              labelId="sort-label"
-              id="sort-select"
-              value={sort}
-              onChange={handleSortChange}
-            >
+            <InputLabel>Sort by...</InputLabel>
+            <Select id="sort-select" value={value} onChange={handleSortChange}>
               <MenuItem value="lowToHigh">Price (Low to High)</MenuItem>
               <MenuItem value="highToLow">Price (High to Low)</MenuItem>
               <MenuItem value="newest">Newest First</MenuItem>
