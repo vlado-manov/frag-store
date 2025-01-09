@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import HeaderProductList from "../../components/HeaderProductList";
 import Filters from "../../components/Filters";
+import Container from "./../../components/layout/Container.jsx";
 
 const CategoryView = () => {
   const { category } = useParams();
@@ -21,8 +22,7 @@ const CategoryView = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
   return (
-    <div className="py-12">
-      <h1>Product List</h1>
+    <Container>
       <HeaderProductList
         setSortBy={setSortBy}
         setSortOrder={setSortOrder}
@@ -41,7 +41,7 @@ const CategoryView = () => {
           )}
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

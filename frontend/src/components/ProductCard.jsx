@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
           <img
             src="https://www.parfimo.bg/data/cache/thumb_min500_max1000-min500_max1000-12/products/56279/1530460699/creed-aventus-parfyumna-voda-dla-mezczyzn-75-ml-238781.jpg"
             alt={product.name}
-            className="w-full h-48 object-cover"
+            className="w-full h-48 object-contain"
           />
         </Link>
         <div className="absolute right-1 top-1 bg-white rounded text-gray-500 hover:cursor-pointer hover:bg-rose-100 hover:text-rose-600 text-lg p-2 font-bold">

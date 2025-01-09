@@ -193,12 +193,15 @@ const Filters = ({ hideFilters = [] }) => {
                   }}
                   MenuProps={MenuProps}
                 >
-                  {brandsData?.brands?.map((brand, index) => (
-                    <MenuItem key={index} value={brand}>
-                      <Checkbox checked={brandFilter.includes(brand)} />
-                      <ListItemText primary={brand} />
-                    </MenuItem>
-                  ))}
+                  {brandsData?.brands
+                    ?.slice()
+                    .sort((a, b) => a.localeCompare(b))
+                    .map((brand, index) => (
+                      <MenuItem key={index} value={brand}>
+                        <Checkbox checked={brandFilter.includes(brand)} />
+                        <ListItemText primary={brand} />
+                      </MenuItem>
+                    ))}
                 </Select>
               </FormControl>
             </div>

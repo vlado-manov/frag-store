@@ -5,6 +5,7 @@ import { GET_PRODUCTS } from "../../graphql/queries";
 import { useQuery } from "@apollo/client";
 import HeaderProductList from "../../components/HeaderProductList";
 import Filters from "../../components/Filters";
+import Container from "./../../components/layout/Container.jsx";
 
 const BrandView = () => {
   const { brand } = useParams();
@@ -19,8 +20,7 @@ const BrandView = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="py-12">
-      <h1>Product List</h1>
+    <Container>
       <HeaderProductList
         setSortBy={setSortBy}
         setSortOrder={setSortOrder}
@@ -39,7 +39,7 @@ const BrandView = () => {
           )}
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

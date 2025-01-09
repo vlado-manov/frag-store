@@ -320,7 +320,7 @@ const Header = () => {
           {...events}
           ref={containerRef}
         >
-          {brandsData?.brands?.map((brand, index) => (
+          {brandsData?.brands?.slice(0, 25).map((brand, index) => (
             <div className="flex gap-5">
               <Link
                 key={index}

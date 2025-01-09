@@ -5,6 +5,7 @@ import Filters from "../../components/Filters";
 import HeaderProductList from "../../components/HeaderProductList";
 import { useQuery } from "@apollo/client";
 import { GET_PRODUCTS } from "../../graphql/queries";
+import Container from "./../../components/layout/Container.jsx";
 
 const ProductsList = () => {
   const [sortBy, setSortBy] = useState("variants.price");
@@ -17,7 +18,7 @@ const ProductsList = () => {
   if (error) return <p>Error loading products.</p>;
 
   return (
-    <div className="product-list-container">
+    <Container>
       <HeaderProductList
         setSortBy={setSortBy}
         setSortOrder={setSortOrder}
@@ -26,7 +27,7 @@ const ProductsList = () => {
       />
       <div className="flex justify-center">
         <Filters />
-        <div className="grid grid-cols-1 max-w-max md:max-w-6xl sm:grid-cols-2 xl:grid-cols-3 max-xl:grid-cols-4 gap-6">
+        <div className="grid max-w-max md:max-w-6xl sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 lg:grid-cols-4 gap-6">
           {data?.products?.length > 0 ? (
             data.products.map((product) => (
               <ProductCard key={product._id} product={product} />
@@ -36,7 +37,7 @@ const ProductsList = () => {
           )}
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 

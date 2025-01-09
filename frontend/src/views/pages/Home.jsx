@@ -2,7 +2,8 @@ import React from "react";
 import { useGetProductsQuery } from "../../slices/productSlice";
 import ProductCard from "../../components/ProductCard";
 import HeaderProductList from "../../components/HeaderProductList";
-import Filters from "../../components/Filters";
+import Container from "./../../components/layout/Container.jsx";
+import PromoHome from "../../components/PromoHome.jsx";
 
 const Home = () => {
   const { data: products, isLoading, error } = useGetProductsQuery();
@@ -10,17 +11,20 @@ const Home = () => {
   if (error) return <p>Error loading products.</p>;
   return (
     <>
-      <div className="flex items-start justify-center gap-10">
-        <div className="flex-[9]">
-          <HeaderProductList />
+      <PromoHome />
+      <Container>
+        <div className="flex items-start justify-center gap-10">
+          <div className="flex-[9]">
+            <HeaderProductList />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products?.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {products?.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Container>
     </>
   );
 };
