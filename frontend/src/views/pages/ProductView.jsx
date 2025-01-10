@@ -17,38 +17,12 @@ import { useSelector } from "react-redux";
 import Message from "../../components/ui/Message";
 import Loader from "../../components/ui/Loader";
 import { formatDistanceToNow, parseISO, format } from "date-fns";
-
-const labels = {
-  0: "Useless",
-  1: "Poor",
-  2: "Could be better",
-  3: "Good",
-  4: "Verry good",
-  5: "Excellent",
-};
-
-const formatDate = (dateString) => {
-  const now = new Date();
-  const postedDate = parseISO(dateString);
-
-  const distance = formatDistanceToNow(postedDate, { addSuffix: true });
-
-  if (now - postedDate <= 2 * 24 * 60 * 60 * 1000) {
-    return distance;
-  } else {
-    return format(postedDate, "MM/dd/yyyy HH:mm");
-  }
-};
-
-function getLabelText(value) {
-  return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
-}
+import Reviews from "../../components/Reviews";
 
 const ProductView = () => {
   const { id: productId } = useParams();
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
-  const [hover, setHover] = useState(-1);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
@@ -81,23 +55,6 @@ const ProductView = () => {
   const scrollToReviews = () => {
     if (reviewsRef.current) {
       reviewsRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const addReview = async (e) => {
-    e.preventDefault();
-    try {
-      await createReview({
-        productId,
-        rating,
-        comment,
-      }).unwrap();
-      refetch();
-      toast.success("You review have been submitted successfully");
-      setRating(5);
-      setComment("");
-    } catch (err) {
-      toast.error(err?.data?.message || err.error);
     }
   };
 
@@ -431,98 +388,14 @@ const ProductView = () => {
           <div className="relative z-10 pt-4 pb-8" ref={reviewsRef}>
             <div className="flex items-center justify-center">
               <div className="bg-white shadow-lg rounded-none lg:rounded-lg max-w-5xl flex w-full">
-                <div className="relative w-full p-6">
-                  <h2 className="text-xl font-bold text-gray-800 mb-4">
-                    Reviews
-                  </h2>
-                  <div id="reviews" className="space-y-4">
-                    {product.reviews?.map((review, key) => (
-                      <div key={key} className="bg-gray-100 p-6 rounded-md">
-                        <p className="text-md text-black font-bold mb-3">
-                          {review.name} said:
-                        </p>
-                        <hr className="mb-3" />
-                        <Rating
-                          name="read-only"
-                          value={review.rating}
-                          size="small"
-                          readOnly
-                        />
-                        <p className="text-gray-800">"{review.comment}"</p>
-                        <p className="text-sm text-gray-500">
-                          - {formatDate(review.createdAt)}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mt-6">
-                    <h3 className="text-lg font-bold text-gray-800">
-                      Add a Review
-                    </h3>
-                    {loadingProductReview && <Loader />}
-                    {userInfo ? (
-                      <form className="space-y-4" onSubmit={addReview}>
-                        <Box
-                          sx={{
-                            marginTop: 2,
-                            display: "flex",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Rating
-                            name="hover-feedback"
-                            value={rating}
-                            size="large"
-                            defaultValue={5}
-                            getLabelText={getLabelText}
-                            onChange={(e, newValue) => {
-                              setRating(newValue || 0);
-                            }}
-                            onChangeActive={(e, newHover) => {
-                              setHover(newHover);
-                            }}
-                            emptyIcon={
-                              <StarIcon
-                                style={{ opacity: 0.55 }}
-                                fontSize="inherit"
-                              />
-                            }
-                          />
-                          {rating !== null && (
-                            <Box sx={{ ml: 2 }}>
-                              {labels[hover !== -1 ? hover : rating]}
-                            </Box>
-                          )}
-                        </Box>
-                        <textarea
-                          className="w-full p-4 border rounded-md"
-                          placeholder="Write your review here..."
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                        ></textarea>
-                        <button
-                          type="submit"
-                          disabled={loadingProductReview}
-                          className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition"
-                        >
-                          Submit Review
-                        </button>
-                      </form>
-                    ) : (
-                      <Message
-                        severity="info"
-                        variant="standard"
-                        sx={{ margin: 2 }}
-                      >
-                        Please{" "}
-                        <Link to="/login" className="underline">
-                          sign in
-                        </Link>{" "}
-                        to leave a review
-                      </Message>
-                    )}
-                  </div>
-                </div>
+                <Reviews
+                  reviews={product.reviews}
+                  productId={productId}
+                  userInfo={userInfo}
+                  createReview={createReview}
+                  loadingProductReview={loadingProductReview}
+                  refetch={refetch}
+                />
               </div>
             </div>
           </div>

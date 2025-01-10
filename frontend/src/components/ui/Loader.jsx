@@ -3,11 +3,13 @@ import { CircularProgress } from "@mui/material";
 
 const Loader = () => {
   return (
-    <CircularProgress
-      size={100}
-      color="secondary"
-      sx={{ margin: "auto", display: "block" }}
-    ></CircularProgress>
+    <div className="flex items-center justify-center w-full h-screen">
+      <CircularProgress
+        size={160}
+        color="secondary"
+        sx={{ margin: "auto", display: "block" }}
+      ></CircularProgress>
+    </div>
   );
 };
 

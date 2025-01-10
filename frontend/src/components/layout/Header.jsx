@@ -7,11 +7,9 @@ import {
   InputBase,
   Menu,
   MenuItem,
-  Typography,
   Drawer,
   Box,
   useMediaQuery,
-  Grid,
 } from "@mui/material";
 import {
   Menu as MenuIcon,
@@ -55,13 +53,12 @@ const theme = createTheme({
 
 const Header = () => {
   const { data: categoriesData } = useQuery(GET_CATEGORIES);
-  const { data: brandsData } = useQuery(GET_BRANDS);
+  const { data: brandsData, loading, error } = useQuery(GET_BRANDS);
   const { data: topBrandsData } = useQuery(GET_TOP_BRANDS);
   const containerRef = useRef(null);
   const { events } = useScrollOnDrag(containerRef, {});
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [selectedTab, setSelectedTab] = useState(0);
   const openMenu = Boolean(anchorEl);
   const [logoutApiCall] = useLogoutMutation();
   const dispatch = useDispatch();
@@ -82,9 +79,6 @@ const Header = () => {
     setDrawerOpen(open);
   };
 
-  const handleTabChange = (e, newValue) => {
-    setSelectedTab(newValue);
-  };
   const [searchText, setSearchText] = useState("");
 
   const handleSearch = () => {
@@ -111,9 +105,9 @@ const Header = () => {
               "linear-gradient(10deg, #0ea5e9 0%, #6366f1 50%, #f43f5e 100%)",
           }}
         >
-          <Grid container alignItems="center" spacing={2} sx={{ padding: 1 }}>
-            <Grid item xs={12} sm={3}>
-              <Box display="flex" alignItems="center">
+          <div className="flex items-center gap-2 px-2 py-4 w-full flex-col sm:flex-row">
+            <div className="flex items-stretch flex-[3] sm:items-center w-full">
+              <div className="flex items-center flex-[6]">
                 {isMobile && (
                   <IconButton
                     color="inherit"
@@ -133,10 +127,30 @@ const Header = () => {
                 >
                   FragStore
                 </Link>
-              </Box>
-            </Grid>
-
-            <Grid item xs={8} sm={6}>
+              </div>
+              <div className="flex flex-[6] justify-end items-center sm:hidden">
+                <IconButton color="inherit">
+                  <Favorite />
+                </IconButton>
+                <IconButton color="inherit">
+                  <Badge badgeContent={4} color="error">
+                    <ShoppingCart />
+                  </Badge>
+                </IconButton>
+                <div
+                  className="hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-900 rounded p-2 flex items-center justify-center gap-1"
+                  onClick={handleMenuOpen}
+                >
+                  <AccountCircle />
+                  {userInfo ? (
+                    <span className="text-sm">{userInfo.name}</span>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center flex-[12] sm:flex-[6] w-full">
               <Box
                 display="flex"
                 justifyContent="center"
@@ -176,25 +190,29 @@ const Header = () => {
                   }}
                 />
               </Box>
-            </Grid>
-
-            <Grid item xs={4} sm={3}>
-              <Box display="flex" justifyContent="flex-end" alignItems="center">
-                <IconButton color="inherit">
-                  <Favorite />
-                </IconButton>
-                <IconButton color="inherit">
-                  <Badge badgeContent={4} color="error">
-                    <ShoppingCart />
-                  </Badge>
-                </IconButton>
-                <IconButton color="inherit" onClick={handleMenuOpen}>
-                  <AccountCircle />
-                </IconButton>
-                {userInfo ? <Typography>{userInfo.name}</Typography> : ""}
-              </Box>
-            </Grid>
-          </Grid>
+            </div>
+            <div className="items-center flex-[3] justify-end sm:flex hidden">
+              <IconButton color="inherit">
+                <Favorite />
+              </IconButton>
+              <IconButton color="inherit">
+                <Badge badgeContent={4} color="error">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+              <div
+                className="hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-900 rounded p-2 flex items-center justify-center gap-1"
+                onClick={handleMenuOpen}
+              >
+                <AccountCircle />
+                {userInfo ? (
+                  <span className="text-sm">{userInfo.name}</span>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+          </div>
         </Toolbar>
       </AppBar>
 
@@ -320,24 +338,34 @@ const Header = () => {
           {...events}
           ref={containerRef}
         >
-          {brandsData?.brands?.slice(0, 25).map((brand, index) => (
-            <div className="flex gap-5">
-              <Link
-                key={index}
-                to={`/products/brands/${brand
-                  .normalize("NFD")
-                  .replace(/[\u0300-\u036f]/g, "")
-                  .replace(/[^a-z0-9\s-]/gi, "")
-                  .replace(/\s+/g, "-")
-                  .toLowerCase()}`}
-              >
-                <p className="text-sm text-gray-500 font-mono w-max uppercase font-bold hover:text-gray-900">
-                  {brand}
-                </p>
-              </Link>
-              <p className="text-gray-300 text-sm">/</p>
+          {loading ? (
+            <div className="h-5 flex gap-5">
+              {[...Array(15)].map((_, i) => (
+                <div className="w-20 bg-slate-200 animate-pulse rounded"></div>
+              ))}
             </div>
-          ))}
+          ) : (
+            <>
+              {brandsData?.brands?.slice(0, 25).map((brand, index) => (
+                <div className="flex gap-5">
+                  <Link
+                    key={index}
+                    to={`/products/brands/${brand
+                      .normalize("NFD")
+                      .replace(/[\u0300-\u036f]/g, "")
+                      .replace(/[^a-z0-9\s-]/gi, "")
+                      .replace(/\s+/g, "-")
+                      .toLowerCase()}`}
+                  >
+                    <p className="text-sm text-gray-500 font-mono w-max uppercase font-bold hover:text-gray-900">
+                      {brand}
+                    </p>
+                  </Link>
+                  <p className="text-gray-300 text-sm">/</p>
+                </div>
+              ))}
+            </>
+          )}
         </div>
       </div>
     </ThemeProvider>

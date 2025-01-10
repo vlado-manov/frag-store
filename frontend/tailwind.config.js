@@ -5,6 +5,9 @@ module.exports = {
       boxShadow: {
         custom: "0px 10px 0px 0",
       },
+      fontFamily: {
+        roboto: ["Roboto", "sans-serif"],
+      },
     },
   },
   plugins: [],

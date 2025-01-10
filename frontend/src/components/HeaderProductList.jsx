@@ -43,13 +43,19 @@ const HeaderProductList = ({ setSortBy, setSortOrder, sortBy, sortOrder }) => {
 
   return (
     <div className="flex items-center justify-between">
-      <div className="flex gap-6 p-4 w-full">
-        <div className="flex-[9]">
+      <div className="flex gap-6 p-4 w-full flex-col md:flex-row">
+        <div className="flex-[9] justify-center md:justify-normal flex">
           <Stack spacing={2}>
-            <Pagination count={10} showFirstButton showLastButton />
+            <Pagination
+              count={10}
+              siblingCount={0}
+              boundaryCount={1}
+              showFirstButton
+              showLastButton
+            />
           </Stack>
         </div>
-        <div className="flex-[3]">
+        <div className="flex-[3] w-1/2 ml-auto md:ml-0">
           <FormControl fullWidth size="small">
             <InputLabel>Sort by...</InputLabel>
             <Select id="sort-select" value={value} onChange={handleSortChange}>

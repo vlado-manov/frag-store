@@ -11,12 +11,12 @@ const ProductCard = ({ product }) => {
   };
   return (
     <div
-      className={`bg-white hover:shadow-custom ${
+      className={`bg-white shadow-custom md:shadow-none hover:shadow-custom ${
         product.gender === "female"
-          ? "hover:shadow-rose-500"
+          ? "hover:shadow-rose-500 shadow-rose-500"
           : product.gender === "male"
-          ? "hover:shadow-sky-500"
-          : "hover:shadow-indigo-500"
+          ? "hover:shadow-sky-500 shadow-sky-500"
+          : "hover:shadow-indigo-500 shadow-indigo-500"
       } overflow-hidden px-4 pt-6 pb-2 transition-all duration-200 ease-linear`}
     >
       <div className="relative">
