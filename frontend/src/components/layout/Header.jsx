@@ -341,13 +341,16 @@ const Header = () => {
           {loading ? (
             <div className="h-5 flex gap-5">
               {[...Array(15)].map((_, i) => (
-                <div className="w-20 bg-slate-200 animate-pulse rounded"></div>
+                <div
+                  key={i}
+                  className="w-20 bg-slate-200 animate-pulse rounded"
+                ></div>
               ))}
             </div>
           ) : (
             <>
               {brandsData?.brands?.slice(0, 25).map((brand, index) => (
-                <div className="flex gap-5">
+                <div className="flex gap-5" key={index}>
                   <Link
                     key={index}
                     to={`/products/brands/${brand

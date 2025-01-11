@@ -31,6 +31,8 @@ import { lightTheme } from "./styles/theme.js";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
 import { ApolloProvider } from "@apollo/client";
 import client from "./apolloClient";
+import Address from "./views/user/Address.jsx";
+import PaymentMethods from "./views/user/PaymentMethods.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -57,6 +59,8 @@ const router = createBrowserRouter(
       <Route path="/recoverpassword" element={<RecoverPassword />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
+        <Route path="/address" element={<Address />} />
+        <Route path="/payment-methods" element={<PaymentMethods />} />
         <Route path="/orders" element={<OrdersList />} />
         <Route path="/orders/page/:pageNumber" element={<OrdersList />} />
         <Route path="/order/:id" element={<OrderView />} />
