@@ -98,6 +98,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       email: user.email,
       isAdmin: user.isAdmin,
       image: user.image,
+      addresses: user.addresses,
     });
   } else {
     res.status(404);
@@ -119,17 +120,42 @@ const updateUser = asyncHandler(async (req, res) => {
     user.email = req.body.email || user.email;
     user.image = req.body.image || user.image;
     user.phone = req.body.phone || user.phone;
+
     if (req.body.password) {
       user.password = req.body.password;
     }
 
+    if (req.body.addresses) {
+      req.body.addresses.forEach((newAddress) => {
+        if (newAddress.isPrimary) {
+          user.addresses.forEach((addr) => {
+            addr.isPrimary = false;
+          });
+        }
+
+        const existingAddress = user.addresses.find(
+          (addr) =>
+            addr.addressLine1 === newAddress.addressLine1 &&
+            addr.city === newAddress.city &&
+            addr.postalCode === newAddress.postalCode &&
+            addr.country === newAddress.country
+        );
+
+        if (!existingAddress) {
+          user.addresses.push(newAddress);
+        }
+      });
+    }
+
     const updatedUser = await user.save();
+
     res.status(200).json({
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
       image: updatedUser.image,
       phone: updatedUser.phone,
+      addresses: updatedUser.addresses,
       isAdmin: updatedUser.isAdmin,
     });
   } else {
