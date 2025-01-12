@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { IconButton, TextField } from "@mui/material";
-import {
-  useGetProfileQuery,
-  useUpdateProfileMutation,
-} from "../../slices/userSlice";
+import { useUpdateProfileMutation } from "../../slices/userSlice";
 import Loader from "../../components/ui/Loader";
 import Settings from "./Settings";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
 import { z } from "zod";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
 
-// Zod schema for password validation
 const passwordSchema = z
   .string()
   .min(8, "Password must be at least 8 characters long")
@@ -28,11 +23,6 @@ const passwordSchema = z
 
 const Profile = () => {
   const [showPassword, setShowPassword] = React.useState(false);
-
-  const { data: user, isLoading, isError } = useGetProfileQuery();
-  const dispatch = useDispatch();
-  const [updateProfile] = useUpdateProfileMutation();
-  const userInfo = useSelector((state) => state.auth.userInfo);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,19 +31,25 @@ const Profile = () => {
     confirmPassword: "",
     phone: "",
   });
+  const dispatch = useDispatch();
+
+  const { userInfo, isLoading, isError } = useSelector((state) => state.auth);
+
+  const [updateProfile, { isLoading: loadingUpdateProfile }] =
+    useUpdateProfileMutation();
 
   useEffect(() => {
-    if (user) {
+    if (userInfo) {
       setFormData({
-        name: user.name || "",
-        email: user.email || "",
-        image: user.image || "",
+        name: userInfo.name || "",
+        email: userInfo.email || "",
+        image: userInfo.image || "",
         password: "",
         confirmPassword: "",
-        phone: user.phone || "",
+        phone: userInfo.phone || "",
       });
     }
-  }, [user]);
+  }, [userInfo]);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const handleChange = (e) => {
@@ -83,6 +79,7 @@ const Profile = () => {
 
     try {
       const updatedData = {
+        _id: userInfo._id,
         name: formData.name,
         email: formData.email,
         image: formData.image,
@@ -91,13 +88,7 @@ const Profile = () => {
       };
 
       const res = await updateProfile(updatedData).unwrap();
-      dispatch(setCredentials({ ...userInfo, ...res })); // Update Redux state and localStorage
-      setFormData({
-        ...formData,
-        ...res,
-        password: "",
-        confirmPassword: "",
-      });
+      dispatch(setCredentials({ ...userInfo, ...res }));
       toast.success("Data was updated successfully!");
     } catch (error) {
       toast.error(error?.data?.message || error.error);
@@ -115,22 +106,22 @@ const Profile = () => {
       </p>
       <div className="flex gap-5 mt-4">
         <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col items-center justify-center p-6 min-w-64">
-          {user.image ? (
+          {userInfo.image ? (
             <img
-              src={user.image}
+              src={userInfo.image}
               alt="Profile"
               className="object-contain rounded-full w-24"
             />
           ) : (
             <div className="rounded-full w-24 h-24 bg-sky-500 relative">
               <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl text-white">
-                {user?.name.charAt(0).toUpperCase()}
+                {userInfo?.name.charAt(0).toUpperCase()}
               </span>
             </div>
           )}
-          <h2 className="my-1 text-black font-bold">{user?.name}</h2>
-          {user.phone && (
-            <h3 className="text-xs text-gray-700">{user.phone}</h3>
+          <h2 className="my-1 text-black font-bold">{userInfo?.name}</h2>
+          {userInfo.phone && (
+            <h3 className="text-xs text-gray-700">{userInfo.phone}</h3>
           )}
           <button className="bg-black rounded py-2 px-4 text-white my-1">
             Change profile image
@@ -234,16 +225,6 @@ const Profile = () => {
                 />
               )}
             </div>
-
-            {/* <IconButton
-              aria-label={
-                showPassword ? "hide the password" : "display the password"
-              }
-              onClick={handleClickShowPassword}
-              edge="end"
-            >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton> */}
           </div>
         </div>
         <button

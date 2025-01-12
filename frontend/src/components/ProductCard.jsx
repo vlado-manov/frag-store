@@ -17,14 +17,14 @@ const ProductCard = ({ product }) => {
           : product.gender === "male"
           ? "hover:shadow-sky-500 shadow-sky-500"
           : "hover:shadow-indigo-500 shadow-indigo-500"
-      } overflow-hidden px-4 pt-6 pb-2 transition-all duration-200 ease-linear`}
+      } overflow-hidden p-2 transition-all duration-200 ease-linear`}
     >
       <div className="relative">
         <Link to={`/products/${product._id}`}>
           <img
             src="https://www.parfimo.bg/data/cache/thumb_min500_max1000-min500_max1000-12/products/56279/1530460699/creed-aventus-parfyumna-voda-dla-mezczyzn-75-ml-238781.jpg"
             alt={product.name}
-            className="w-full h-48 object-contain"
+            className="w-full h-40 object-contain"
           />
         </Link>
         <div className="absolute right-1 top-1 bg-white rounded text-gray-500 hover:cursor-pointer hover:bg-rose-100 hover:text-rose-600 text-lg p-2 font-bold">
@@ -35,7 +35,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
 
-      <div className="p-4">
+      <div className="p-1">
         <h2 className="text-xs font-semibold text-center font-serif">
           {product.brand}
         </h2>
@@ -60,21 +60,21 @@ const ProductCard = ({ product }) => {
               : "all"}
           </div>
         </div>
+        {/* {product.rating > 0 ? ( */}
+        <div className="flex justify-center items-center my-2">
+          <Rating
+            name="read-only"
+            value={parseFloat(product.rating)}
+            size="small"
+            precision={0.5}
+            readOnly
+          />
+          <span className="text-sm font-bold ml-2">{product.rating}</span>
+        </div>
+        {/* ) : (
+                ""
+              )} */}
         <hr className="mt-4" />
-        {product.rating > 0 ? (
-          <div className="flex justify-center items-center mt-4">
-            <Rating
-              name="read-only"
-              value={parseFloat(product.rating)}
-              size="small"
-              precision={0.5}
-              readOnly
-            />
-            <span className="text-sm font-bold ml-2">{product.rating}</span>
-          </div>
-        ) : (
-          ""
-        )}
 
         <div className="flex justify-center items-center gap-1 mt-2">
           {product.variants.map((variant, index) => (

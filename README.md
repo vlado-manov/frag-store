@@ -1,6 +1,6 @@
 # E-Commerce Fragrance Store
 
-A modern, feature-rich E-Commerce fragrance store built with **React**, **TypeScript**, **Redux Toolkit**, **ExpressJS**, **NodeJS**, **Stripe**, **PayPal**, **JWT**, and **MongoDB**. This project allows users to browse, search, and purchase fragrances, offering a seamless shopping experience with secure payments and advanced features such as promotions, discounts, and wishlist management.
+A modern, feature-rich E-Commerce fragrance store built with **React**, **Redux Toolkit**, **GraphQL with Apollo server**, **ExpressJS**, **NodeJS**, **Stripe**, **PayPal**, **JWT**, and **MongoDB**. This project allows users to browse, search, and purchase fragrances, offering a seamless shopping experience with secure payments and advanced features such as promotions, discounts, and wishlist management.
 
 ---
 
@@ -10,7 +10,7 @@ A modern, feature-rich E-Commerce fragrance store built with **React**, **TypeSc
 - **Search & Filters**: Filter products by category, brand, price range, and promotional discounts.
 - **User Authentication**: Secure registration and login with **JWT** authentication (supports **Google OAuth** and **Facebook OAuth**).
 - **Shopping Cart**: Add products to the cart, update quantities, and proceed to checkout.
-- **Secure Payments**: Choose between payment methods via **Stripe**, **PayPal**, or **Cash on Delivery**.
+- **Secure Payments**: Choose between payment methods via **Stripe** or **PayPal**.
 - **Order Management**: Track the status of current orders and view order history.
 - **Wishlist**: Save favorite products for future purchase.
 - **Promotions**: Manage promotional codes and set up discounts for products, categories, or brands.
@@ -26,13 +26,12 @@ A modern, feature-rich E-Commerce fragrance store built with **React**, **TypeSc
 
 ### Frontend
 
-- **React with TypeScript**: A modern framework for building scalable user interfaces.
+- **React**: A modern framework for building scalable user interfaces.
 - **Redux Toolkit**: For state management of cart, orders, and user authentication.
 - **TailwindCSS**: Utility-first CSS framework for responsive design.
 - **Material UI**: Pre-built React components for fast development.
 - **Jest & RTL (React Testing Library)**: For unit and integration testing of components.
 - **Cypress**: End-to-end testing for a seamless user experience.
-- **Storybook**: For developing and documenting UI components in isolation.
 - **Helmet**: For improving security by setting HTTP headers.
 
 ### Backend
@@ -51,22 +50,8 @@ A modern, feature-rich E-Commerce fragrance store built with **React**, **TypeSc
 
 ### CI/CD & DevOps
 
-- **GitLab**: For version control and CI/CD pipelines.
+- **GitHub**: For version control and CI/CD pipelines.
 - **Docker**: For containerized application development and deployment.
 - **Postman**: For API testing and debugging.
-
----
-
-## Additional Functionalities
-
-- **Promotions & Discounts**:
-  - Add promo codes for specific products, categories, or brands.
-  - Apply dynamic pricing logic without altering the original product price.
-- **Wishlist Management**:
-  - Associate wishlist with authenticated users.
-  - Allow adding/removing products from the wishlist easily.
-- **Advanced Search**:
-  - Enable users to search by product name, brand, or category using Elasticsearch.
-  - Support keyword suggestions and filters for better user experience.
 
 ---
