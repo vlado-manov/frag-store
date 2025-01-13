@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useGetProfileQuery, useLogoutMutation } from "../../slices/userSlice";
 import { FaCircleUser } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
@@ -54,12 +54,18 @@ const Settings = ({ children }) => {
                   key={index}
                   className="border-b-4 border-white  last-of-type:border-none"
                 >
-                  <Link
+                  <NavLink
                     to={`/${link.path}`}
-                    className="p-4 text-sm w-full hover:cursor-pointer hover:text-blue-500 block"
+                    className={({ isActive }) =>
+                      `p-4 text-sm w-full block hover:cursor-pointer  ${
+                        isActive
+                          ? "bg-sky-500 text-white hover:text-gray-200"
+                          : "hover:text-sky-500"
+                      }`
+                    }
                   >
                     {link.label}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
               <li

@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Settings from "./Settings";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
-import {
-  useGetProfileQuery,
-  useUpdateProfileMutation,
-} from "../../slices/userSlice";
+import { useUpdateProfileMutation } from "../../slices/userSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
@@ -18,28 +15,39 @@ const Address = () => {
     city: "",
     postalCode: "",
     country: "",
+    isPrimary: false,
   });
   const { userInfo } = useSelector((state) => state.auth);
-  const { data: user } = useGetProfileQuery();
-  const [updateProfile, { isLoading: loadingUpdateProfile }] =
-    useUpdateProfileMutation();
+  const [updateProfile] = useUpdateProfileMutation();
   const dispatch = useDispatch();
+  const [localAddresses, setLocalAddresses] = useState(
+    userInfo.addresses || []
+  );
+
+  useEffect(() => {
+    setLocalAddresses(userInfo.addresses);
+  }, [userInfo.addresses]);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value, checked, type } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
   };
+
   const submitAddress = async (e) => {
     e.preventDefault();
     try {
-      const updatedData = {
-        _id: userInfo._id,
-        addresses: [
-          ...(userInfo.addresses || []),
-          {
-            ...formData,
-            isPrimary: userInfo.addresses?.length === 0,
-          },
-        ],
-      };
+      const updatedAddresses = userInfo.addresses.map((addr) => ({
+        ...addr,
+        isPrimary: formData.isPrimary ? false : addr.isPrimary,
+      }));
+
+      const newAddress = { ...formData, isPrimary: formData.isPrimary };
+      updatedAddresses.push(newAddress);
+
+      const updatedData = { ...userInfo, addresses: updatedAddresses };
 
       const res = await updateProfile(updatedData).unwrap();
       dispatch(setCredentials({ ...userInfo, ...res }));
@@ -49,14 +57,47 @@ const Address = () => {
         city: "",
         postalCode: "",
         country: "",
+        isPrimary: false,
       });
+      setLocalAddresses(updatedAddresses);
       toast.success("Data was updated successfully!");
     } catch (error) {
       toast.error(error?.data?.message || error.error);
     }
   };
-  console.log("user is: ", user);
-  console.log("userinfo is: ", userInfo);
+
+  const makePrimary = async (index) => {
+    try {
+      const updatedAddresses = userInfo.addresses.map((addr, idx) => ({
+        ...addr,
+        isPrimary: idx === index,
+      }));
+
+      const updatedData = { ...userInfo, addresses: updatedAddresses };
+      const res = await updateProfile(updatedData).unwrap();
+      dispatch(setCredentials({ ...userInfo, ...res }));
+      setLocalAddresses(updatedAddresses);
+      toast.success("Primary address updated!");
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to update address!");
+    }
+  };
+
+  const deleteAddress = async (index) => {
+    try {
+      const updatedAddresses = userInfo.addresses.filter(
+        (_, idx) => idx !== index
+      );
+      const updatedData = { ...userInfo, addresses: updatedAddresses };
+      const res = await updateProfile(updatedData).unwrap();
+      dispatch(setCredentials({ ...userInfo, ...res }));
+      setLocalAddresses(updatedAddresses);
+      toast.success("Address deleted!");
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to delete address!");
+    }
+  };
+
   return (
     <Settings>
       <h1 className="text-2xl font-bold text-left my-1">Address</h1>
@@ -115,7 +156,13 @@ const Address = () => {
         </div>
         <div className="p-2">
           <FormControlLabel
-            control={<Checkbox />}
+            control={
+              <Checkbox
+                name="isPrimary"
+                checked={formData.isPrimary}
+                onChange={handleChange}
+              />
+            }
             label="That's my primary address"
           />
         </div>
@@ -130,11 +177,11 @@ const Address = () => {
         <h1 className="text-xl font-bold text-left my-1 w-full">
           Your addresses
         </h1>
-        {user?.addresses?.length === 0 ? (
+        {localAddresses.length === 0 ? (
           <div>NO ADDRESS YET</div>
         ) : (
           <div className="grid grid cols-1 sm:grid-cols-2 mt-4 gap-4">
-            {user?.addresses?.map((address, index) => (
+            {localAddresses.map((address, index) => (
               <div
                 key={index}
                 className={`bg-white rounded-xl p-6 border-2 relative ${
@@ -143,10 +190,7 @@ const Address = () => {
               >
                 <div className="flex gap-2">
                   <h4 className="text-sm font-bold">Country:</h4>
-                  <p className="text-sm font-roboto">
-                    {address.country}
-                    {address.isPrimary ? "KOOO" : "NEEEE"}
-                  </p>
+                  <p className="text-sm font-roboto">{address.country}</p>
                 </div>
                 <div className="flex gap-2">
                   <h4 className="text-sm font-bold">City:</h4>
@@ -168,18 +212,30 @@ const Address = () => {
                     </p>
                   </div>
                 )}
-                <div className="flex py-2 absolute top-4 right-4">
-                  <button className="rounded bg-red-500 p-2">
-                    <RiDeleteBin5Fill color="white" size={20} />
+                {address.isPrimary ? (
+                  ""
+                ) : (
+                  <div className="flex py-2 absolute top-4 right-4">
+                    <button
+                      className="rounded bg-red-500 p-2"
+                      onClick={() => deleteAddress(index)}
+                    >
+                      <RiDeleteBin5Fill color="white" size={20} />
+                    </button>
+                  </div>
+                )}
+                {address.isPrimary ? (
+                  <button className="rounded px-4 py-2 text-sm mt-2 bg-sky-500 text-white">
+                    Primary
                   </button>
-                </div>
-                <button
-                  className={`rounded px-4 py-2 text-sm mt-2 ${
-                    address.isPrimary ? "bg-sky-500 text-white" : "bg-gray-200"
-                  }`}
-                >
-                  {address.isPrimary ? "Primary" : "Make Primary"}
-                </button>
+                ) : (
+                  <button
+                    className="rounded px-4 py-2 text-sm mt-2 bg-gray-200"
+                    onClick={() => makePrimary(index)}
+                  >
+                    Make Primary
+                  </button>
+                )}
               </div>
             ))}
           </div>
