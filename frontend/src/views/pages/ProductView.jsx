@@ -84,6 +84,7 @@ const ProductView = () => {
         price: selectedVariant.price,
         discountPrice: selectedVariant.discountPrice,
         countInStock: selectedVariant.countInStock,
+        images: selectedVariant.images,
       },
       quantity,
     };

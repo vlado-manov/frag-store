@@ -48,7 +48,7 @@ const Settings = ({ children }) => {
               )}
               {/* <div className="w-24 h-24 bg-slate-200 border-white border-4 rounded-full"></div> */}
             </div>
-            <ul className="rounded-xl bg-slate-200 z-10">
+            <ul className="rounded-xl bg-slate-200">
               {links.map((link, index) => (
                 <li
                   key={index}

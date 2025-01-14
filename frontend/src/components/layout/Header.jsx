@@ -196,11 +196,13 @@ const Header = () => {
               <IconButton color="inherit">
                 <Favorite />
               </IconButton>
-              <IconButton color="inherit">
-                <Badge badgeContent={cartItems.length} color="info">
-                  <ShoppingCart />
-                </Badge>
-              </IconButton>
+              <Link to="/cart">
+                <IconButton color="inherit">
+                  <Badge badgeContent={cartItems.length} color="info">
+                    <ShoppingCart />
+                  </Badge>
+                </IconButton>
+              </Link>
               <div
                 className="hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-900 rounded p-2 flex items-center justify-center gap-1"
                 onClick={handleMenuOpen}
