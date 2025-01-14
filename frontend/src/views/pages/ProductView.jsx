@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useCreateReviewMutation,
   useGetProductQuery,
@@ -10,12 +10,15 @@ import { useSelector } from "react-redux";
 import Message from "../../components/ui/Message";
 import Loader from "../../components/ui/Loader";
 import Reviews from "../../components/Reviews";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../slices/cartSlice";
 
 const ProductView = () => {
   const { id: productId } = useParams();
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     data: product,
     refetch,
@@ -69,6 +72,23 @@ const ProductView = () => {
 
   const handleDotClick = (index) => {
     setCurrentIndex(index);
+  };
+
+  const addToCartHandler = () => {
+    const itemToAdd = {
+      _id: product._id,
+      name: product.name,
+      brand: product.brand,
+      variant: {
+        size: selectedVariant.size,
+        price: selectedVariant.price,
+        discountPrice: selectedVariant.discountPrice,
+        countInStock: selectedVariant.countInStock,
+      },
+      quantity,
+    };
+    dispatch(addToCart(itemToAdd));
+    navigate("/cart");
   };
   return (
     <>
@@ -363,7 +383,11 @@ const ProductView = () => {
                   )}
 
                   <div className="flex gap-4">
-                    <button className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition">
+                    <button
+                      className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition"
+                      disabled={selectedVariant.countInStock === 0}
+                      onClick={addToCartHandler}
+                    >
                       ADD TO CART
                     </button>
                     <button className=" bg-rose-500 py-3 px-5 rounded hover:bg-rose-400 transition">

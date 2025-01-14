@@ -18,7 +18,6 @@ import BrandView from "./views/pages/BrandView.jsx";
 import ProductsList from "./views/pages/ProductsList.jsx";
 import WishList from "./views/user/WishList.jsx";
 import Profile from "./views/user/Profile.jsx";
-import Cart from "./views/user/Cart.jsx";
 import OrdersList from "./views/user/OrdersList.jsx";
 import OrderView from "./views/user/OrderView.jsx";
 import PaymentView from "./views/user/PaymentView.jsx";
@@ -33,6 +32,7 @@ import { ApolloProvider } from "@apollo/client";
 import client from "./apolloClient";
 import Address from "./views/user/Address.jsx";
 import PaymentMethods from "./views/user/PaymentMethods.jsx";
+import Cart from "./views/pages/Cart.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

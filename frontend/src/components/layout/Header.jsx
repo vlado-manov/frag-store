@@ -64,6 +64,7 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -196,7 +197,7 @@ const Header = () => {
                 <Favorite />
               </IconButton>
               <IconButton color="inherit">
-                <Badge badgeContent={4} color="error">
+                <Badge badgeContent={cartItems.length} color="info">
                   <ShoppingCart />
                 </Badge>
               </IconButton>
