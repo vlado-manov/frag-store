@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IconButton, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { useUpdateProfileMutation } from "../../slices/userSlice";
 import Loader from "../../components/ui/Loader";
 import Settings from "./Settings";
@@ -35,8 +35,7 @@ const Profile = () => {
 
   const { userInfo, isLoading, isError } = useSelector((state) => state.auth);
 
-  const [updateProfile, { isLoading: loadingUpdateProfile }] =
-    useUpdateProfileMutation();
+  const [updateProfile] = useUpdateProfileMutation();
 
   useEffect(() => {
     if (userInfo) {

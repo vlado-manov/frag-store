@@ -4,25 +4,15 @@ import {
   useCreateReviewMutation,
   useGetProductQuery,
 } from "../../slices/productSlice";
-import {
-  FaChevronLeft,
-  FaChevronRight,
-  FaHeart,
-  FaRegHeart,
-} from "react-icons/fa6";
-import { Box, Rating } from "@mui/material";
-import StarIcon from "@mui/icons-material/Star";
-import { toast } from "react-toastify";
+import { FaChevronLeft, FaChevronRight, FaRegHeart } from "react-icons/fa6";
+import { Rating } from "@mui/material";
 import { useSelector } from "react-redux";
 import Message from "../../components/ui/Message";
 import Loader from "../../components/ui/Loader";
-import { formatDistanceToNow, parseISO, format } from "date-fns";
 import Reviews from "../../components/Reviews";
 
 const ProductView = () => {
   const { id: productId } = useParams();
-  const [rating, setRating] = useState(5);
-  const [comment, setComment] = useState("");
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
 

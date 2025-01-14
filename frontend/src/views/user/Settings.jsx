@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useGetProfileQuery, useLogoutMutation } from "../../slices/userSlice";
 import { FaCircleUser } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
@@ -14,7 +14,7 @@ const links = [
   //   { label: "Sign Out", path: "sign-out" },
 ];
 const Settings = ({ children }) => {
-  const { data: user, isLoading } = useGetProfileQuery();
+  const { data: user } = useGetProfileQuery();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [logoutApiCall] = useLogoutMutation();

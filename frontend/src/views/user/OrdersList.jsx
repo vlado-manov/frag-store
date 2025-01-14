@@ -1,9 +1,7 @@
 import React from "react";
 import Settings from "./Settings";
-import { FaCheck, FaEye } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
-import { RiDeleteBin5Fill } from "react-icons/ri";
-import { FaEdit } from "react-icons/fa";
 import { Pagination, Stack } from "@mui/material";
 
 const OrdersList = () => {

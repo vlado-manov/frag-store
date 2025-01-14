@@ -53,7 +53,7 @@ const theme = createTheme({
 
 const Header = () => {
   const { data: categoriesData } = useQuery(GET_CATEGORIES);
-  const { data: brandsData, loading, error } = useQuery(GET_BRANDS);
+  const { data: brandsData, loading } = useQuery(GET_BRANDS);
   const { data: topBrandsData } = useQuery(GET_TOP_BRANDS);
   const containerRef = useRef(null);
   const { events } = useScrollOnDrag(containerRef, {});

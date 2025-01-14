@@ -11,7 +11,7 @@ import {
   Select,
 } from "@mui/material";
 import React, { useState } from "react";
-import { GET_SIZES, GET_BRANDS, GET_CATEGORIES } from "../graphql/queries";
+import { GET_BRANDS, GET_CATEGORIES } from "../graphql/queries";
 import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,

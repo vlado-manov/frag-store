@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import WishListProductCard from "../../components/WishListProductCard";
 
 const WishList = () => {
-  const { data, loading, error } = useQuery(GET_PRODUCTS, {});
+  const { data } = useQuery(GET_PRODUCTS, {});
   console.log(data);
   return (
     <Settings>
