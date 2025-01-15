@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
+  useAddToWishlistMutation,
   useCreateReviewMutation,
   useGetProductQuery,
 } from "../../slices/productSlice";
@@ -72,6 +73,19 @@ const ProductView = () => {
 
   const handleDotClick = (index) => {
     setCurrentIndex(index);
+  };
+
+  const [addToWishlist] = useAddToWishlistMutation();
+
+  const addToWishlistHandler = async () => {
+    try {
+      await addToWishlist({
+        productId,
+        variant: selectedVariant,
+      }).unwrap();
+    } catch (err) {
+      console.error("Failed to add to wishlist", err);
+    }
   };
 
   const addToCartHandler = () => {
@@ -391,7 +405,10 @@ const ProductView = () => {
                     >
                       ADD TO CART
                     </button>
-                    <button className=" bg-rose-500 py-3 px-5 rounded hover:bg-rose-400 transition">
+                    <button
+                      className=" bg-rose-500 py-3 px-5 rounded hover:bg-rose-400 transition"
+                      onClick={addToWishlistHandler}
+                    >
                       <FaRegHeart className="text-white" />
                       {/* <FaHeart className="text-white" /> */}
                     </button>

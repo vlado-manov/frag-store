@@ -1,6 +1,4 @@
-// clean-history.js
-
-import simpleGit from "simple-git"; // Use import instead of require
+import simpleGit from "simple-git";
 
 const git = simpleGit();
 

@@ -114,7 +114,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access  Private
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
-  console.log("Request body:", req.body);
 
   if (user) {
     user.name = req.body.name || user.name;
@@ -144,7 +143,6 @@ const updateUser = asyncHandler(async (req, res) => {
     }
 
     const updatedUser = await user.save();
-    console.log("updated user is: ", updatedUser);
     res.status(200).json({
       _id: updatedUser._id,
       name: updatedUser.name,

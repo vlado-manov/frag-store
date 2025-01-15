@@ -12,7 +12,6 @@ const links = [
   { label: "Address", path: "address" },
   { label: "Payment methods", path: "payment-methods" },
   { label: "Wishlist", path: "wishlist" },
-  //   { label: "Sign Out", path: "sign-out" },
 ];
 const Settings = ({ children }) => {
   const { data: user } = useGetProfileQuery();

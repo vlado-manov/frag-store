@@ -33,6 +33,7 @@ import {
   GET_TOP_BRANDS,
 } from "../../graphql/queries";
 import CartSync from "../../utils/CartSync";
+import { useGetWishListProductsQuery } from "../../slices/productSlice";
 
 const theme = createTheme({
   palette: {
@@ -66,6 +67,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
+  const { data: wishlist } = useGetWishListProductsQuery();
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -132,14 +134,24 @@ const Header = () => {
                 </Link>
               </div>
               <div className="flex flex-[6] justify-end items-center sm:hidden">
-                <IconButton color="inherit">
-                  <Favorite />
-                </IconButton>
-                <IconButton color="inherit">
-                  <Badge badgeContent={4} color="error">
-                    <ShoppingCart />
-                  </Badge>
-                </IconButton>
+                <Link to="/wishlist">
+                  <IconButton color="inherit">
+                    <Favorite />
+                  </IconButton>
+                </Link>
+                <Link to="/cart">
+                  <IconButton color="inherit">
+                    <Badge
+                      badgeContent={cartItems.reduce(
+                        (sum, item) => sum + item.quantity,
+                        0
+                      )}
+                      color="info"
+                    >
+                      <ShoppingCart />
+                    </Badge>
+                  </IconButton>
+                </Link>
                 <div
                   className="hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-900 rounded p-2 flex items-center justify-center gap-1"
                   onClick={handleMenuOpen}
@@ -195,9 +207,13 @@ const Header = () => {
               </Box>
             </div>
             <div className="items-center flex-[3] justify-end sm:flex hidden">
-              <IconButton color="inherit">
-                <Favorite />
-              </IconButton>
+              <Link to="/wishlist">
+                <IconButton color="inherit">
+                  <Badge badgeContent={wishlist?.products?.length} color="info">
+                    <Favorite />
+                  </Badge>
+                </IconButton>
+              </Link>
               <Link to="/cart">
                 <IconButton color="inherit">
                   <Badge

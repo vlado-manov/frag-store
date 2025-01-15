@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Container from "../../components/layout/Container";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -24,7 +24,6 @@ import CartSync from "../../utils/CartSync.js";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  // const [qty, setQty] = useState(0);
   const { cartItems } = cart;
   const dispatch = useDispatch();
 
