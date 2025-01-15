@@ -14,7 +14,7 @@ import { useLoginMutation } from "../../slices/userSlice";
 import { useSelector } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
-import Message from "../../components/ui/Message";
+import Message from "../../components/ux/Message";
 
 function SignIn() {
   const [formData, setFormData] = useState({

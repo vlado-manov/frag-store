@@ -3,8 +3,8 @@ import { Box, Rating } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow, parseISO } from "date-fns";
-import Loader from "./ui/Loader";
-import Message from "./ui/Message";
+import Loader from "./ux/Loader";
+import Message from "./ux/Message";
 
 const labels = {
   0: "Useless",

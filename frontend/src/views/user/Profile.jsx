@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 import { useUpdateProfileMutation } from "../../slices/userSlice";
-import Loader from "../../components/ui/Loader";
+import Loader from "../../components/ux/Loader";
 import Settings from "./Settings";
 import { useDispatch, useSelector } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";

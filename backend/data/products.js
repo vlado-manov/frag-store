@@ -1432,7 +1432,7 @@ const products = [
       {
         size: 50,
         price: 105.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 7,
         images: ["https://example.com/lafemme50ml.jpg"],
         video: "",
@@ -1441,7 +1441,7 @@ const products = [
       {
         size: 100,
         price: 145.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 5,
         images: ["https://example.com/lafemme100ml.jpg"],
         video: "",
@@ -1464,7 +1464,7 @@ const products = [
       {
         size: 60,
         price: 120.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 5,
         images: ["https://example.com/cedratboise60ml.jpg"],
         video: "",
@@ -1505,7 +1505,7 @@ const products = [
       {
         size: 120,
         price: 150.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 4,
         images: ["https://example.com/rosesvanille120ml.jpg"],
         video: "",
@@ -1551,7 +1551,7 @@ const products = [
       {
         size: 100,
         price: 200.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 3,
         images: ["https://example.com/blackgold100ml.jpg"],
         video: "",
@@ -1582,7 +1582,7 @@ const products = [
       {
         size: 120,
         price: 180.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 4,
         images: ["https://example.com/sicily120ml.jpg"],
         video: "",
@@ -1650,7 +1650,7 @@ const products = [
       {
         size: 120,
         price: 190.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 5,
         images: ["https://example.com/hindukush120ml.jpg"],
         video: "",
@@ -1673,7 +1673,7 @@ const products = [
       {
         size: 60,
         price: 120.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 6,
         images: ["https://example.com/velvetvanilla60ml.jpg"],
         video: "",
@@ -1704,7 +1704,7 @@ const products = [
       {
         size: 120,
         price: 180.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 4,
         images: ["https://example.com/muskygarden120ml.jpg"],
         video: "",
@@ -1727,7 +1727,7 @@ const products = [
       {
         size: 50,
         price: 90.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 6,
         images: ["https://example.com/amberpourhomme50ml.jpg"],
         video: "",
@@ -1773,7 +1773,7 @@ const products = [
       {
         size: 50,
         price: 100.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 5,
         images: ["https://example.com/lunarossablack50ml.jpg"],
         video: "",
@@ -1805,7 +1805,7 @@ const products = [
       {
         size: 100,
         price: 135.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 4,
         images: ["https://example.com/infusiondamande100ml.jpg"],
         video: "",
@@ -1828,7 +1828,7 @@ const products = [
       {
         size: 50,
         price: 115.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 7,
         images: ["https://example.com/candynight50ml.jpg"],
         video: "",
@@ -1860,7 +1860,7 @@ const products = [
       {
         size: 30,
         price: 85.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 10,
         images: ["https://example.com/paradoxe30ml.jpg"],
         video: "",
@@ -1869,7 +1869,7 @@ const products = [
       {
         size: 50,
         price: 115.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 8,
         images: ["https://example.com/paradoxe50ml.jpg"],
         video: "",
@@ -1878,7 +1878,7 @@ const products = [
       {
         size: 90,
         price: 160.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 5,
         images: ["https://example.com/paradoxe90ml.jpg"],
         video: "",
@@ -1901,7 +1901,7 @@ const products = [
       {
         size: 50,
         price: 120.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 7,
         images: ["https://example.com/lunarossa_ocean50ml.jpg"],
         video: "",
@@ -1910,7 +1910,7 @@ const products = [
       {
         size: 100,
         price: 150.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 6,
         images: ["https://example.com/lunarossa_ocean100ml.jpg"],
         video: "",
@@ -1919,7 +1919,7 @@ const products = [
       {
         size: 150,
         price: 190.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 4,
         images: ["https://example.com/lunarossa_ocean150ml.jpg"],
         video: "",
@@ -1942,7 +1942,7 @@ const products = [
       {
         size: 30,
         price: 75.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 9,
         images: ["https://example.com/candy30ml.jpg"],
         video: "",
@@ -1951,7 +1951,7 @@ const products = [
       {
         size: 50,
         price: 105.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 7,
         images: ["https://example.com/candy50ml.jpg"],
         video: "",
@@ -1960,7 +1960,7 @@ const products = [
       {
         size: 80,
         price: 135.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 5,
         images: ["https://example.com/candy80ml.jpg"],
         video: "",
@@ -1983,7 +1983,7 @@ const products = [
       {
         size: 50,
         price: 110.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 6,
         images: ["https://example.com/infusiondiris50ml.jpg"],
         video: "",
@@ -1992,7 +1992,7 @@ const products = [
       {
         size: 100,
         price: 150.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 4,
         images: ["https://example.com/infusiondiris100ml.jpg"],
         video: "",
@@ -2015,7 +2015,7 @@ const products = [
       {
         size: 50,
         price: 95.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 8,
         images: ["https://example.com/lhomme50ml.jpg"],
         video: "",
@@ -2024,7 +2024,7 @@ const products = [
       {
         size: 100,
         price: 125.0,
-        discountPrice: null,
+        discountPrice: 0,
         countInStock: 5,
         images: ["https://example.com/lhomme100ml.jpg"],
         video: "",

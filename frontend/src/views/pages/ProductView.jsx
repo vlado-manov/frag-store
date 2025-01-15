@@ -7,8 +7,8 @@ import {
 import { FaChevronLeft, FaChevronRight, FaRegHeart } from "react-icons/fa6";
 import { Rating } from "@mui/material";
 import { useSelector } from "react-redux";
-import Message from "../../components/ui/Message";
-import Loader from "../../components/ui/Loader";
+import Message from "../../components/ux/Message";
+import Loader from "../../components/ux/Loader";
 import Reviews from "../../components/Reviews";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../slices/cartSlice";

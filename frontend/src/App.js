@@ -7,10 +7,12 @@ import "@fontsource/raleway";
 import "@fontsource/roboto";
 import Header from "./components/layout/Header.jsx";
 import Footer from "./components/layout/Footer.jsx";
+import ScrollToTop from "./components/ux/ScrollToTop.jsx";
 function App() {
   return (
     <>
       <Header />
+      <ScrollToTop />
       <Outlet />
       <Footer />
       <ToastContainer />

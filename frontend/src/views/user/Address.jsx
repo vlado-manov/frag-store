@@ -177,11 +177,11 @@ const Address = () => {
         <h1 className="text-xl font-bold text-left my-1 w-full">
           Your addresses
         </h1>
-        {localAddresses.length === 0 ? (
+        {localAddresses?.length === 0 ? (
           <div>NO ADDRESS YET</div>
         ) : (
           <div className="grid grid cols-1 sm:grid-cols-2 mt-4 gap-4">
-            {localAddresses.map((address, index) => (
+            {localAddresses?.map((address, index) => (
               <div
                 key={index}
                 className={`bg-white rounded-xl p-6 border-2 relative ${

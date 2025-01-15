@@ -4,6 +4,7 @@ import { useGetProfileQuery, useLogoutMutation } from "../../slices/userSlice";
 import { FaCircleUser } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { logout } from "../../slices/authSlice";
+import { clearCartItems } from "../../slices/cartSlice";
 
 const links = [
   { label: "User profile", path: "profile" },
@@ -23,6 +24,8 @@ const Settings = ({ children }) => {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
+      dispatch(clearCartItems());
+      localStorage.removeItem("cart");
       navigate("/login");
     } catch (err) {
       console.log(err);

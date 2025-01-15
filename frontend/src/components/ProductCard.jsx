@@ -30,9 +30,11 @@ const ProductCard = ({ product }) => {
         <div className="absolute right-1 top-1 bg-white rounded text-gray-500 hover:cursor-pointer hover:bg-rose-100 hover:text-rose-600 text-lg p-2 font-bold">
           <FaRegHeart />
         </div>
-        <div className="absolute left-1 top-1 bg-rose-500 text-white text-sm p-1 font-bold uppercase">
-          Sale
-        </div>
+        {selectedVariant && selectedVariant.discountPrice > 0 && (
+          <div className="absolute left-1 top-1 bg-rose-500 text-white text-sm p-1 font-bold uppercase">
+            Sale
+          </div>
+        )}
       </div>
 
       <div className="p-1">
@@ -97,16 +99,15 @@ const ProductCard = ({ product }) => {
             ? parseFloat(selectedVariant.price).toFixed(2)
             : "N/A"}
         </p>
-        <p className="text-center text-xs text-rose-600">
-          $
-          {selectedVariant && selectedVariant.discountPrice
-            ? parseFloat(selectedVariant.discountPrice).toFixed(2)
-            : "N/A"}{" "}
-          with promo code:{" "}
-          <b>
-            <u>XMAS</u>
-          </b>
-        </p>
+        {selectedVariant && selectedVariant.discountPrice > 0 && (
+          <p className="text-center text-xs text-rose-600">
+            ${parseFloat(selectedVariant.discountPrice).toFixed(2)} with promo
+            code:{" "}
+            <b>
+              <u>XMAS</u>
+            </b>
+          </p>
+        )}
       </div>
     </div>
   );

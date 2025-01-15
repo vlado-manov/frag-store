@@ -32,6 +32,7 @@ import {
   GET_CATEGORIES,
   GET_TOP_BRANDS,
 } from "../../graphql/queries";
+import CartSync from "../../utils/CartSync";
 
 const theme = createTheme({
   palette: {
@@ -95,6 +96,7 @@ const Header = () => {
       console.log(err);
     }
   };
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="sticky">
@@ -198,7 +200,13 @@ const Header = () => {
               </IconButton>
               <Link to="/cart">
                 <IconButton color="inherit">
-                  <Badge badgeContent={cartItems.length} color="info">
+                  <Badge
+                    badgeContent={cartItems.reduce(
+                      (sum, item) => sum + item.quantity,
+                      0
+                    )}
+                    color="info"
+                  >
                     <ShoppingCart />
                   </Badge>
                 </IconButton>
@@ -374,6 +382,7 @@ const Header = () => {
           )}
         </div>
       </div>
+      <CartSync />
     </ThemeProvider>
   );
 };

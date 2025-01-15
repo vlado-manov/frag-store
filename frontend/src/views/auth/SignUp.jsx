@@ -14,7 +14,7 @@ import { Divider, Link as MuiLink } from "@mui/material";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
-import Message from "../../components/ui/Message";
+import Message from "../../components/ux/Message";
 
 // Zod schema
 export const baseSchema = z.object({
