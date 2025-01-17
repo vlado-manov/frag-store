@@ -151,66 +151,6 @@ const createReview = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Add to wishlist
-// @route   POST /api/products/wishlist
-// @access  Private
-const addToWishlist = asyncHandler(async (req, res) => {
-  const { productId, variant } = req.body;
-  const userId = req.user._id;
-  const product = await Product.findById(productId);
-  if (!product) {
-    res.status(404);
-    throw new Error("Product not found");
-  }
-
-  let wishlist = await Wishlist.findOne({ user: userId });
-  const wishlistProduct = {
-    productId: product._id,
-    name: product.name,
-    rating: product.rating,
-    brand: product.brand,
-    variant: {
-      size: variant.size,
-      price: variant.price,
-      discountPrice: variant.discountPrice,
-      countInStock: variant.countInStock,
-      images: variant.images,
-    },
-  };
-  if (!wishlist) {
-    wishlist = new Wishlist({
-      user: userId,
-      products: [wishlistProduct],
-    });
-    await wishlist.save();
-    return res.status(201).json(wishlist);
-  }
-  const alreadyInWishlist = wishlist.products.some(
-    (item) =>
-      item.productId.toString() === productId &&
-      item.variant.size === variant.size
-  );
-
-  if (alreadyInWishlist) {
-    res.status(400);
-    throw new Error("Product with this variant is already in wishlist");
-  }
-
-  wishlist.products.push(wishlistProduct);
-
-  await wishlist.save();
-  res.status(200).json(wishlist);
-});
-
-// @desc    Get wishlist
-// @route   GET /api/products/wishlist
-// @access  Private
-const getWishlistProducts = asyncHandler(async (req, res) => {
-  const userId = req.user._id;
-  const wishlist = await Wishlist.findOne({ user: userId });
-  res.status(200).json(wishlist);
-});
-
 export {
   getProducts,
   getProductById,
@@ -218,6 +158,4 @@ export {
   updateProduct,
   deleteProduct,
   createReview,
-  addToWishlist,
-  getWishlistProducts,
 };

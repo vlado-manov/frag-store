@@ -1,13 +1,18 @@
 import { Rating } from "@mui/material";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from "../slices/cartSlice";
 import { toast } from "react-toastify";
+import { IoIosCloseCircle } from "react-icons/io";
+import { useRemoveFromWishlistMutation } from "../slices/wishlistApiSlice";
+import { removeFromLocalWishlist } from "../slices/wishlistSlice";
 
 const WishListProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isLoggedIn = useSelector((state) => !!state.auth.userInfo);
+  const [removeFromWishlist] = useRemoveFromWishlistMutation();
 
   const addToCartHandler = () => {
     const itemToAdd = {
@@ -27,9 +32,31 @@ const WishListProductCard = ({ product }) => {
     toast.success("Item was added to cart successfully!");
     navigate("/cart");
   };
+
+  const removeFromWishlistHandler = async () => {
+    try {
+      console.log(product.productId);
+      console.log(product.variant.size);
+      if (isLoggedIn) {
+        await removeFromWishlist({
+          productId: product.productId,
+          size: product.variant.size,
+        }).unwrap();
+      }
+      dispatch(
+        removeFromLocalWishlist({
+          productId: product.productId,
+          variant: { size: product.variant.size },
+        })
+      );
+      toast.success("Product removed from wishlist");
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
+  };
   return (
     <div
-      className="bg-white shadow-custom flex flex-col shadow-sky-500 justify-between overflow-hidden transition-all duration-200 ease-linear"
+      className="bg-white shadow-custom flex flex-col shadow-sky-500 justify-between relative"
       // className={`bg-white shadow-custom flex flex-col justify-between ${
       //   product.gender === "female"
       //     ? " shadow-rose-500"
@@ -38,6 +65,12 @@ const WishListProductCard = ({ product }) => {
       //     : " shadow-indigo-500"
       // } overflow-hidden transition-all duration-200 ease-linear`}
     >
+      <div
+        className="hover:cursor-pointer absolute top-1 right-0 z-10"
+        onClick={removeFromWishlistHandler}
+      >
+        <IoIosCloseCircle size={28} />
+      </div>
       <div className="relative">
         <Link to={`/products/${product.productId}`}>
           <img

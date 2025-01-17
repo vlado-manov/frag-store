@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -33,7 +33,11 @@ import {
   GET_TOP_BRANDS,
 } from "../../graphql/queries";
 import CartSync from "../../utils/CartSync";
-import { useGetWishListProductsQuery } from "../../slices/productSlice";
+import { useGetWishListProductsQuery } from "../../slices/wishlistApiSlice";
+import {
+  clearLocalWishlist,
+  loadWishlistFromLocalStorage,
+} from "../../slices/wishlistSlice";
 
 const theme = createTheme({
   palette: {
@@ -68,8 +72,11 @@ const Header = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
   const { data: wishlist } = useGetWishListProductsQuery();
-
+  useEffect(() => {
+    dispatch(loadWishlistFromLocalStorage());
+  }, [dispatch]);
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const localWishlist = useSelector((state) => state.wishlist.items);
 
   const handleMenuOpen = (e) => {
     setAnchorEl(e.currentTarget);
@@ -89,10 +96,16 @@ const Header = () => {
     console.log("Searching for:", searchText);
   };
 
+  const getWishlistCount = () => {
+    const wishlist2 = JSON.parse(localStorage.getItem("wishlist")) || [];
+    console.log(wishlist2);
+  };
+  getWishlistCount();
   const logoutHandler = async () => {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
+      dispatch(clearLocalWishlist());
       navigate("/login");
     } catch (err) {
       console.log(err);
@@ -136,7 +149,9 @@ const Header = () => {
               <div className="flex flex-[6] justify-end items-center sm:hidden">
                 <Link to="/wishlist">
                   <IconButton color="inherit">
-                    <Favorite />
+                    <Badge badgeContent={localWishlist?.length} color="info">
+                      <Favorite />
+                    </Badge>
                   </IconButton>
                 </Link>
                 <Link to="/cart">
@@ -209,7 +224,7 @@ const Header = () => {
             <div className="items-center flex-[3] justify-end sm:flex hidden">
               <Link to="/wishlist">
                 <IconButton color="inherit">
-                  <Badge badgeContent={wishlist?.products?.length} color="info">
+                  <Badge badgeContent={localWishlist?.length} color="info">
                     <Favorite />
                   </Badge>
                 </IconButton>

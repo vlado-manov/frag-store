@@ -24,19 +24,6 @@ export const productsApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Product"],
     }),
-    addToWishlist: builder.mutation({
-      query: (data) => ({
-        url: `${PRODUCTS_URL}/wishlist`,
-        method: "POST",
-        body: data,
-      }),
-    }),
-    getWishListProducts: builder.query({
-      query: () => ({
-        url: `${PRODUCTS_URL}/wishlist`,
-      }),
-      keepUnusedDataFor: 5,
-    }),
   }),
 });
 
@@ -44,6 +31,4 @@ export const {
   useGetProductsQuery,
   useGetProductQuery,
   useCreateReviewMutation,
-  useAddToWishlistMutation,
-  useGetWishListProductsQuery,
 } = productsApiSlice;

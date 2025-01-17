@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
+import {
+  Container,
+  Box,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  Divider,
+  Link as MuiLink,
+} from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { Divider, Link as MuiLink } from "@mui/material";
-import { FaSquareFacebook } from "react-icons/fa6";
-import { FcGoogle } from "react-icons/fc";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLoginMutation } from "../../slices/userSlice";
-import { useSelector } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
+import {
+  useGetWishListProductsQuery,
+  useSyncWishlistToServerMutation,
+} from "../../slices/wishlistApiSlice";
+import { clearLocalWishlist } from "../../slices/wishlistSlice";
 import Message from "../../components/ux/Message";
+import { FaSquareFacebook } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 
 function SignIn() {
   const [formData, setFormData] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -27,13 +33,10 @@ function SignIn() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [login, { isLoading }] = useLoginMutation();
-  const userInfo = useSelector((state) => state.auth.userInfo);
+  const [syncWishlistToServer] = useSyncWishlistToServerMutation();
+  const { data: serverWishlist } = useGetWishListProductsQuery();
+  const localWishlist = useSelector((state) => state.wishlist.items);
   const redirect = "/";
-  useEffect(() => {
-    if (userInfo) {
-      navigate(redirect);
-    }
-  }, [userInfo, redirect, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,10 +54,25 @@ function SignIn() {
       }).unwrap();
 
       dispatch(setCredentials({ ...res }));
+
+      const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+      console.log("STORED WISHLIST IS:", storedWishlist);
+      console.log("SERVERED WISHLIST IS:", serverWishlist);
+      if (storedWishlist.length > 0) {
+        if (serverWishlist?.products?.length > 0) {
+          dispatch(clearLocalWishlist());
+          localStorage.setItem(
+            "wishlist",
+            JSON.stringify(serverWishlist.products)
+          );
+        } else {
+          await syncWishlistToServer(storedWishlist);
+        }
+      }
+
       navigate(redirect);
     } catch (err) {
       toast.error(err?.data.message || err.error);
-      setSubmitError(err?.data.message || err.error);
     }
   };
 
@@ -127,42 +145,24 @@ function SignIn() {
             width: "100%",
           }}
         />
-        <Button
-          variant="outlined"
-          sx={{ mt: 1, position: "relative", fontSize: "14px" }}
-        >
-          <FcGoogle
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "10px",
-              transform: "translateY(-50%)",
-            }}
-          />
+        <Button variant="outlined" sx={{ mt: 1, fontSize: "14px" }}>
+          <FcGoogle style={{ marginRight: 8 }} />
           Continue with Google
         </Button>
-        <Button variant="outlined" sx={{ marginTop: 1, fontSize: "14px" }}>
-          <FaSquareFacebook
-            color="#1877F2"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "10px",
-              transform: "translateY(-50%)",
-            }}
-          />
+        <Button variant="outlined" sx={{ mt: 1, fontSize: "14px" }}>
+          <FaSquareFacebook style={{ marginRight: 8, color: "#1877F2" }} />
           Continue with Facebook
         </Button>
       </Box>
       <Grid container sx={{ marginBottom: 4, marginTop: 1 }}>
         <Grid item xs>
           <MuiLink component={RouterLink} to="/recoverpassword" variant="body2">
-            {"Forgot password?"}
+            Forgot password?
           </MuiLink>
         </Grid>
         <Grid item>
           <MuiLink component={RouterLink} to="/register" variant="body2">
-            {"Don't have an account? Sign Up"}
+            Don't have an account? Sign Up
           </MuiLink>
         </Grid>
       </Grid>

@@ -16,7 +16,6 @@ import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 import Message from "../../components/ux/Message";
 
-// Zod schema
 export const baseSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email format"),
@@ -61,7 +60,7 @@ function SignUp() {
     e.preventDefault();
 
     try {
-      baseSchema.parse(formData); // Валидиране на цялата форма
+      baseSchema.parse(formData);
 
       if (formData.password !== formData.confirmPassword) {
         setErrors((prevErrors) => ({

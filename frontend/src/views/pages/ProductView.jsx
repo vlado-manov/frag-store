@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
-  useAddToWishlistMutation,
   useCreateReviewMutation,
   useGetProductQuery,
 } from "../../slices/productSlice";
@@ -13,9 +12,19 @@ import Loader from "../../components/ux/Loader";
 import Reviews from "../../components/Reviews";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../slices/cartSlice";
+import {
+  useAddToWishlistMutation,
+  useRemoveFromWishlistMutation,
+} from "../../slices/wishlistApiSlice";
+import {
+  addToLocalWishlist,
+  removeFromLocalWishlist,
+} from "../../slices/wishlistSlice";
+import { toast } from "react-toastify";
 
 const ProductView = () => {
   const { id: productId } = useParams();
+  const isLoggedIn = useSelector((state) => !!state.auth.userInfo);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
@@ -74,17 +83,56 @@ const ProductView = () => {
   const handleDotClick = (index) => {
     setCurrentIndex(index);
   };
-
+  const [removeFromWishlist] = useRemoveFromWishlistMutation();
   const [addToWishlist] = useAddToWishlistMutation();
 
   const addToWishlistHandler = async () => {
+    const productToAdd = {
+      productId,
+      variant: selectedVariant,
+    };
+    const localProductAdd = {
+      productId,
+      name: product.name,
+      rating: product.rating,
+      brand: product.brand,
+      gender: product.gender,
+      variant: {
+        size: selectedVariant.size,
+        price: selectedVariant.price,
+        discountPrice: selectedVariant.discountPrice,
+        countInStock: selectedVariant.countInStock,
+        images: selectedVariant.images,
+      },
+    };
     try {
-      await addToWishlist({
-        productId,
-        variant: selectedVariant,
-      }).unwrap();
-    } catch (err) {
-      console.error("Failed to add to wishlist", err);
+      if (isLoggedIn) {
+        await addToWishlist(productToAdd).unwrap();
+      }
+      dispatch(addToLocalWishlist(localProductAdd));
+      toast.success("Product added to wishlist");
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
+  };
+
+  const removeFromWishlistHandler = async () => {
+    try {
+      if (isLoggedIn) {
+        await removeFromWishlist({
+          productId,
+          size: selectedVariant.size,
+        }).unwrap();
+      }
+      dispatch(
+        removeFromLocalWishlist({
+          productId,
+          variant: { size: selectedVariant.size },
+        })
+      );
+      toast.success("Product removed from wishlist");
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
     }
   };
 
@@ -105,6 +153,7 @@ const ProductView = () => {
     dispatch(addToCart(itemToAdd));
     navigate("/cart");
   };
+
   return (
     <>
       {isLoading ? (
@@ -408,6 +457,13 @@ const ProductView = () => {
                     <button
                       className=" bg-rose-500 py-3 px-5 rounded hover:bg-rose-400 transition"
                       onClick={addToWishlistHandler}
+                    >
+                      <FaRegHeart className="text-white" />
+                      {/* <FaHeart className="text-white" /> */}
+                    </button>
+                    <button
+                      className=" bg-gray-500 py-3 px-5 rounded hover:bg-gray-400 transition"
+                      onClick={removeFromWishlistHandler}
                     >
                       <FaRegHeart className="text-white" />
                       {/* <FaHeart className="text-white" /> */}

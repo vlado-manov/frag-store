@@ -30,6 +30,7 @@ export const GET_PRODUCTS = gql`
         size
         price
         discountPrice
+        countInStock
         images
       }
     }
