@@ -1,10 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useCreateReviewMutation,
   useGetProductQuery,
 } from "../../slices/productSlice";
-import { FaChevronLeft, FaChevronRight, FaRegHeart } from "react-icons/fa6";
+import {
+  FaChevronLeft,
+  FaChevronRight,
+  FaRegHeart,
+  FaHeart,
+} from "react-icons/fa6";
 import { Rating } from "@mui/material";
 import { useSelector } from "react-redux";
 import Message from "../../components/ux/Message";
@@ -14,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../slices/cartSlice";
 import {
   useAddToWishlistMutation,
+  useGetWishListProductsQuery,
   useRemoveFromWishlistMutation,
 } from "../../slices/wishlistApiSlice";
 import {
@@ -24,6 +30,8 @@ import { toast } from "react-toastify";
 
 const ProductView = () => {
   const { id: productId } = useParams();
+  const [isInWishlist, setIsInWishlist] = useState(false);
+  const { userInfo } = useSelector((state) => state.auth);
   const isLoggedIn = useSelector((state) => !!state.auth.userInfo);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -41,7 +49,6 @@ const ProductView = () => {
 
   const selectedVariant = product?.variants?.[selectedVariantIndex];
 
-  const { userInfo } = useSelector((state) => state.auth);
   const reviewsRef = useRef(null);
   const handleVariantChange = (index) => {
     setSelectedVariantIndex(index);
@@ -83,6 +90,19 @@ const ProductView = () => {
   const handleDotClick = (index) => {
     setCurrentIndex(index);
   };
+
+  const { data: wishlistItems } = useGetWishListProductsQuery();
+
+  useEffect(() => {
+    const isProductInWishlist = wishlistItems?.products?.some(
+      (item) =>
+        item.productId === product?._id &&
+        item.variant.size === selectedVariant.size
+    );
+
+    setIsInWishlist(isProductInWishlist);
+  }, [wishlistItems, selectedVariant, product?._id]);
+
   const [removeFromWishlist] = useRemoveFromWishlistMutation();
   const [addToWishlist] = useAddToWishlistMutation();
 
@@ -110,6 +130,7 @@ const ProductView = () => {
         await addToWishlist(productToAdd).unwrap();
       }
       dispatch(addToLocalWishlist(localProductAdd));
+      setIsInWishlist(true);
       toast.success("Product added to wishlist");
     } catch (error) {
       toast.error(error?.data?.message || error.message);
@@ -130,6 +151,7 @@ const ProductView = () => {
           variant: { size: selectedVariant.size },
         })
       );
+      setIsInWishlist(false);
       toast.success("Product removed from wishlist");
     } catch (error) {
       toast.error(error?.data?.message || error.message);
@@ -455,18 +477,18 @@ const ProductView = () => {
                       ADD TO CART
                     </button>
                     <button
-                      className=" bg-rose-500 py-3 px-5 rounded hover:bg-rose-400 transition"
-                      onClick={addToWishlistHandler}
+                      className=" bg-rose-500 py-2 px-5 rounded hover:bg-rose-400  transition-transform duration-100 ease-in-out transform active:scale-110"
+                      onClick={
+                        isInWishlist
+                          ? () => removeFromWishlistHandler()
+                          : () => addToWishlistHandler()
+                      }
                     >
-                      <FaRegHeart className="text-white" />
-                      {/* <FaHeart className="text-white" /> */}
-                    </button>
-                    <button
-                      className=" bg-gray-500 py-3 px-5 rounded hover:bg-gray-400 transition"
-                      onClick={removeFromWishlistHandler}
-                    >
-                      <FaRegHeart className="text-white" />
-                      {/* <FaHeart className="text-white" /> */}
+                      {isInWishlist ? (
+                        <FaHeart className="text-white" size={24} />
+                      ) : (
+                        <FaRegHeart className="text-white" size={24} />
+                      )}
                     </button>
                   </div>
                 </div>

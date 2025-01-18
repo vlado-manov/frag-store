@@ -33,7 +33,6 @@ import {
   GET_TOP_BRANDS,
 } from "../../graphql/queries";
 import CartSync from "../../utils/CartSync";
-import { useGetWishListProductsQuery } from "../../slices/wishlistApiSlice";
 import {
   clearLocalWishlist,
   loadWishlistFromLocalStorage,
@@ -71,12 +70,12 @@ const Header = () => {
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
   const { cartItems } = useSelector((state) => state.cart);
-  const { data: wishlist } = useGetWishListProductsQuery();
   useEffect(() => {
     dispatch(loadWishlistFromLocalStorage());
   }, [dispatch]);
+  const wishlistLength = useSelector((state) => state.wishlist.items.length);
+
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const localWishlist = useSelector((state) => state.wishlist.items);
 
   const handleMenuOpen = (e) => {
     setAnchorEl(e.currentTarget);
@@ -96,11 +95,6 @@ const Header = () => {
     console.log("Searching for:", searchText);
   };
 
-  const getWishlistCount = () => {
-    const wishlist2 = JSON.parse(localStorage.getItem("wishlist")) || [];
-    console.log(wishlist2);
-  };
-  getWishlistCount();
   const logoutHandler = async () => {
     try {
       await logoutApiCall().unwrap();
@@ -149,7 +143,7 @@ const Header = () => {
               <div className="flex flex-[6] justify-end items-center sm:hidden">
                 <Link to="/wishlist">
                   <IconButton color="inherit">
-                    <Badge badgeContent={localWishlist?.length} color="info">
+                    <Badge badgeContent={wishlistLength} color="info">
                       <Favorite />
                     </Badge>
                   </IconButton>
@@ -224,7 +218,7 @@ const Header = () => {
             <div className="items-center flex-[3] justify-end sm:flex hidden">
               <Link to="/wishlist">
                 <IconButton color="inherit">
-                  <Badge badgeContent={localWishlist?.length} color="info">
+                  <Badge badgeContent={wishlistLength} color="info">
                     <Favorite />
                   </Badge>
                 </IconButton>

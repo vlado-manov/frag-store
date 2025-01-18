@@ -1,13 +1,97 @@
 import { Rating } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import {
+  useAddToWishlistMutation,
+  useGetWishListProductsQuery,
+  useRemoveFromWishlistMutation,
+} from "../slices/wishlistApiSlice";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addToLocalWishlist,
+  removeFromLocalWishlist,
+} from "../slices/wishlistSlice";
+import { FaHeart } from "react-icons/fa6";
 
 const ProductCard = ({ product }) => {
+  const [isInWishlist, setIsInWishlist] = useState(false);
   const [variantIndex, setVariantIndex] = useState(0);
   const selectedVariant = product.variants?.[variantIndex];
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => !!state.auth.userInfo);
+
+  // const wishlistItems = useSelector((state) => state.wishlist.items);
+  const { data: wishlistItems } = useGetWishListProductsQuery();
+
+  useEffect(() => {
+    const isProductInWishlist = wishlistItems?.products?.some(
+      (item) =>
+        item.productId === product._id &&
+        item.variant.size === selectedVariant.size
+    );
+
+    setIsInWishlist(isProductInWishlist);
+  }, [wishlistItems, selectedVariant, product._id]);
+
   const handleVariantChange = (index) => {
     setVariantIndex(index);
+  };
+
+  const [removeFromWishlist] = useRemoveFromWishlistMutation();
+  const [addToWishlist] = useAddToWishlistMutation();
+
+  const addToWishlistHandler = async () => {
+    const productToAdd = {
+      productId: product._id,
+      variant: selectedVariant,
+    };
+    const localProductAdd = {
+      productId: product._id,
+      name: product.name,
+      rating: product.rating,
+      brand: product.brand,
+      gender: product.gender,
+      variant: {
+        size: selectedVariant.size,
+        price: selectedVariant.price,
+        discountPrice: selectedVariant.discountPrice,
+        countInStock: selectedVariant.countInStock,
+        images: selectedVariant.images,
+      },
+    };
+    try {
+      if (isLoggedIn) {
+        await addToWishlist(productToAdd).unwrap();
+      }
+      dispatch(addToLocalWishlist(localProductAdd));
+      setIsInWishlist(true);
+      toast.success("Product added to wishlist");
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
+  };
+
+  const removeFromWishlistHandler = async () => {
+    try {
+      if (isLoggedIn) {
+        await removeFromWishlist({
+          productId: product._id,
+          size: selectedVariant.size,
+        }).unwrap();
+      }
+      dispatch(
+        removeFromLocalWishlist({
+          productId: product._id,
+          variant: { size: selectedVariant.size },
+        })
+      );
+      setIsInWishlist(false);
+      toast.success("Product removed from wishlist");
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
   };
   return (
     <div
@@ -27,8 +111,20 @@ const ProductCard = ({ product }) => {
             className="w-full h-40 object-contain"
           />
         </Link>
-        <div className="absolute right-1 top-1 bg-white rounded text-gray-500 hover:cursor-pointer hover:bg-rose-100 hover:text-rose-600 text-lg p-2 font-bold">
-          <FaRegHeart />
+        <div
+          className="absolute right-1 top-1 bg-white rounded text-gray-500 hover:cursor-pointer hover:bg-rose-100 hover:text-rose-600 
+          text-lg p-2 font-bold transition-transform duration-100 ease-in-out transform active:scale-150"
+          onClick={
+            isInWishlist
+              ? () => removeFromWishlistHandler()
+              : () => addToWishlistHandler()
+          }
+        >
+          {isInWishlist ? (
+            <FaHeart className="text-rose-500" />
+          ) : (
+            <FaRegHeart />
+          )}
         </div>
         {selectedVariant && selectedVariant.discountPrice > 0 && (
           <div className="absolute left-1 top-1 bg-rose-500 text-white text-sm p-1 font-bold uppercase">

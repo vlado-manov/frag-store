@@ -10,7 +10,7 @@ import {
   Link as MuiLink,
 } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useLoginMutation } from "../../slices/userSlice";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
@@ -18,7 +18,10 @@ import {
   useGetWishListProductsQuery,
   useSyncWishlistToServerMutation,
 } from "../../slices/wishlistApiSlice";
-import { clearLocalWishlist } from "../../slices/wishlistSlice";
+import {
+  clearLocalWishlist,
+  loadWishlistFromLocalStorage,
+} from "../../slices/wishlistSlice";
 import Message from "../../components/ux/Message";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -29,14 +32,30 @@ function SignIn() {
     password: "",
   });
   const [submitError, setSubmitError] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [login, { isLoading }] = useLoginMutation();
-  const [syncWishlistToServer] = useSyncWishlistToServerMutation();
-  const { data: serverWishlist } = useGetWishListProductsQuery();
-  const localWishlist = useSelector((state) => state.wishlist.items);
+  const [login] = useLoginMutation();
+  const [syncWish] = useSyncWishlistToServerMutation();
   const redirect = "/";
+  const {
+    data: serverWishlist,
+    isLoading,
+    refetch,
+  } = useGetWishListProductsQuery();
+
+  useEffect(() => {
+    if (!serverWishlist || isLoading) return;
+
+    if (serverWishlist?.products?.length > 0) {
+      localStorage.setItem("wishlist", JSON.stringify(serverWishlist.products));
+      dispatch(loadWishlistFromLocalStorage());
+    }
+    if (loginSuccess && !isLoading) {
+      navigate(redirect);
+    }
+  }, [serverWishlist, loginSuccess, isLoading, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,12 +71,17 @@ function SignIn() {
         email: formData.email,
         password: formData.password,
       }).unwrap();
-
       dispatch(setCredentials({ ...res }));
+      setLoginSuccess(true);
 
+      await refetch();
+
+      if (isLoading) {
+        toast.info("Loading wishlist data...");
+        return;
+      }
       const storedWishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
-      console.log("STORED WISHLIST IS:", storedWishlist);
-      console.log("SERVERED WISHLIST IS:", serverWishlist);
+
       if (storedWishlist.length > 0) {
         if (serverWishlist?.products?.length > 0) {
           dispatch(clearLocalWishlist());
@@ -66,13 +90,19 @@ function SignIn() {
             JSON.stringify(serverWishlist.products)
           );
         } else {
-          await syncWishlistToServer(storedWishlist);
+          await syncWish(storedWishlist);
+          refetch();
         }
+      } else {
+        localStorage.setItem(
+          "wishlist",
+          JSON.stringify(serverWishlist.products)
+        );
       }
 
-      navigate(redirect);
+      // navigate(redirect);
     } catch (err) {
-      toast.error(err?.data.message || err.error);
+      toast.error(err?.data?.message || err.error);
     }
   };
 
@@ -133,7 +163,7 @@ function SignIn() {
             fullWidth
             variant="contained"
             sx={{ mt: 1, mb: 1, fontSize: "14px" }}
-            disabled={isLoading}
+            // disabled={isLoading}
           >
             Sign In
           </Button>

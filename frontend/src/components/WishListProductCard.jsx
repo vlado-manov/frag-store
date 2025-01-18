@@ -35,17 +35,15 @@ const WishListProductCard = ({ product }) => {
 
   const removeFromWishlistHandler = async () => {
     try {
-      console.log(product.productId);
-      console.log(product.variant.size);
       if (isLoggedIn) {
         await removeFromWishlist({
-          productId: product.productId,
+          productId: product.productId.toString(),
           size: product.variant.size,
         }).unwrap();
       }
       dispatch(
         removeFromLocalWishlist({
-          productId: product.productId,
+          productId: product.productId.toString(),
           variant: { size: product.variant.size },
         })
       );

@@ -60,17 +60,12 @@ const addToWishlist = asyncHandler(async (req, res) => {
 const removeFromWishlist = asyncHandler(async (req, res) => {
   const userId = req.user._id;
   const { productId, size } = req.body;
-  console.log("size is: ", size);
-  console.log("id is: ", productId);
-  // console.log("userIID is: ", userId);
-  console.log("req body  is: ", req.body);
   if (!productId) {
     res.status(400);
     throw new Error("Product ID is required");
   }
 
   let wishlist = await Wishlist.findOne({ user: userId });
-  // console.log("wishlist is: ", wishlist);
 
   if (!wishlist) {
     res.status(404);
@@ -81,11 +76,6 @@ const removeFromWishlist = asyncHandler(async (req, res) => {
     (item) =>
       item.productId.toString() === productId && item.variant.size === size
   );
-  // console.log("PRODUCT IS:", wishlist.products[5].name);
-  // console.log("PRODUCT IS:", wishlist.products[5]);
-  // console.log("PRODUCT IS:", wishlist.products[5].variant.size);
-  // console.log("PRODUCT VARIANT IS:", item.variant);
-  // console.log("PRODUCT SIZE  IS:", item.variant.size);
   if (productIndex === -1) {
     res.status(404);
     throw new Error("Product with this variant not found in wishlist");
@@ -108,6 +98,9 @@ const removeFromWishlist = asyncHandler(async (req, res) => {
 const getWishlistProducts = asyncHandler(async (req, res) => {
   const userId = req.user._id;
   const wishlist = await Wishlist.findOne({ user: userId });
+  if (!wishlist) {
+    return res.status(200).json({ products: [] });
+  }
   res.status(200).json(wishlist);
 });
 
@@ -116,13 +109,15 @@ const getWishlistProducts = asyncHandler(async (req, res) => {
 // @access  Private
 const syncWishlist = asyncHandler(async (req, res) => {
   const userId = req.user._id;
+  if (!req.user || !userId) {
+    res.status(401);
+    throw new Error("User not authenticated");
+  }
   const { products } = req.body;
-  console.log("USERID IS:", userId);
-  console.log("prODUCTS IS:", products);
+  if (!Array.isArray(products)) {
+    return res.status(400).json({ message: "Invalid products format" });
+  }
   let wishlist = await Wishlist.findOne({ user: userId });
-  console.log("WISHLIST IS:", wishlist);
-  console.log("WISHLIST ПРОДУЦТС IS:", wishlist.products);
-
   if (!wishlist) {
     wishlist = new Wishlist({
       user: userId,
