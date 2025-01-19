@@ -12,6 +12,10 @@ import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import wishlistRoutes from "./routes/wishlistRoutes.js";
 import connectDB from "./config/db.js";
+import {
+  apiLimiter,
+  graphqlLimiter,
+} from "./middleware/rateLimitMiddleware.js";
 
 dotenv.config();
 
@@ -38,6 +42,7 @@ app.get("/", (req, res) => {
   res.send("API is running!");
 });
 
+app.use("/api", apiLimiter);
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/wishlist", wishlistRoutes);
@@ -49,7 +54,13 @@ const server = new ApolloServer({
 
 await server.start();
 
-app.use("/graphql", cors(), bodyParser.json(), expressMiddleware(server));
+app.use(
+  "/graphql",
+  graphqlLimiter,
+  cors(),
+  bodyParser.json(),
+  expressMiddleware(server)
+);
 
 app.use(notFound);
 app.use(errorHandler);

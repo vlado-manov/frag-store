@@ -319,10 +319,10 @@ const ProductView = () => {
                 <div
                   className={`w-full md:w-1/2 p-8 ${
                     product.gender === "female"
-                      ? "bg-rose-50"
+                      ? "bg-rose-100"
                       : product.gender === "male"
-                      ? "bg-sky-50"
-                      : "bg-indigo-50"
+                      ? "bg-sky-100"
+                      : "bg-indigo-100"
                   }`}
                 >
                   <div className="hidden md:block">
@@ -405,14 +405,14 @@ const ProductView = () => {
                   </div>
                   <div className="mb-6">
                     <h3 className="text-sm font-bold text-gray-800 mb-2">
-                      SELECT SIZE
+                      Select size
                     </h3>
                     <div className="flex gap-2">
                       {product.variants.map((variant, index) => (
                         <button
                           key={variant.size}
                           onClick={() => handleVariantChange(index)}
-                          className={`px-4 py-2 border rounded-md ${
+                          className={`px-4 py-2 ${
                             selectedVariant?.size === variant.size
                               ? "bg-black text-white"
                               : "bg-white text-gray-800 hover:bg-gray-200"
@@ -441,7 +441,7 @@ const ProductView = () => {
                   ) : (
                     <div className="mb-6">
                       <h3 className="text-sm font-bold text-gray-800 mb-2">
-                        QUANTITY
+                        Quantity
                       </h3>
                       <div className="flex items-center gap-4">
                         <button
