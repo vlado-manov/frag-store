@@ -49,14 +49,14 @@ const Cart = () => {
   const subtotal = calculateSubtotal(cartItems);
   return (
     <Container>
-      <div className="flex py-16 px-10 rounded w-full gap-10 font-roboto">
+      <div className="flex py-2 md:py-16 px-4 md:px-10 rounded w-full gap-10 font-roboto flex-col-reverse md:flex-row">
         <div className="flex-[9] w-full">
           <h1 className="text-2xl font-bold text-left my-1">Your cart</h1>
           <p className="text-gray-600 text-sm text-left font-thin">
             Review your selected items, adjust quantities, and proceed to
             checkout when you're ready to complete your order
           </p>
-          <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-6 my-4">
+          <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-4 md:p-6 my-4">
             {cartItems.length === 0 ? (
               <div>Your cart is empty.</div>
             ) : (
@@ -79,22 +79,26 @@ const Cart = () => {
                 {cartItems.map((item) => (
                   <div
                     key={item._id}
-                    className="flex items-center pt-12 pb-6 border-b-2 gap-4 border-stone-200 last-of-type:border-none"
+                    className="flex items-center py-2 md:pt-12 md:pb-6 border-b-2 gap-4 border-stone-200 last-of-type:border-none"
                   >
                     <div className="flex-[4] w-full flex gap-4 items-center">
-                      <div className="w-full">
+                      <div className="md:w-full">
                         <Link to={`/products/${item._id}`}>
                           <img
                             src="https://www.parfimo.bg/data/cache/thumb_min500_max1000-min500_max1000-12/products/56279/1530460699/creed-aventus-parfyumna-voda-dla-mezczyzn-75-ml-238781.jpg"
                             alt={item.name}
-                            className="w-24 h-24 object-contain"
+                            className="w-14 h-14 md:w-24 md:h-24 object-contain"
                           />
                         </Link>
                       </div>
                       <div className="w-full">
                         <Link to={`/products/${item._id}`}>
-                          <p className="text-xs">{item.brand}</p>
-                          <p className="text-lg break-words">{item.name}</p>
+                          <p className="hidden md:block text-xs">
+                            {item.brand}
+                          </p>
+                          <p className="text-md md:text-lg break-words">
+                            {item.name}
+                          </p>
                         </Link>
                       </div>
                     </div>
@@ -156,32 +160,45 @@ const Cart = () => {
             )}
           </div>
         </div>
-        <div className="flex-[3] w-full relative">
-          <div className="">
-            <h1 className="text-left text-xl font-thin">Summary</h1>
-            <div className="flex justify-between py-2 items-center">
-              <p className="text-sm">Number of items:</p>
-              <p className="font-bold">{cartItems.length}</p>
+        <div className="flex-[3] w-full relative border-b-2 pb-4 md:p-0 border-stone-200 md:border-none">
+          <div>
+            <h1 className="text-left text-xl font-thin hidden md:block">
+              Summary
+            </h1>
+            <h1 className="text-left font-bold text-2xl block mb-4 md:hidden">
+              Cart status
+            </h1>
+            <div className="flex gap-2 md:justify-between py-2 items-center">
+              <p className="text-base md:text-sm">Number of items:</p>
+              <p className="font-bold text-lg md:text-base">
+                {cartItems.length}
+              </p>
             </div>
-            <div className="flex justify-between py-2 items-center">
-              <p className="text-sm">Items price:</p>
-              <p className="font-bold">${itemsPrice.toFixed(2)}</p>
+            <div className="flex gap-2 md:justify-between py-2 items-center">
+              <p className="text-base md:text-sm">Items price:</p>
+              <p className="font-bold text-lg md:text-base">
+                ${itemsPrice.toFixed(2)}
+              </p>
             </div>
-            <div className="flex justify-between py-2 items-center">
-              <p className="text-sm">Shipping:</p>
-              <p className="font-bold">${shipping.toFixed(2)}</p>
+            <div className="flex gap-2 md:justify-between py-2 items-center">
+              <p className="text-base md:text-sm">Shipping:</p>
+              <p className="font-bold text-lg md:text-base">
+                ${shipping.toFixed(2)}
+              </p>
             </div>
             {promoCodeDiscount > 0 && (
-              <div className="flex justify-between py-2 items-center">
-                <p className="text-sm">Promo code:</p>
-                <p className="font-bold text-red-500">
+              <div className="flex gap-2 md:justify-between py-2 items-center">
+                <p className="text-base md:text-sm">Promo code:</p>
+                <p className="font-bold text-red-500 text-lg md:text-base">
                   -${promoCodeDiscount.toFixed(2)}
                 </p>
               </div>
             )}
-            <div className="flex justify-between py-2 items-center">
-              <p className="text-sm">Subtotal:</p>
-              <p className="font-bold">${subtotal.toFixed(2)}</p>
+            <div className="flex gap-2 md:justify-between py-2 items-center">
+              <p className="text-base md:text-sm">Subtotal:</p>
+              <p className="font-bold text-lg md:text-base">
+                ${subtotal.toFixed(2)}
+              </p>
             </div>
             <div className="py-2 w-full">
               <TextField
