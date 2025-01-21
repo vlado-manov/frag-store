@@ -67,6 +67,11 @@ h1 {
   font-size: 1em;
   color: #666;
 }
+.field-border {
+  padding: 2px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #0ea5e9 0%, #6366f1 100%);
+}
 
 .product-price {
   font-size: 1.2em;

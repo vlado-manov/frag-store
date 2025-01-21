@@ -83,26 +83,26 @@ const lightTheme = createTheme({
         root: {
           "& .MuiOutlinedInput-root": {
             "& fieldset": {
-              borderColor: "#996f99", // Рамка на инпутите
+              borderColor: "#cbd5e1", // Рамка на инпутите
               borderWidth: 2,
               fontSize: "12px",
             },
             "&:hover fieldset": {
-              borderColor: "#996f99", // При hover на инпут
+              borderColor: "#cbd5e1", // При hover на инпут
             },
             "&.Mui-focused fieldset": {
-              borderColor: "#cfc1cf", // Когато е фокусирано
+              borderColor: "#ccc", // Когато е фокусирано
             },
           },
           // Тук добавяме стилове за autofill
           "& input:-webkit-autofill": {
-            backgroundColor: "#fff !important", // Фон за autofill
+            backgroundColor: "#fafaf9 !important", // Фон за autofill
             color: "#313131 !important", // Текстовия цвят
             borderColor: "#996f99 !important", // Рамка при autofill
             boxShadow: "0 0 0 30px #fff inset !important", // Премахване на синия фон на autofill
           },
           "& input:-webkit-autofill:focus": {
-            backgroundColor: "#fff !important", // Фон за autofill при фокус
+            backgroundColor: "#fafaf9 !important", // Фон за autofill при фокус
             color: "#313131 !important", // Текстовия цвят
             borderColor: "#996f99 !important", // Рамка при autofill фокус
             boxShadow: "0 0 0 30px #fff inset !important", // Премахване на синия фон на autofill
@@ -114,11 +114,11 @@ const lightTheme = createTheme({
       styleOverrides: {
         root: {
           color: "#313131", // Цвят на лейбъла по подразбиране
-          background: "#fff",
+          background: "#fafaf9",
           padding: "0 10px 0 0",
           fontSize: "16px",
           "&.Mui-focused": {
-            color: "#725972", // Цвят на лейбъла, когато е фокусиран
+            color: "#313131", // Цвят на лейбъла, когато е фокусиран
           },
         },
       },

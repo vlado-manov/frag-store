@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import Settings from "./Settings";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
-import { useUpdateProfileMutation } from "../../slices/userSlice";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../../slices/userSlice";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import Loader from "../../components/ux/Loader";
 
 const Address = () => {
   const [formData, setFormData] = useState({
@@ -18,15 +22,9 @@ const Address = () => {
     isPrimary: false,
   });
   const { userInfo } = useSelector((state) => state.auth);
+  const { data: user, isLoading, refetch } = useGetProfileQuery();
   const [updateProfile] = useUpdateProfileMutation();
   const dispatch = useDispatch();
-  const [localAddresses, setLocalAddresses] = useState(
-    userInfo.addresses || []
-  );
-
-  useEffect(() => {
-    setLocalAddresses(userInfo.addresses);
-  }, [userInfo.addresses]);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -39,18 +37,14 @@ const Address = () => {
   const submitAddress = async (e) => {
     e.preventDefault();
     try {
-      const updatedAddresses = userInfo.addresses.map((addr) => ({
+      const updatedAddresses = user.addresses.map((addr) => ({
         ...addr,
         isPrimary: formData.isPrimary ? false : addr.isPrimary,
       }));
-
       const newAddress = { ...formData, isPrimary: formData.isPrimary };
       updatedAddresses.push(newAddress);
-
       const updatedData = { ...userInfo, addresses: updatedAddresses };
-
       const res = await updateProfile(updatedData).unwrap();
-      dispatch(setCredentials({ ...userInfo, ...res }));
       setFormData({
         addressLine1: "",
         addressLine2: "",
@@ -59,7 +53,7 @@ const Address = () => {
         country: "",
         isPrimary: false,
       });
-      setLocalAddresses(updatedAddresses);
+      refetch();
       toast.success("Data was updated successfully!");
     } catch (error) {
       toast.error(error?.data?.message || error.error);
@@ -68,7 +62,7 @@ const Address = () => {
 
   const makePrimary = async (index) => {
     try {
-      const updatedAddresses = userInfo.addresses.map((addr, idx) => ({
+      const updatedAddresses = user.addresses.map((addr, idx) => ({
         ...addr,
         isPrimary: idx === index,
       }));
@@ -76,7 +70,7 @@ const Address = () => {
       const updatedData = { ...userInfo, addresses: updatedAddresses };
       const res = await updateProfile(updatedData).unwrap();
       dispatch(setCredentials({ ...userInfo, ...res }));
-      setLocalAddresses(updatedAddresses);
+      refetch();
       toast.success("Primary address updated!");
     } catch (error) {
       toast.error(error?.data?.message || "Failed to update address!");
@@ -85,13 +79,11 @@ const Address = () => {
 
   const deleteAddress = async (index) => {
     try {
-      const updatedAddresses = userInfo.addresses.filter(
-        (_, idx) => idx !== index
-      );
+      const updatedAddresses = user.addresses.filter((_, idx) => idx !== index);
       const updatedData = { ...userInfo, addresses: updatedAddresses };
       const res = await updateProfile(updatedData).unwrap();
       dispatch(setCredentials({ ...userInfo, ...res }));
-      setLocalAddresses(updatedAddresses);
+      refetch();
       toast.success("Address deleted!");
     } catch (error) {
       toast.error(error?.data?.message || "Failed to delete address!");
@@ -163,7 +155,7 @@ const Address = () => {
                 onChange={handleChange}
               />
             }
-            label="That's my primary address"
+            label="Set as my primary address"
           />
         </div>
         <button
@@ -177,11 +169,16 @@ const Address = () => {
         <h1 className="text-xl font-bold text-left my-1 w-full">
           Your addresses
         </h1>
-        {localAddresses?.length === 0 ? (
-          <div>NO ADDRESS YET</div>
+        {isLoading ? (
+          <Loader />
+        ) : user.addresses?.length === 0 ? (
+          <div>
+            You haven't added any addresses yet. Add a new address to make your
+            checkout experience smoother!
+          </div>
         ) : (
           <div className="grid grid cols-1 sm:grid-cols-2 mt-4 gap-4">
-            {localAddresses?.map((address, index) => (
+            {user.addresses?.map((address, index) => (
               <div
                 key={index}
                 className={`bg-white rounded-xl p-6 border-2 relative ${
