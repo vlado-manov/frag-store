@@ -35,66 +35,62 @@ const ShippingView = () => {
   return (
     <Container>
       <CheckoutStepper step1 step2 />
-      {user?.addresses?.length > 0 ? (
+      {isLoading ? (
+        <Loader />
+      ) : user?.addresses?.length > 0 ? (
         <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-6 my-4">
           <h1 className="text-xl font-bold text-left my-1 w-full">
             Pick one of you addresses
           </h1>
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <div className="grid grid cols-1 sm:grid-cols-2 mt-4 gap-4">
-              {user.addresses?.map((address, index) => (
-                <div
-                  key={index}
-                  className={`bg-white rounded-xl p-6 border-2 relative hover:cursor-pointer  ${
-                    address.isPrimary
-                      ? "border-sky-500"
-                      : "border-slate-100 hover:border-sky-300"
-                  }`}
-                >
+          <div className="grid grid cols-1 sm:grid-cols-2 mt-4 gap-4">
+            {user.addresses?.map((address, index) => (
+              <div
+                key={index}
+                className={`bg-white rounded-xl p-6 border-2 relative hover:cursor-pointer  ${
+                  address.isPrimary
+                    ? "border-sky-500"
+                    : "border-slate-100 hover:border-sky-300"
+                }`}
+              >
+                <div className="flex gap-2">
+                  <h4 className="text-sm font-bold">Country:</h4>
+                  <p className="text-sm font-roboto">{address.country}</p>
+                </div>
+                <div className="flex gap-2">
+                  <h4 className="text-sm font-bold">City:</h4>
+                  <p className="text-sm font-roboto">{address.city}</p>
+                </div>
+                <div className="flex gap-2">
+                  <h4 className="text-sm font-bold">Postal Code:</h4>
+                  <p className="text-sm font-roboto">{address.postalCode}</p>
+                </div>
+                <div className="flex gap-2">
+                  <h4 className="text-sm font-bold">Address:</h4>
+                  <p className="text-sm font-roboto">{address.addressLine1}</p>
+                </div>
+                {address.addressLine2 && (
                   <div className="flex gap-2">
-                    <h4 className="text-sm font-bold">Country:</h4>
-                    <p className="text-sm font-roboto">{address.country}</p>
-                  </div>
-                  <div className="flex gap-2">
-                    <h4 className="text-sm font-bold">City:</h4>
-                    <p className="text-sm font-roboto">{address.city}</p>
-                  </div>
-                  <div className="flex gap-2">
-                    <h4 className="text-sm font-bold">Postal Code:</h4>
-                    <p className="text-sm font-roboto">{address.postalCode}</p>
-                  </div>
-                  <div className="flex gap-2">
-                    <h4 className="text-sm font-bold">Address:</h4>
+                    <h4 className="text-sm font-bold">Additional info:</h4>
                     <p className="text-sm font-roboto">
-                      {address.addressLine1}
+                      {address.addressLine2}
                     </p>
                   </div>
-                  {address.addressLine2 && (
-                    <div className="flex gap-2">
-                      <h4 className="text-sm font-bold">Additional info:</h4>
-                      <p className="text-sm font-roboto">
-                        {address.addressLine2}
-                      </p>
-                    </div>
-                  )}
-                  {address.isPrimary ? (
-                    <button className="rounded px-4 py-2 text-sm mt-2 bg-sky-500 text-white">
-                      Selected
-                    </button>
-                  ) : (
-                    <button
-                      className="rounded px-4 py-2 text-sm mt-2 bg-gray-200"
-                      // onClick={() => makePrimary(index)}
-                    >
-                      Select
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
+                )}
+                {address.isPrimary ? (
+                  <button className="rounded px-4 py-2 text-sm mt-2 bg-sky-500 text-white">
+                    Selected
+                  </button>
+                ) : (
+                  <button
+                    className="rounded px-4 py-2 text-sm mt-2 bg-gray-200"
+                    // onClick={() => makePrimary(index)}
+                  >
+                    Select
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
           <Link to="/payment">
             <button
               // onClick={submitAddress}

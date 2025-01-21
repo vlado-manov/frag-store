@@ -48,31 +48,38 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
         ></div>
       </div>
       <div className="flex items-center gap-2">
-        <div className={`relative pb-8 overflow-visible`}>
-          {step3 & step4 ? (
-            <IoCheckmark className="text-sky-500" size={20} />
-          ) : step3 ? (
-            <GoDotFill
-              className="text-sky-500 transition-colors duration-300 ease-in-out"
-              size={20}
-            />
-          ) : (
-            <GoDotFill
-              className="text-slate-300 transition-colors duration-300 ease-in-out"
-              size={20}
-            />
-          )}
-          <h2
-            className={`absolute -left-1/2 -translate-x-1/2 bottom-0 w-full whitespace-nowrap transition-colors duration-300 ease-in-out ${
-              step4
-                ? "text-sky-400"
-                : step3
-                ? "text-sky-500 font-bold"
-                : "text-slate-300"
-            }`}
+        <div className="relative pb-8 overflow-visible">
+          <Link
+            to={step3 ? "/payment" : "#"}
+            onClick={(e) => {
+              if (!step3) e.preventDefault();
+            }}
           >
-            Payment
-          </h2>
+            {step3 & step4 ? (
+              <IoCheckmark className="text-sky-500" size={20} />
+            ) : step3 ? (
+              <GoDotFill
+                className="text-sky-500 transition-colors duration-300 ease-in-out"
+                size={20}
+              />
+            ) : (
+              <GoDotFill
+                className="text-slate-300 transition-colors duration-300 ease-in-out"
+                size={20}
+              />
+            )}
+            <h2
+              className={`absolute -left-1/2 -translate-x-1/2 bottom-0 w-full whitespace-nowrap transition-colors duration-300 ease-in-out ${
+                step4
+                  ? "text-sky-400"
+                  : step3
+                  ? "text-sky-500 font-bold"
+                  : "text-slate-300"
+              }`}
+            >
+              Payment
+            </h2>
+          </Link>
         </div>
         <div
           className={`w-28 h-0.5 rounded-full mb-8 transition-colors duration-300 ease-in-out ${
