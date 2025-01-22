@@ -23,6 +23,7 @@ export const calculatePromoCodeDiscount = (cartItems) =>
 
 export const calculateSubtotal = (cartItems) => {
   const itemsPrice = calculateItemsPrice(cartItems);
+  const shippingPrice = calculateShipping(cartItems);
   const promoCodeDiscount = calculatePromoCodeDiscount(cartItems);
-  return itemsPrice - promoCodeDiscount;
+  return itemsPrice + shippingPrice - promoCodeDiscount;
 };

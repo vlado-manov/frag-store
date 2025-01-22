@@ -124,3 +124,6 @@ h1 {
   font-weight: 600;
   padding-left: 0.5rem;
 }
+.heading-container {
+  background: linear-gradient(10deg, #0ea5e9 0%, #6366f1 35%, #f43f5e 80%);
+}

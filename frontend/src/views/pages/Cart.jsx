@@ -8,12 +8,6 @@ import {
   incrementQuantity,
   decrementQuantity,
 } from "../../slices/cartSlice";
-import {
-  calculateItemsPrice,
-  calculateShipping,
-  calculatePromoCodeDiscount,
-  calculateSubtotal,
-} from "../../utils/cartUtils.js";
 import { IoMdCloseCircle } from "react-icons/io";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
@@ -24,7 +18,7 @@ import CartSync from "../../utils/CartSync.js";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
+  const { cartItems, itemsPrice, shipping, discount, subtotal } = cart;
   const dispatch = useDispatch();
 
   const removeFromCartHandler = async (item) => {
@@ -42,11 +36,6 @@ const Cart = () => {
   const incrementQty = (_id, variant) => {
     dispatch(incrementQuantity(_id, variant));
   };
-
-  const itemsPrice = calculateItemsPrice(cartItems);
-  const shipping = calculateShipping(cartItems);
-  const promoCodeDiscount = calculatePromoCodeDiscount(cartItems);
-  const subtotal = calculateSubtotal(cartItems);
   return (
     <Container>
       <div className="flex py-2 md:py-16 px-4 md:px-10 rounded w-full gap-10 font-roboto flex-col-reverse md:flex-row">
@@ -186,18 +175,18 @@ const Cart = () => {
                 ${shipping.toFixed(2)}
               </p>
             </div>
-            {promoCodeDiscount > 0 && (
+            {discount && discount > 0 && (
               <div className="flex gap-2 md:justify-between py-2 items-center">
                 <p className="text-base md:text-sm">Promo code:</p>
                 <p className="font-bold text-red-500 text-lg md:text-base">
-                  -${promoCodeDiscount.toFixed(2)}
+                  -${discount.toFixed(2)}
                 </p>
               </div>
             )}
             <div className="flex gap-2 md:justify-between py-2 items-center">
               <p className="text-base md:text-sm">Subtotal:</p>
               <p className="font-bold text-lg md:text-base">
-                ${subtotal.toFixed(2)}
+                ${subtotal ? subtotal.toFixed(2) : 0}
               </p>
             </div>
             <div className="py-2 w-full">

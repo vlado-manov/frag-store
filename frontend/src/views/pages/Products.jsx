@@ -38,9 +38,11 @@ const ProductsLayout = ({
 
   return (
     <Container>
-      <h1 className="text-lg font-roboto uppercase mx-4 border-b-8 py-4">
-        {title}
-      </h1>
+      <div className="heading-container pb-2 m-4">
+        <h1 className="text-lg font-roboto uppercase py-4 bg-white m-0">
+          {title}
+        </h1>
+      </div>
       <HeaderProductList
         setSortBy={setSortBy}
         setSortOrder={setSortOrder}

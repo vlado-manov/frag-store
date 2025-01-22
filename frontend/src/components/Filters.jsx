@@ -51,7 +51,7 @@ const Filters = ({ hideFilters = [] }) => {
     }));
   };
   return (
-    <div className="flex-[3] w-full py-4 px-6 min-w-80 max-w-80 hidden md:block">
+    <div className="flex-[3] w-full py-4 px-6 min-w-80 max-w-80 hidden md:block shadow-2xl shadow-inner">
       {!hideFilters.includes("category") && (
         <div>
           <p

@@ -1,16 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CheckoutStepper from "../../components/CheckoutStepper";
 import Container from "../../components/layout/Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaCcVisa } from "react-icons/fa";
 import { FaCcMastercard } from "react-icons/fa";
 import { LiaCcAmex } from "react-icons/lia";
 import { FaCcPaypal } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { savePaymentMethod } from "../../slices/cartSlice";
 
 const PaymentView = () => {
   const [selectedMethod, setSelectedMethod] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const savedMethod = localStorage.getItem("paymentMethod");
+    if (savedMethod) {
+      setSelectedMethod(savedMethod);
+    }
+  }, []);
+
   const handleSelect = (method) => {
     setSelectedMethod(method);
+  };
+
+  const handleNextStep = () => {
+    if (selectedMethod) {
+      dispatch(savePaymentMethod(selectedMethod));
+      localStorage.setItem("paymentMethod", selectedMethod);
+      navigate("/placeOrder");
+    }
   };
   return (
     <Container>
@@ -48,7 +68,15 @@ const PaymentView = () => {
           </div>
         </div>
         <Link to="/placeOrder">
-          <button className="bg-black rounded py-2 px-4 text-white my-1 mt-4 w-fit">
+          <button
+            onClick={handleNextStep}
+            disabled={!selectedMethod}
+            className={`rounded py-2 px-4 my-1 mt-4 w-fit ${
+              selectedMethod
+                ? "bg-black text-white"
+                : "bg-slate-200 text-slate-400 hover:cursor-not-allowed"
+            }`}
+          >
             Next Step
           </button>
         </Link>

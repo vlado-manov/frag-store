@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Container from "../../components/layout/Container";
 import CheckoutStepper from "../../components/CheckoutStepper";
-import { Checkbox, FormControlLabel, TextField } from "@mui/material";
-import {
-  useGetProfileQuery,
-  useUpdateProfileMutation,
-} from "../../slices/userSlice";
-import { RiDeleteBin5Fill } from "react-icons/ri";
+import { TextField } from "@mui/material";
+import { useGetProfileQuery } from "../../slices/userSlice";
 import Loader from "../../components/ux/Loader";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveShippingAddress } from "../../slices/cartSlice";
 
 const ShippingView = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     addressLine1: "",
     addressLine2: "",
@@ -19,8 +20,28 @@ const ShippingView = () => {
     country: "",
     isPrimary: false,
   });
-  const { data: user, isLoading, refetch } = useGetProfileQuery();
-  const [updateProfile] = useUpdateProfileMutation();
+
+  const { data: user, isLoading } = useGetProfileQuery();
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
+  useEffect(() => {
+    const savedAddress = JSON.parse(localStorage.getItem("shippingAddress"));
+    if (savedAddress) {
+      const matchingAddress = user?.addresses?.find(
+        (address) =>
+          address.addressLine1 === savedAddress.addressLine1 &&
+          address.city === savedAddress.city &&
+          address.postalCode === savedAddress.postalCode &&
+          address.country === savedAddress.country
+      );
+
+      if (matchingAddress) {
+        setSelectedAddress(matchingAddress);
+      } else {
+        setFormData(savedAddress);
+      }
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -28,10 +49,42 @@ const ShippingView = () => {
       ...formData,
       [name]: type === "checkbox" ? checked : value,
     });
+    setSelectedAddress(null);
   };
+
+  const handleAddressSelection = (address) => {
+    if (selectedAddress === address) {
+      setSelectedAddress(null);
+    } else {
+      setSelectedAddress(address);
+      setFormData({
+        addressLine1: "",
+        addressLine2: "",
+        city: "",
+        postalCode: "",
+        country: "",
+        isPrimary: false,
+      });
+    }
+  };
+
   const submitAddress = async (e) => {
     e.preventDefault();
+
+    const addressToSave = selectedAddress || formData;
+
+    dispatch(saveShippingAddress(addressToSave));
+    localStorage.setItem("shippingAddress", JSON.stringify(addressToSave));
+
+    navigate("/payment");
   };
+  const isFormValid =
+    selectedAddress ||
+    (formData.addressLine1 &&
+      formData.city &&
+      formData.postalCode &&
+      formData.country);
+
   return (
     <Container>
       <CheckoutStepper step1 step2 />
@@ -40,14 +93,15 @@ const ShippingView = () => {
       ) : user?.addresses?.length > 0 ? (
         <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-6 my-4">
           <h1 className="text-xl font-bold text-left my-1 w-full">
-            Pick one of you addresses
+            Pick one of your addresses
           </h1>
-          <div className="grid grid cols-1 sm:grid-cols-2 mt-4 gap-4">
-            {user.addresses?.map((address, index) => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 mt-4 gap-4">
+            {user.addresses.map((address, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-xl p-6 border-2 relative hover:cursor-pointer  ${
-                  address.isPrimary
+                onClick={() => handleAddressSelection(address)}
+                className={`bg-white rounded-xl p-6 border-2 relative hover:cursor-pointer ${
+                  selectedAddress === address
                     ? "border-sky-500"
                     : "border-slate-100 hover:border-sky-300"
                 }`}
@@ -76,29 +130,20 @@ const ShippingView = () => {
                     </p>
                   </div>
                 )}
-                {address.isPrimary ? (
-                  <button className="rounded px-4 py-2 text-sm mt-2 bg-sky-500 text-white">
-                    Selected
-                  </button>
-                ) : (
-                  <button
-                    className="rounded px-4 py-2 text-sm mt-2 bg-gray-200"
-                    // onClick={() => makePrimary(index)}
-                  >
-                    Select
-                  </button>
-                )}
               </div>
             ))}
           </div>
-          <Link to="/payment">
-            <button
-              // onClick={submitAddress}
-              className="bg-black rounded py-2 px-4 text-white my-1 mt-4 w-fit"
-            >
-              Next Step
-            </button>
-          </Link>
+          <button
+            onClick={submitAddress}
+            disabled={!isFormValid}
+            className={`rounded py-2 px-4 my-1 mt-4 w-fit ${
+              isFormValid
+                ? "bg-black text-white"
+                : "bg-slate-200 text-slate-400 hover:cursor-not-allowed"
+            }`}
+          >
+            Next Step
+          </button>
         </div>
       ) : (
         ""
@@ -135,7 +180,7 @@ const ShippingView = () => {
             required
           />
         </div>
-        <div className="w-1/2 flex gap-4">
+        <div className="w-full flex gap-4">
           <TextField
             fullWidth
             name="addressLine1"
@@ -156,7 +201,12 @@ const ShippingView = () => {
         </div>
         <button
           onClick={submitAddress}
-          className="bg-black rounded py-2 px-4 text-white my-1 mt-4 w-fit"
+          disabled={!isFormValid}
+          className={`rounded py-2 px-4 my-1 mt-4 w-fit ${
+            isFormValid
+              ? "bg-black text-white"
+              : "bg-slate-200 text-slate-400 hover:cursor-not-allowed"
+          }`}
         >
           Next Step
         </button>
