@@ -21,7 +21,7 @@ import Profile from "./views/user/Profile.jsx";
 import OrdersList from "./views/user/OrdersList.jsx";
 import OrderView from "./views/user/OrderView.jsx";
 import PaymentView from "./views/user/PaymentView.jsx";
-import PlaceOrder from "./views/user/PlaceOrder.jsx";
+import OrderSummary from "./views/user/OrderSummary.jsx";
 import ShippingView from "./views/user/ShippingView.jsx";
 import SignIn from "./views/auth/SignIn.jsx";
 import SignUp from "./views/auth/SignUp.jsx";
@@ -66,7 +66,7 @@ const router = createBrowserRouter(
         <Route path="/order/:id" element={<OrderView />} />
         <Route path="/shipping" element={<ShippingView />} />
         <Route path="/payment" element={<PaymentView />} />
-        <Route path="/placeorder" element={<PlaceOrder />} />
+        <Route path="/summary" element={<OrderSummary />} />
       </Route>
       {/* TODO: Place admin routes */}
     </Route>

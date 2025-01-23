@@ -212,9 +212,12 @@ const Cart = () => {
                 away from free shipping!
               </p>
             )}
-            <button className="rounded-md mt-4 bg-sky-500 py-4 w-full text-white">
+            <Link
+              to="/shipping"
+              className="block text-center rounded-md mt-4 bg-sky-500 py-4 w-full text-white"
+            >
               Checkout
-            </button>
+            </Link>
           </div>
         </div>
       </div>

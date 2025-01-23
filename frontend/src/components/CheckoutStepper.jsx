@@ -105,7 +105,7 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
               step4 ? "text-sky-500 font-bold" : "text-slate-300"
             }`}
           >
-            Place order
+            Summary
           </h2>
         </div>
       </div>
