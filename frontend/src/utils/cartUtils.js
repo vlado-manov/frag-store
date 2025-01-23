@@ -1,3 +1,7 @@
+export const addDecimals = (num) => {
+  return Number((Math.round(num * 100) / 100).toFixed(2));
+};
+
 export const calculateItemsPrice = (cartItems) =>
   cartItems.reduce((acc, item) => acc + item.variant.price * item.quantity, 0);
 
@@ -26,4 +30,12 @@ export const calculateSubtotal = (cartItems) => {
   const shippingPrice = calculateShipping(cartItems);
   const promoCodeDiscount = calculatePromoCodeDiscount(cartItems);
   return itemsPrice + shippingPrice - promoCodeDiscount;
+};
+
+export const updateCart = (state) => {
+  state.itemsPrice = addDecimals(calculateItemsPrice(state.cartItems));
+  state.shipping = addDecimals(calculateShipping(state.cartItems));
+  state.discount = addDecimals(calculatePromoCodeDiscount(state.cartItems));
+  state.subtotal = addDecimals(calculateSubtotal(state.cartItems));
+  localStorage.setItem("cart", JSON.stringify(state));
 };

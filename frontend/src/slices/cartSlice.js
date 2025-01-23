@@ -4,6 +4,7 @@ import {
   calculatePromoCodeDiscount,
   calculateShipping,
   calculateSubtotal,
+  updateCart,
 } from "../utils/cartUtils";
 
 const initialState = localStorage.getItem("cart")
@@ -29,30 +30,14 @@ const cartSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, item];
       }
-
-      // Recalculate prices and store them in the Redux state
-      state.itemsPrice = calculateItemsPrice(state.cartItems);
-      state.shipping = calculateShipping(state.cartItems);
-      state.discount = calculatePromoCodeDiscount(state.cartItems);
-      state.subtotal = calculateSubtotal(state.cartItems);
-
-      // Update localStorage
-      localStorage.setItem("cart", JSON.stringify(state));
+      updateCart(state);
     },
     removeFromCart: (state, action) => {
       const { _id, variant } = action.payload;
       state.cartItems = state.cartItems.filter(
         (x) => x._id !== _id || x.variant.size !== variant.size
       );
-
-      // Recalculate prices after removal
-      state.itemsPrice = calculateItemsPrice(state.cartItems);
-      state.shipping = calculateShipping(state.cartItems);
-      state.discount = calculatePromoCodeDiscount(state.cartItems);
-      state.subtotal = calculateSubtotal(state.cartItems);
-
-      // Update localStorage
-      localStorage.setItem("cart", JSON.stringify(state));
+      updateCart(state);
     },
     incrementQuantity: (state, action) => {
       const { _id, variant } = action.payload;
@@ -61,15 +46,7 @@ const cartSlice = createSlice({
       );
       if (item && item.quantity < item.variant.countInStock) {
         item.quantity += 1;
-
-        // Recalculate prices after increment
-        state.itemsPrice = calculateItemsPrice(state.cartItems);
-        state.shipping = calculateShipping(state.cartItems);
-        state.discount = calculatePromoCodeDiscount(state.cartItems);
-        state.subtotal = calculateSubtotal(state.cartItems);
-
-        // Update localStorage
-        localStorage.setItem("cart", JSON.stringify(state));
+        updateCart(state);
       }
     },
     decrementQuantity: (state, action) => {
@@ -85,40 +62,16 @@ const cartSlice = createSlice({
             (x) => x._id !== _id || x.variant.size !== variant.size
           );
         }
-
-        // Recalculate prices after decrement
-        state.itemsPrice = calculateItemsPrice(state.cartItems);
-        state.shipping = calculateShipping(state.cartItems);
-        state.discount = calculatePromoCodeDiscount(state.cartItems);
-        state.subtotal = calculateSubtotal(state.cartItems);
-
-        // Update localStorage
-        localStorage.setItem("cart", JSON.stringify(state));
+        updateCart(state);
       }
     },
     clearCartItems: (state) => {
       state.cartItems = [];
-
-      // Recalculate prices after clearing the cart
-      state.itemsPrice = 0;
-      state.shipping = 0;
-      state.discount = 0;
-      state.subtotal = 0;
-
-      // Update localStorage
-      localStorage.setItem("cart", JSON.stringify(state));
+      updateCart(state);
     },
     setCartItems: (state, action) => {
       state.cartItems = action.payload;
-
-      // Recalculate prices after setting cart items
-      state.itemsPrice = calculateItemsPrice(state.cartItems);
-      state.shipping = calculateShipping(state.cartItems);
-      state.discount = calculatePromoCodeDiscount(state.cartItems);
-      state.subtotal = calculateSubtotal(state.cartItems);
-
-      // Update localStorage
-      localStorage.setItem("cart", JSON.stringify(state));
+      updateCart(state);
     },
     saveShippingAddress: (state, action) => {
       state.shippingAddress = action.payload;

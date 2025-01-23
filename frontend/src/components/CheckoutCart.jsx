@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import PlaceOrderButton from "./PlaceOrderButton";
 
 const CheckoutCart = () => {
   const cart = useSelector((state) => state.cart);
@@ -36,23 +37,29 @@ const CheckoutCart = () => {
       </div>
       <div className="flex justify-between my-2">
         <p className="text-sm text-slate-400">Items price:</p>
-        <p className="text-sm">${cart.itemsPrice}</p>
+        <p className="text-sm">${cart.itemsPrice.toFixed(2)}</p>
       </div>
       <div className="flex justify-between my-2">
         <p className="text-sm text-slate-400">Shipping:</p>
-        <p className="text-sm">${cart.shipping}</p>
+        <p className="text-sm">${cart.shipping.toFixed(2)}</p>
       </div>
       <div className="flex justify-between my-2">
         <p className="text-sm text-slate-400">Promo discount:</p>
-        <p className="text-sm text-red-500 font-bold">-${cart.discount}</p>
+        <p className="text-sm text-red-500 font-bold">
+          -${cart.discount.toFixed(2)}
+        </p>
       </div>
       <div className="flex justify-between my-2">
         <p className="text-sm text-slate-400">Subtotal:</p>
-        <p className="text-sm">${cart.subtotal}</p>
+        <p className="text-sm">${cart.subtotal.toFixed(2)}</p>
       </div>
-      <button className="bg-black text-white rounded py-2 text-lg w-full mt-6">
+      {/* <button
+        disabled={!cart.shippingAddress || !cart.paymentMethod}
+        className="bg-black text-white rounded py-2 text-lg w-full mt-6"
+      >
         Place order
-      </button>
+      </button> */}
+      <PlaceOrderButton cart={cart} />
     </div>
   );
 };

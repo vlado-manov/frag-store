@@ -63,7 +63,7 @@ const router = createBrowserRouter(
         <Route path="/payment-methods" element={<PaymentMethods />} />
         <Route path="/orders" element={<OrdersList />} />
         <Route path="/orders/page/:pageNumber" element={<OrdersList />} />
-        <Route path="/order/:id" element={<OrderView />} />
+        <Route path="/orders/:id" element={<OrderView />} />
         <Route path="/shipping" element={<ShippingView />} />
         <Route path="/payment" element={<PaymentView />} />
         <Route path="/summary" element={<OrderSummary />} />

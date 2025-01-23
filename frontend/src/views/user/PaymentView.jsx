@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import CheckoutStepper from "../../components/CheckoutStepper";
 import Container from "../../components/layout/Container";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaCcVisa } from "react-icons/fa";
 import { FaCcMastercard } from "react-icons/fa";
 import { LiaCcAmex } from "react-icons/lia";
 import { FaCcPaypal } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../../slices/cartSlice";
 import CheckoutCart from "../../components/CheckoutCart";
 
@@ -14,22 +14,27 @@ const PaymentView = () => {
   const [selectedMethod, setSelectedMethod] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
+    if (!cart.shippingAddress) {
+      navigate("/shipping");
+    }
     const savedMethod = localStorage.getItem("paymentMethod");
     if (savedMethod) {
       setSelectedMethod(savedMethod);
     }
-  }, []);
+  }, [cart.shippingAddress, navigate]);
 
   const handleSelect = (method) => {
     setSelectedMethod(method);
   };
 
-  const handleNextStep = () => {
+  const handleNextStep = (e) => {
+    e.preventDefault();
     if (selectedMethod) {
       dispatch(savePaymentMethod(selectedMethod));
-      localStorage.setItem("paymentMethod", selectedMethod);
+      // localStorage.setItem("paymentMethod", selectedMethod);
       navigate("/summary");
     }
   };
@@ -70,19 +75,17 @@ const PaymentView = () => {
                 <FaCcPaypal size={32} />
               </div>
             </div>
-            <Link to="/summary">
-              <button
-                onClick={handleNextStep}
-                disabled={!selectedMethod}
-                className={`rounded py-2 px-4 my-1 mt-4 w-fit ${
-                  selectedMethod
-                    ? "bg-black text-white"
-                    : "bg-slate-200 text-slate-400 hover:cursor-not-allowed"
-                }`}
-              >
-                Next Step
-              </button>
-            </Link>
+            <button
+              onClick={handleNextStep}
+              disabled={!selectedMethod}
+              className={`rounded py-2 px-4 my-1 mt-4 w-fit ${
+                selectedMethod
+                  ? "bg-black text-white"
+                  : "bg-slate-200 text-slate-400 hover:cursor-not-allowed"
+              }`}
+            >
+              Next Step
+            </button>
           </div>
         </div>
         <CheckoutCart />

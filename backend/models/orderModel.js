@@ -10,18 +10,18 @@ const orderSchema = new mongoose.Schema(
     orderItems: [
       {
         name: { type: String, required: true },
-        size: { type: Number, required: true },
         quantity: { type: Number, required: true },
-        image: { type: String, required: true },
-        price: { type: Number, required: true },
+        brand: { type: String, required: true },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           required: true,
           ref: "Product",
         },
-        variantId: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
+        variant: {
+          size: { type: Number, required: true },
+          price: { type: Number, required: true },
+          discountPrice: { type: Number, required: false },
+          images: { type: [String], required: false },
         },
       },
     ],
@@ -36,7 +36,7 @@ const orderSchema = new mongoose.Schema(
     paymentMethod: {
       type: String,
       required: true,
-      enum: ["stripe", "paypal"],
+      enum: ["creditCard", "paypal"],
     },
     paymentResult: {
       stripe: {

@@ -186,7 +186,7 @@ const Cart = () => {
             <div className="flex gap-2 md:justify-between py-2 items-center">
               <p className="text-base md:text-sm">Subtotal:</p>
               <p className="font-bold text-lg md:text-base">
-                ${subtotal ? subtotal.toFixed(2) : 0}
+                ${subtotal.toFixed(2)}
               </p>
             </div>
             <div className="py-2 w-full">

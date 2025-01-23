@@ -10,6 +10,7 @@ import { resolvers } from "./graphql/resolvers.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import ordersRoutes from "./routes/ordersRoutes.js";
 import wishlistRoutes from "./routes/wishlistRoutes.js";
 import connectDB from "./config/db.js";
 import {
@@ -45,6 +46,7 @@ app.get("/", (req, res) => {
 app.use("/api", apiLimiter);
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/orders", ordersRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 
 const server = new ApolloServer({

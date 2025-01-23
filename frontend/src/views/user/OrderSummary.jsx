@@ -2,10 +2,21 @@ import { useSelector } from "react-redux";
 import Container from "../../components/layout/Container";
 import CheckoutStepper from "../../components/CheckoutStepper";
 import CheckoutCart from "../../components/CheckoutCart";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import PlaceOrderButton from "../../components/PlaceOrderButton";
 
 const OrderSummary = () => {
   const cart = useSelector((state) => state.cart);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!cart.shippingAddress) {
+      navigate("/shipping");
+    } else if (!cart.paymentMethod) {
+      navigate("/payment");
+    }
+  }, [cart.shippingAddress, cart.paymentMethod, navigate]);
 
   return (
     <Container>
@@ -95,9 +106,7 @@ const OrderSummary = () => {
                 <p className="text-xl font-bold">${cart.subtotal}</p>
               </div>
               <div className="flex justify-end p-0">
-                <button className="bg-black text-white rounded py-2 px-6">
-                  Place order
-                </button>
+                <PlaceOrderButton cart={cart} />
               </div>
             </div>
           </div>
