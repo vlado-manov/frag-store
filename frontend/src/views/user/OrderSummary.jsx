@@ -11,12 +11,15 @@ const OrderSummary = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (cart.orderCompleted) {
+      return;
+    }
     if (!cart.shippingAddress) {
       navigate("/shipping");
     } else if (!cart.paymentMethod) {
       navigate("/payment");
     }
-  }, [cart.shippingAddress, cart.paymentMethod, navigate]);
+  }, [cart.shippingAddress, cart.paymentMethod, cart.orderCompleted, navigate]);
 
   return (
     <Container>

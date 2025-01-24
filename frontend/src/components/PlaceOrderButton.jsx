@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useCreateOrderMutation } from "../slices/ordersSlice";
-import { clearCartItems } from "../slices/cartSlice";
+import { clearCartItems, finishOrder } from "../slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -22,6 +22,7 @@ const PlaceOrderButton = ({ cart }) => {
         totalPrice: cart.subtotal,
       }).unwrap();
       dispatch(clearCartItems());
+      dispatch(finishOrder());
       navigate(`/orders/${res._id}`);
     } catch (error) {
       toast.error(error.data?.message || error.error || "Something went wrong");
@@ -30,6 +31,7 @@ const PlaceOrderButton = ({ cart }) => {
   return (
     <button
       onClick={placeOrderHandler}
+      disabled={!cart.shippingAddress || !cart.paymentMethod}
       className="bg-black text-white rounded py-2 px-6"
     >
       Place order
