@@ -70,7 +70,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 });
 
 // @desc    Update payment method for an order
-// @route   PUT /api/orders/:id
+// @route   PUT /api/orders/:id/payment-method
 // @access  Private
 const updatePaymentMethod = asyncHandler(async (req, res) => {
   const { paymentMethod } = req.body;
@@ -79,6 +79,21 @@ const updatePaymentMethod = asyncHandler(async (req, res) => {
     order.paymentMethod = paymentMethod;
     await order.save();
     res.status(200).json({ message: "Payment method updated successfully" });
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+// @desc    Cancel order
+// @route   PUT /api/orders/:id
+// @access  Private
+const cancelOrder = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    order.orderStatus = "cancelled";
+    await order.save();
+    res.status(200).json({ message: "Order was successfully cancelled!" });
   } else {
     res.status(404);
     throw new Error("Order not found");
@@ -99,4 +114,5 @@ export {
   getOrders,
   getOrderById,
   updatePaymentMethod,
+  cancelOrder,
 };

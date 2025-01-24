@@ -11,7 +11,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 const SelectPaymentModal = ({ paymentMethod, onSave }) => {
   const [selectedMethod, setSelectedMethod] = useState(null);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     setSelectedMethod(paymentMethod);
@@ -49,7 +49,7 @@ const SelectPaymentModal = ({ paymentMethod, onSave }) => {
         keepMounted
         onClose={handleClose}
       >
-        <div className="py-12">
+        <div className="pt-8 pb-4">
           <h1 className="text-2xl font-bold text-left pb-4 px-6 border-b-2 border-slate-200">
             Select payment method
           </h1>
@@ -83,7 +83,7 @@ const SelectPaymentModal = ({ paymentMethod, onSave }) => {
               </div>
             </div>
           </div>
-          <div className="border-t-2 border-slate-200 px-6 pt-6 mt-6">
+          <div className="border-t-2 border-slate-200 px-6 pt-4 mt-6">
             <button
               onClick={handleSave}
               disabled={!selectedMethod}

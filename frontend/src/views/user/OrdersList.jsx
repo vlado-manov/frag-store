@@ -37,7 +37,13 @@ const OrdersList = () => {
               } border-slate-100 border-2 rounded-xl p-4 w-full text-left`}
             >
               <Link className="flex gap-4" to={`/orders/${order._id}`}>
-                <div className="flex-[4] text-sm p-1 w-full">{order._id}</div>
+                <div
+                  className={`${
+                    order.orderStatus === "cancelled" ? "text-red-500 " : ""
+                  }flex-[4] text-sm p-1 w-full`}
+                >
+                  {order._id}
+                </div>
                 <div className="flex-[1] text-sm p-1 w-full text-center">
                   {order.orderItems.length}
                 </div>

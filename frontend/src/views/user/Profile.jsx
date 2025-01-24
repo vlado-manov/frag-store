@@ -22,7 +22,7 @@ const passwordSchema = z
   );
 
 const Profile = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",

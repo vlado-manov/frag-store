@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Settings from "./Settings";
 import {
+  useCancelOrderMutation,
   useGetOrderByIdQuery,
   useUpdatePaymentMethodMutation,
 } from "../../slices/ordersSlice";
@@ -14,8 +15,10 @@ import { FaCcPaypal } from "react-icons/fa";
 import { FaCreditCard } from "react-icons/fa";
 import { IoHome } from "react-icons/io5";
 import { format } from "date-fns";
+import { ImCancelCircle } from "react-icons/im";
 import SelectPaymentModal from "../../components/modals/SelectPaymentModal";
 import { toast } from "react-toastify";
+import ConfirmCancellationOrder from "../../components/modals/ConfirmCancellationOrder";
 
 const OrderView = () => {
   const { id: orderId } = useParams();
@@ -26,6 +29,7 @@ const OrderView = () => {
     isError,
   } = useGetOrderByIdQuery(orderId);
   const [updatePaymentMethod] = useUpdatePaymentMethodMutation();
+  const [cancelOrder] = useCancelOrderMutation();
   const handlePaymentMethodChange = async (newPaymentMethod) => {
     try {
       await updatePaymentMethod({
@@ -33,11 +37,25 @@ const OrderView = () => {
         paymentMethod: newPaymentMethod,
       }).unwrap();
       refetch();
+      toast.success(
+        `You successfully changed the payment method to ${
+          newPaymentMethod == "creditCard" ? "Credit Card" : "Paypal"
+        }`
+      );
     } catch (error) {
       toast.error(error?.data?.message || error.message);
     }
   };
-  //TODO: Cancel Order
+
+  const handleCancelOrder = async () => {
+    try {
+      await cancelOrder(orderId).unwrap();
+      refetch();
+      toast.success("The order was successfully cancelled!");
+    } catch (error) {
+      toast.error(error?.data?.message || error.message);
+    }
+  };
   //TODO: Pay order w/ Paypal
   //TODO: Pay order w/ Stripe
 
@@ -165,6 +183,22 @@ const OrderView = () => {
                 </div>
               )}
             </div>
+
+            {order.orderStatus === "cancelled" && (
+              <>
+                <div className="w-full h-2 bg-red-500"></div>
+                <div className="text-center relative group">
+                  <div className="bg-red-500 rounded-full py-4 min-w-24 w-24  h-24 flex items-center justify-center border-4 border-white">
+                    <ImCancelCircle size={40} color="white" />
+                  </div>
+                  <p className="font-bold text-red-400">Cancelled</p>
+                  <div className="absolute p-2 bg-black text-white text-xs font-thin rounded -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap hidden group-hover:block">
+                    Cancelled on{" "}
+                    {format(new Date(order.updatedAt), "dd/MM/yyyy HH:mm")}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           <div className="flex gap-4">
             <div className="flex-[6] border-slate-100 bg-stone-50 border-2 rounded-xl p-6">
@@ -196,7 +230,12 @@ const OrderView = () => {
                   <FaCreditCard size={24} />
                 )}
               </div>
-              {order.isPaid ? (
+              {order.orderStatus === "cancelled" ? (
+                <h5 className="text-red-500 mt-2">
+                  You can no longer complete the payment since the order has
+                  been cancelled.
+                </h5>
+              ) : order.isPaid ? (
                 <>
                   <h5 className="mt-1 text-emerald-500">
                     Payment received on 11/04/2025 12:32
@@ -251,7 +290,7 @@ const OrderView = () => {
               >
                 <div className="flex-[6] w-full flex gap-4 items-center">
                   <div className="flex-[2]">
-                    <Link to={`/products/${item._id}`}>
+                    <Link to={`/products/${item.product}`}>
                       <img
                         src="https://www.parfimo.bg/data/cache/thumb_min500_max1000-min500_max1000-12/products/56279/1530460699/creed-aventus-parfyumna-voda-dla-mezczyzn-75-ml-238781.jpg"
                         alt={item.name}
@@ -260,7 +299,7 @@ const OrderView = () => {
                     </Link>
                   </div>
                   <div className="w-full flex-[10]">
-                    <Link to={`/products/${item._id}`}>
+                    <Link to={`/products/${item.product}`}>
                       <p className="hidden md:block text-xs">{item.brand}</p>
                       <p className="text-sm md:text-base break-words">
                         {item.name}
@@ -297,14 +336,11 @@ const OrderView = () => {
               </p>
             </div>
           </div>
-          {!order.isDelivered && (
-            <button
-              type="button"
-              className="text-white bg-red-500 py-2 px-6 rounded"
-            >
-              Cancel order
-            </button>
-          )}
+          {!order.isDelivered &&
+            !order.isPaid &&
+            order.orderStatus !== "cancelled" && (
+              <ConfirmCancellationOrder cancelHandler={handleCancelOrder} />
+            )}
         </>
       )}
     </Settings>
