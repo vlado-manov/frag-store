@@ -175,13 +175,15 @@ const Cart = () => {
                 ${shipping.toFixed(2)}
               </p>
             </div>
-            {discount && discount > 0 && (
+            {discount && discount > 0 ? (
               <div className="flex gap-2 md:justify-between py-2 items-center">
                 <p className="text-base md:text-sm">Promo code:</p>
                 <p className="font-bold text-red-500 text-lg md:text-base">
                   -${discount.toFixed(2)}
                 </p>
               </div>
+            ) : (
+              ""
             )}
             <div className="flex gap-2 md:justify-between py-2 items-center">
               <p className="text-base md:text-sm">Subtotal:</p>

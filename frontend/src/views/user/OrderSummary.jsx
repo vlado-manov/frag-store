@@ -89,7 +89,7 @@ const OrderSummary = () => {
                                 ${(item.variant?.price).toFixed(2)}
                               </span>
                               <span className="text-red-500 font-bold block text-base">
-                                ${item.variant.discountPrice}
+                                ${item.variant.discountPrice.toFixed(2)}
                               </span>
                             </>
                           ) : (
@@ -103,7 +103,7 @@ const OrderSummary = () => {
               </div>
               <div className="p-2 mb-4 pr-6 flex gap-2 justify-end items-center">
                 <h5 className="">Sub total:</h5>
-                <p className="text-xl font-bold">${cart.subtotal}</p>
+                <p className="text-xl font-bold">${cart.subtotal.toFixed(2)}</p>
               </div>
               <div className="flex justify-end p-0">
                 <PlaceOrderButton cart={cart} />

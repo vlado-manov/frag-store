@@ -37,6 +37,7 @@ import {
   clearLocalWishlist,
   loadWishlistFromLocalStorage,
 } from "../../slices/wishlistSlice";
+import { clearCartItems } from "../../slices/cartSlice";
 
 const theme = createTheme({
   palette: {
@@ -100,6 +101,7 @@ const Header = () => {
       await logoutApiCall().unwrap();
       dispatch(logout());
       dispatch(clearLocalWishlist());
+      dispatch(clearCartItems());
       navigate("/login");
     } catch (err) {
       console.log(err);
@@ -260,6 +262,14 @@ const Header = () => {
               onClick={handleMenuClose}
             >
               Profile
+            </MenuItem>
+          </Link>
+          <Link to="/orders">
+            <MenuItem
+              sx={{ color: "#313131", fontSize: 14, padding: "5px 16px" }}
+              onClick={handleMenuClose}
+            >
+              My orders
             </MenuItem>
           </Link>
           <MenuItem

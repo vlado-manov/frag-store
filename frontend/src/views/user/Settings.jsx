@@ -5,12 +5,13 @@ import { FaCircleUser } from "react-icons/fa6";
 import { useDispatch } from "react-redux";
 import { logout } from "../../slices/authSlice";
 import { clearCartItems } from "../../slices/cartSlice";
+import { clearLocalWishlist } from "../../slices/wishlistSlice";
 
 const links = [
   { label: "User profile", path: "profile" },
   { label: "Orders", path: "orders" },
   { label: "Address", path: "address" },
-  { label: "Payment methods", path: "payment-methods" },
+  // { label: "Payment methods", path: "payment-methods" },
   { label: "Wishlist", path: "wishlist" },
 ];
 const Settings = ({ children }) => {
@@ -23,6 +24,7 @@ const Settings = ({ children }) => {
     try {
       await logoutApiCall().unwrap();
       dispatch(logout());
+      dispatch(clearLocalWishlist());
       dispatch(clearCartItems());
       localStorage.removeItem("cart");
       navigate("/login");
