@@ -2,13 +2,18 @@ import React from "react";
 import Settings from "./Settings";
 import { FaCheck } from "react-icons/fa6";
 import { RiCloseLargeFill } from "react-icons/ri";
-import { Pagination, Stack } from "@mui/material";
 import { useGetMyOrdersQuery } from "../../slices/ordersSlice";
 import { format } from "date-fns";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import CustomPagination from "../../components/ux/CustomPagination";
 
 const OrdersList = () => {
-  const { data: orders } = useGetMyOrdersQuery();
+  const { pageNumber } = useParams();
+  const navigate = useNavigate();
+  const { data } = useGetMyOrdersQuery({ pageNumber: pageNumber || 1 });
+  const handlePageChange = (newPage) => {
+    navigate(`/orders/page/${newPage}`);
+  };
   return (
     <Settings>
       <h1 className="text-2xl font-bold text-left my-1">Your Orders</h1>
@@ -16,7 +21,7 @@ const OrdersList = () => {
         Track your order history, manage returns, and view details for each
         purchase.
       </p>
-      {orders?.length > 0 ? (
+      {data?.orders?.length > 0 ? (
         <div className="flex flex-col gap-1 mt-4">
           <div className="flex full-w gap-4 border-2 border-stone-200 rounded-xl px-4 py-2">
             <div className="flex-[4] text-sm p-1 w-full">Order ID</div>
@@ -29,7 +34,7 @@ const OrdersList = () => {
             </div>
           </div>
 
-          {orders.map((order, index) => (
+          {data?.orders.map((order, index) => (
             <div
               key={index}
               className={`${
@@ -74,17 +79,11 @@ const OrdersList = () => {
       ) : (
         <p>NO ORDERS YET</p>
       )}
-      <div className="my-6 w-full flex justify-center">
-        <Stack spacing={2} fullwidth>
-          <Pagination
-            count={10}
-            siblingCount={0}
-            boundaryCount={1}
-            showFirstButton
-            showLastButton
-          />
-        </Stack>
-      </div>
+      <CustomPagination
+        pages={data?.pages}
+        page={Number(data?.page) || 1}
+        setPage={handlePageChange}
+      />
     </Settings>
   );
 };

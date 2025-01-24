@@ -44,12 +44,19 @@ const addOrderItems = asyncHandler(async (req, res) => {
 
 // @desc    Get my orders
 // @route   GET /api/orders/myOrders
-// @access  Private
+// @access  Private  const pageSize = 16;
+
 const getMyOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id }).sort({
-    createdAt: -1,
-  });
-  res.status(200).json(orders);
+  const pageSize = 5;
+  const page = Number(req.query.pageNumber) || 1;
+  const count = await Order.countDocuments();
+  const orders = await Order.find({ user: req.user._id })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+    .sort({
+      createdAt: -1,
+    });
+  res.status(200).json({ orders, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Get order by ID
