@@ -97,6 +97,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       image: user.image,
       addresses: user.addresses,
+      phone: user.phone,
+      lastLogin: user.lastLogin,
     });
   } else {
     res.status(404);
@@ -116,7 +118,7 @@ const updateUser = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.image = req.body.image || user.image;
+    // user.image = req.body.image || user.image;
     user.phone = req.body.phone || user.phone;
     user.addresses = req.body.addresses || user.addresses;
 
@@ -145,7 +147,7 @@ const updateUser = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
-      image: updatedUser.image,
+      // image: updatedUser.image,
       phone: updatedUser.phone,
       addresses: updatedUser.addresses,
       isAdmin: updatedUser.isAdmin,

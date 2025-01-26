@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
-import { useUpdateProfileMutation } from "../../slices/userSlice";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../../slices/userSlice";
 import Loader from "../../components/ux/Loader";
 import Settings from "./Settings";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,13 +29,14 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    image: "",
+    // image: "",
     password: "",
     confirmPassword: "",
     phone: "",
   });
   const dispatch = useDispatch();
 
+  const { data: profile, refetch } = useGetProfileQuery();
   const { userInfo, isLoading, isError } = useSelector((state) => state.auth);
 
   const [updateProfile] = useUpdateProfileMutation();
@@ -42,7 +46,7 @@ const Profile = () => {
       setFormData({
         name: userInfo.name || "",
         email: userInfo.email || "",
-        image: userInfo.image || "",
+        // image: userInfo.image || "",
         password: "",
         confirmPassword: "",
         phone: userInfo.phone || "",
@@ -78,16 +82,17 @@ const Profile = () => {
 
     try {
       const updatedData = {
-        _id: userInfo._id,
+        _id: profile?._id,
         name: formData.name,
         email: formData.email,
-        image: formData.image,
+        // image: formData.image,
         phone: formData.phone,
         password: formData.password ? formData.password : undefined,
       };
 
       const res = await updateProfile(updatedData).unwrap();
       dispatch(setCredentials({ ...userInfo, ...res }));
+      refetch();
       toast.success("Data was updated successfully!");
     } catch (error) {
       toast.error(error?.data?.message || error.error);
@@ -105,22 +110,22 @@ const Profile = () => {
       </p>
       <div className="flex gap-5 mt-4">
         <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col items-center justify-center p-6 min-w-64">
-          {userInfo.image ? (
+          {profile?.image ? (
             <img
-              src={userInfo.image}
+              src={profile?.image}
               alt="Profile"
               className="object-contain rounded-full w-24"
             />
           ) : (
             <div className="rounded-full w-24 h-24 bg-sky-500 relative">
               <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-6xl text-white">
-                {userInfo?.name.charAt(0).toUpperCase()}
+                {profile?.name.charAt(0).toUpperCase()}
               </span>
             </div>
           )}
-          <h2 className="my-1 text-black font-bold">{userInfo?.name}</h2>
-          {userInfo.phone && (
-            <h3 className="text-xs text-gray-700">{userInfo.phone}</h3>
+          <h2 className="my-1 text-black font-bold">{profile?.name}</h2>
+          {profile?.phone && (
+            <h3 className="text-xs text-gray-700">{profile.phone}</h3>
           )}
           <button className="bg-black rounded py-2 px-4 text-white my-1">
             Change profile image

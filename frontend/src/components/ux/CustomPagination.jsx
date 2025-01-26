@@ -7,7 +7,7 @@ const CustomPagination = ({ pages, page, setPage }) => {
   };
   return (
     <div className="my-6 w-full flex justify-center">
-      <Stack spacing={2} fullwidth>
+      <Stack spacing={2}>
         <Pagination
           count={pages}
           page={page}
