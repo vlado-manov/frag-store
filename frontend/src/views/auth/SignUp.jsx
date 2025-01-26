@@ -32,6 +32,15 @@ export const baseSchema = z.object({
   confirmPassword: z.string().min(1, "Please confirm your password"),
 });
 
+const redirectToGoogle = () => {
+  const client_id = process.env.GOOGLE_CLIENT_ID;
+  const state = crypto.randomBytes(16).toString("hex");
+  localStorage.setItem("latestCSRFToken", state);
+
+  const link = `https://accounts.google.com/o/oauth2/auth?scope=https://www.googleapis.com/auth/cloud-platform&response_type=code&access_type=offline&state=${state}&redirect_uri=${window.location.origin}/integrations/google/oauth2/callback&client_id=${client_id}`;
+  window.location.assign(link);
+};
+
 function SignUp() {
   const [formData, setFormData] = useState({
     name: "",
@@ -218,7 +227,11 @@ function SignUp() {
             width: "100%",
           }}
         />
-        <Button variant="outlined" sx={{ marginTop: 1, position: "relative" }}>
+        <Button
+          variant="outlined"
+          sx={{ marginTop: 1, position: "relative" }}
+          onClick={redirectToGoogle}
+        >
           <FcGoogle
             style={{
               position: "absolute",

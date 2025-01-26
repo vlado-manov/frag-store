@@ -22,68 +22,86 @@ const OrdersList = () => {
         purchase.
       </p>
       {data?.orders?.length > 0 ? (
-        <div className="flex flex-col gap-1 mt-4">
-          <div className="flex full-w gap-4 border-2 border-stone-200 rounded-xl px-4 py-2">
-            <div className="flex-[4] text-sm p-1 w-full">Order ID</div>
-            <div className="flex-[1] text-sm text-center p-1 w-full">Items</div>
-            <div className="flex-[2] text-sm text-center p-1 w-full">Total</div>
-            <div className="flex-[3] text-sm text-center p-1 w-full">Date</div>
-            <div className="flex-[1] text-sm text-center p-1 w-full">Paid</div>
-            <div className="flex-[1] text-sm text-right p-1 pr-2 w-full">
-              Delivered
+        <>
+          <div className="flex flex-col gap-1 mt-4">
+            <div className="flex full-w gap-4 border-2 border-stone-200 rounded-xl px-4 py-2">
+              <div className="flex-[4] text-sm p-1 w-full">Order ID</div>
+              <div className="flex-[1] text-sm text-center p-1 w-full">
+                Items
+              </div>
+              <div className="flex-[2] text-sm text-center p-1 w-full">
+                Total
+              </div>
+              <div className="flex-[3] text-sm text-center p-1 w-full">
+                Date
+              </div>
+              <div className="flex-[1] text-sm text-center p-1 w-full">
+                Paid
+              </div>
+              <div className="flex-[1] text-sm text-right p-1 pr-2 w-full">
+                Delivered
+              </div>
             </div>
-          </div>
 
-          {data?.orders.map((order, index) => (
-            <div
-              key={index}
-              className={`${
-                index % 2 ? "bg-white" : "bg-stone-100"
-              } border-slate-100 border-2 rounded-xl p-4 w-full text-left`}
-            >
-              <Link className="flex gap-4" to={`/orders/${order._id}`}>
-                <div
-                  className={`${
-                    order.orderStatus === "cancelled" ? "text-red-500 " : ""
-                  }flex-[4] text-sm p-1 w-full`}
-                >
-                  {order._id}
-                </div>
-                <div className="flex-[1] text-sm p-1 w-full text-center">
-                  {order.orderItems.length}
-                </div>
-                <div className="flex-[2] text-sm text-center p-1 w-full">
-                  ${order.totalPrice.toFixed(2)}
-                </div>
-                <div className="flex-[3] text-sm text-center p-1 w-full">
-                  {format(new Date(order.createdAt), "dd/MM/yyyy HH:mm")}
-                </div>
-                <div className="flex-[1] flex justify-center p-1 w-full">
-                  {order.isPaid ? (
-                    <FaCheck color="green" size={24} />
-                  ) : (
-                    <RiCloseLargeFill color="red" size={24} />
-                  )}
-                </div>
-                <div className="flex-[1] flex justify-center p-1 w-full">
-                  {order.isDelivered ? (
-                    <FaCheck color="green" size={24} />
-                  ) : (
-                    <RiCloseLargeFill color="red" size={24} />
-                  )}
-                </div>
-              </Link>
-            </div>
-          ))}
-        </div>
+            {data?.orders.map((order, index) => (
+              <div
+                key={index}
+                className={`${
+                  index % 2 ? "bg-white" : "bg-stone-100"
+                } border-slate-100 border-2 rounded-xl p-4 w-full text-left`}
+              >
+                <Link className="flex gap-4" to={`/orders/${order._id}`}>
+                  <div
+                    className={`${
+                      order.orderStatus === "cancelled" ? "text-red-500 " : ""
+                    }flex-[4] text-sm p-1 w-full`}
+                  >
+                    {order._id}
+                  </div>
+                  <div className="flex-[1] text-sm p-1 w-full text-center">
+                    {order.orderItems.length}
+                  </div>
+                  <div className="flex-[2] text-sm text-center p-1 w-full">
+                    ${order.totalPrice.toFixed(2)}
+                  </div>
+                  <div className="flex-[3] text-sm text-center p-1 w-full">
+                    {format(new Date(order.createdAt), "dd/MM/yyyy HH:mm")}
+                  </div>
+                  <div className="flex-[1] flex justify-center p-1 w-full">
+                    {order.isPaid ? (
+                      <FaCheck color="green" size={24} />
+                    ) : (
+                      <RiCloseLargeFill color="red" size={24} />
+                    )}
+                  </div>
+                  <div className="flex-[1] flex justify-center p-1 w-full">
+                    {order.isDelivered ? (
+                      <FaCheck color="green" size={24} />
+                    ) : (
+                      <RiCloseLargeFill color="red" size={24} />
+                    )}
+                  </div>
+                </Link>
+              </div>
+            ))}
+          </div>
+          <CustomPagination
+            pages={data?.pages}
+            page={Number(data?.page) || 1}
+            setPage={handlePageChange}
+          />
+        </>
       ) : (
-        <p>NO ORDERS YET</p>
+        <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-6 my-4">
+          <h1 className="text-xl font-bold text-left my-1 w-full">
+            No orders yet
+          </h1>
+          <div>
+            You haven't placed any orders yet. Start shopping now to see your
+            orders here!
+          </div>
+        </div>
       )}
-      <CustomPagination
-        pages={data?.pages}
-        page={Number(data?.page) || 1}
-        setPage={handlePageChange}
-      />
     </Settings>
   );
 };
