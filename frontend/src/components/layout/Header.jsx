@@ -38,6 +38,7 @@ import {
   loadWishlistFromLocalStorage,
 } from "../../slices/wishlistSlice";
 import { clearCartItems } from "../../slices/cartSlice";
+import CartDropdown from "../CartDropdown";
 
 const theme = createTheme({
   palette: {
@@ -70,7 +71,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
-  const { cartItems } = useSelector((state) => state.cart);
   useEffect(() => {
     dispatch(loadWishlistFromLocalStorage());
   }, [dispatch]);
@@ -150,19 +150,7 @@ const Header = () => {
                     </Badge>
                   </IconButton>
                 </Link>
-                <Link to="/cart">
-                  <IconButton color="inherit">
-                    <Badge
-                      badgeContent={cartItems.reduce(
-                        (sum, item) => sum + item.quantity,
-                        0
-                      )}
-                      color="info"
-                    >
-                      <ShoppingCart />
-                    </Badge>
-                  </IconButton>
-                </Link>
+                <CartDropdown />
                 <div
                   className="hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-900 rounded p-2 flex items-center justify-center gap-1"
                   onClick={handleMenuOpen}
@@ -225,19 +213,7 @@ const Header = () => {
                   </Badge>
                 </IconButton>
               </Link>
-              <Link to="/cart">
-                <IconButton color="inherit">
-                  <Badge
-                    badgeContent={cartItems.reduce(
-                      (sum, item) => sum + item.quantity,
-                      0
-                    )}
-                    color="info"
-                  >
-                    <ShoppingCart />
-                  </Badge>
-                </IconButton>
-              </Link>
+              <CartDropdown />
               <div
                 className="hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-900 rounded p-2 flex items-center justify-center gap-1"
                 onClick={handleMenuOpen}
