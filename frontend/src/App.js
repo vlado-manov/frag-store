@@ -8,14 +8,18 @@ import "@fontsource/roboto";
 import Header from "./components/layout/Header.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import ScrollToTop from "./components/ux/ScrollToTop.jsx";
+import DropDownContextProvider from "./context/DropDrownContext/DropDownContextProvider.jsx";
+
 function App() {
   return (
     <>
-      <Header />
-      <ScrollToTop />
-      <Outlet />
-      <Footer />
-      <ToastContainer />
+      <DropDownContextProvider>
+        <Header />
+        <ScrollToTop />
+        <Outlet />
+        <Footer />
+        <ToastContainer />
+      </DropDownContextProvider>
     </>
   );
 }

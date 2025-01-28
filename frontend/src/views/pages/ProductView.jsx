@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import {
   useCreateReviewMutation,
   useGetProductQuery,
@@ -27,6 +27,7 @@ import {
   removeFromLocalWishlist,
 } from "../../slices/wishlistSlice";
 import { toast } from "react-toastify";
+import useDropDown from "../../hooks/useDropDown";
 
 const ProductView = () => {
   const { id: productId } = useParams();
@@ -34,9 +35,9 @@ const ProductView = () => {
   const { userInfo } = useSelector((state) => state.auth);
   const isLoggedIn = useSelector((state) => !!state.auth.userInfo);
   const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
+  const [_, setIsDropdownOpen] = useDropDown();
   const [quantity, setQuantity] = useState(1);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const {
     data: product,
     refetch,
@@ -173,7 +174,7 @@ const ProductView = () => {
       quantity,
     };
     dispatch(addToCart(itemToAdd));
-    navigate("/cart");
+    setIsDropdownOpen(true);
   };
 
   return (

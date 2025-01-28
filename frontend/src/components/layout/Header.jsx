@@ -150,7 +150,6 @@ const Header = () => {
                     </Badge>
                   </IconButton>
                 </Link>
-                <CartDropdown />
                 <div
                   className="hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-900 rounded p-2 flex items-center justify-center gap-1"
                   onClick={handleMenuOpen}

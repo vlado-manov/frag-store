@@ -1,22 +1,21 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Badge, IconButton } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useSelector } from "react-redux";
+import useDropDown from "../hooks/useDropDown";
 
 const CartDropdown = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useDropDown();
   const dropdownRef = useRef(null);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsPrice = useSelector((state) => state.cart.itemsPrice);
 
-  // Toggle dropdown visibility
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
-  // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
