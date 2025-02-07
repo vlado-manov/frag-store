@@ -31,12 +31,12 @@ const wishlistSlice = createSlice({
       state.items = [];
       localStorage.removeItem("wishlist");
     },
-    loadWishlistFromLocalStorage: (state) => {
-      const storedWishlist = localStorage.getItem("wishlist");
-      if (storedWishlist) {
-        state.items = JSON.parse(storedWishlist);
-      }
-    },
+    // loadWishlistFromLocalStorage: (state) => {
+    //   const storedWishlist = localStorage.getItem("wishlist");
+    //   if (storedWishlist) {
+    //     state.items = JSON.parse(storedWishlist);
+    //   }
+    // },
   },
 });
 
@@ -44,7 +44,7 @@ export const {
   addToLocalWishlist,
   removeFromLocalWishlist,
   clearLocalWishlist,
-  loadWishlistFromLocalStorage,
+  // loadWishlistFromLocalStorage,
 } = wishlistSlice.actions;
 
 export default wishlistSlice.reducer;

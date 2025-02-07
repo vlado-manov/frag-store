@@ -114,7 +114,7 @@ const OrderSummary = () => {
             </div>
           </div>
         </div>
-        <CheckoutCart />
+        {cart.cartItems.length > 0 && <CheckoutCart cart={cart} />}
       </div>
     </Container>
   );

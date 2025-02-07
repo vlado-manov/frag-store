@@ -150,77 +150,81 @@ const Cart = () => {
           </div>
         </div>
         <div className="flex-[3] w-full relative border-b-2 pb-4 md:p-0 border-stone-200 md:border-none">
-          <div>
-            <h1 className="text-left text-xl font-thin hidden md:block">
-              Summary
-            </h1>
-            <h1 className="text-left font-bold text-2xl block mb-4 md:hidden">
-              Cart status
-            </h1>
-            <div className="flex gap-2 md:justify-between py-2 items-center">
-              <p className="text-base md:text-sm">Number of items:</p>
-              <p className="font-bold text-lg md:text-base">
-                {cartItems.length}
-              </p>
-            </div>
-            <div className="flex gap-2 md:justify-between py-2 items-center">
-              <p className="text-base md:text-sm">Items price:</p>
-              <p className="font-bold text-lg md:text-base">
-                ${itemsPrice.toFixed(2)}
-              </p>
-            </div>
-            <div className="flex gap-2 md:justify-between py-2 items-center">
-              <p className="text-base md:text-sm">Shipping:</p>
-              <p className="font-bold text-lg md:text-base">
-                ${shipping.toFixed(2)}
-              </p>
-            </div>
-            {discount && discount > 0 ? (
+          {cartItems.length === 0 ? (
+            ""
+          ) : (
+            <div>
+              <h1 className="text-left text-xl font-thin hidden md:block">
+                Summary
+              </h1>
+              <h1 className="text-left font-bold text-2xl block mb-4 md:hidden">
+                Cart status
+              </h1>
               <div className="flex gap-2 md:justify-between py-2 items-center">
-                <p className="text-base md:text-sm">Promo code:</p>
-                <p className="font-bold text-red-500 text-lg md:text-base">
-                  -${discount.toFixed(2)}
+                <p className="text-base md:text-sm">Number of items:</p>
+                <p className="font-bold text-lg md:text-base">
+                  {cartItems.length}
                 </p>
               </div>
-            ) : (
-              ""
-            )}
-            <div className="flex gap-2 md:justify-between py-2 items-center">
-              <p className="text-base md:text-sm">Subtotal:</p>
-              <p className="font-bold text-lg md:text-base">
-                ${subtotal.toFixed(2)}
-              </p>
+              <div className="flex gap-2 md:justify-between py-2 items-center">
+                <p className="text-base md:text-sm">Items price:</p>
+                <p className="font-bold text-lg md:text-base">
+                  ${itemsPrice.toFixed(2)}
+                </p>
+              </div>
+              <div className="flex gap-2 md:justify-between py-2 items-center">
+                <p className="text-base md:text-sm">Shipping:</p>
+                <p className="font-bold text-lg md:text-base">
+                  ${shipping.toFixed(2)}
+                </p>
+              </div>
+              {discount && discount > 0 ? (
+                <div className="flex gap-2 md:justify-between py-2 items-center">
+                  <p className="text-base md:text-sm">Promo code:</p>
+                  <p className="font-bold text-red-500 text-lg md:text-base">
+                    -${discount.toFixed(2)}
+                  </p>
+                </div>
+              ) : (
+                ""
+              )}
+              <div className="flex gap-2 md:justify-between py-2 items-center">
+                <p className="text-base md:text-sm">Subtotal:</p>
+                <p className="font-bold text-lg md:text-base">
+                  ${subtotal.toFixed(2)}
+                </p>
+              </div>
+              <div className="py-2 w-full">
+                <TextField
+                  fullwidth
+                  type="text"
+                  name="coupon"
+                  label="Add coupon code"
+                  variant="standard"
+                  value="XMAX"
+                />
+              </div>
+              {itemsPrice >= 600 ? (
+                <p className="text-xs text-sky-500 mt-4">
+                  Woohoo! You've scored free shipping.
+                </p>
+              ) : (
+                <p className="text-xs text-red-500 mt-4">
+                  You're just{" "}
+                  <span className="font-bold underline">
+                    ${(600 - itemsPrice > 0 ? 600 - itemsPrice : 0).toFixed(2)}
+                  </span>{" "}
+                  away from free shipping!
+                </p>
+              )}
+              <Link
+                to="/shipping"
+                className="block text-center rounded-md mt-4 bg-sky-500 py-4 w-full text-white"
+              >
+                Checkout
+              </Link>
             </div>
-            <div className="py-2 w-full">
-              <TextField
-                fullwidth
-                type="text"
-                name="coupon"
-                label="Add coupon code"
-                variant="standard"
-                value="XMAX"
-              />
-            </div>
-            {itemsPrice >= 600 ? (
-              <p className="text-xs text-sky-500 mt-4">
-                Woohoo! You've scored free shipping.
-              </p>
-            ) : (
-              <p className="text-xs text-red-500 mt-4">
-                You're just{" "}
-                <span className="font-bold underline">
-                  ${(600 - itemsPrice > 0 ? 600 - itemsPrice : 0).toFixed(2)}
-                </span>{" "}
-                away from free shipping!
-              </p>
-            )}
-            <Link
-              to="/shipping"
-              className="block text-center rounded-md mt-4 bg-sky-500 py-4 w-full text-white"
-            >
-              Checkout
-            </Link>
-          </div>
+          )}
         </div>
       </div>
       <CartSync />

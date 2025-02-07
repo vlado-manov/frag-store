@@ -18,10 +18,7 @@ import {
   useGetWishListProductsQuery,
   useSyncWishlistToServerMutation,
 } from "../../slices/wishlistApiSlice";
-import {
-  clearLocalWishlist,
-  loadWishlistFromLocalStorage,
-} from "../../slices/wishlistSlice";
+import { clearLocalWishlist } from "../../slices/wishlistSlice";
 import Message from "../../components/ux/Message";
 import { FaSquareFacebook } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
@@ -48,14 +45,14 @@ function SignIn() {
   useEffect(() => {
     if (!serverWishlist || isLoading) return;
 
-    if (serverWishlist?.products?.length > 0) {
-      localStorage.setItem("wishlist", JSON.stringify(serverWishlist.products));
-      dispatch(loadWishlistFromLocalStorage());
-    }
+    // if (serverWishlist?.products?.length > 0) {
+    //   localStorage.setItem("wishlist", JSON.stringify(serverWishlist.products));
+    //   dispatch(loadWishlistFromLocalStorage());
+    // }
     if (loginSuccess && !isLoading) {
       navigate(redirect);
     }
-  }, [serverWishlist, loginSuccess, isLoading, navigate]);
+  }, [serverWishlist, loginSuccess, isLoading, navigate, redirect]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,20 +82,22 @@ function SignIn() {
       if (storedWishlist.length > 0) {
         if (serverWishlist?.products?.length > 0) {
           dispatch(clearLocalWishlist());
-          localStorage.setItem(
-            "wishlist",
-            JSON.stringify(serverWishlist.products)
-          );
+          // localStorage.setItem(
+          //   "wishlist",
+          //   JSON.stringify(serverWishlist.products)
+          // );
         } else {
           await syncWish(storedWishlist);
           refetch();
+          dispatch(clearLocalWishlist());
         }
-      } else {
-        localStorage.setItem(
-          "wishlist",
-          JSON.stringify(serverWishlist.products)
-        );
       }
+      // else {
+      //   localStorage.setItem(
+      //     "wishlist",
+      //     JSON.stringify(serverWishlist.products)
+      //   );
+      // }
 
       // navigate(redirect);
     } catch (err) {

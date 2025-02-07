@@ -3,14 +3,16 @@ import { Badge, IconButton } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useDropDown from "../hooks/useDropDown";
+import { removeFromCart } from "../slices/cartSlice";
 
 const CartDropdown = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useDropDown();
   const dropdownRef = useRef(null);
   const cartItems = useSelector((state) => state.cart.cartItems);
   const itemsPrice = useSelector((state) => state.cart.itemsPrice);
+  const dispatch = useDispatch();
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
@@ -25,6 +27,10 @@ const CartDropdown = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const removeFromCartHandler = async (item) => {
+    dispatch(removeFromCart(item));
+  };
 
   return (
     <div
@@ -80,7 +86,10 @@ const CartDropdown = () => {
                     <p className="text-sm text-right w-full">
                       ${item.variant.price}
                     </p>
-                    <div className="absolute top-1/2 -translate-y-1/2 right-1 cursor-pointer">
+                    <div
+                      className="absolute top-1/2 -translate-y-1/2 right-1 cursor-pointer"
+                      onClick={() => removeFromCartHandler(item)}
+                    >
                       <IoMdCloseCircle size={20} />
                     </div>
                   </div>

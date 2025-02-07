@@ -5,7 +5,7 @@ import { TextField } from "@mui/material";
 import { useGetProfileQuery } from "../../slices/userSlice";
 import Loader from "../../components/ux/Loader";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../../slices/cartSlice";
 import CheckoutCart from "../../components/CheckoutCart";
 
@@ -24,8 +24,14 @@ const ShippingView = () => {
 
   const { data: user, isLoading } = useGetProfileQuery();
   const [selectedAddress, setSelectedAddress] = useState(null);
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
+    if (!user && !isLoading) {
+      navigate("/sign-in");
+    } else if (user && cart.cartItems.length === 0) {
+      navigate("/products");
+    }
     const savedAddress = JSON.parse(localStorage.getItem("shippingAddress"));
     if (savedAddress) {
       const matchingAddress = user?.addresses?.find(
@@ -42,7 +48,7 @@ const ShippingView = () => {
         setFormData(savedAddress);
       }
     }
-  }, [user]);
+  }, [user, cart.cartItems.length, isLoading, navigate]);
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;
@@ -219,7 +225,7 @@ const ShippingView = () => {
             </button>
           </div>
         </div>
-        <CheckoutCart />
+        {cart.cartItems.length > 0 && <CheckoutCart cart={cart} />}
       </div>
     </Container>
   );

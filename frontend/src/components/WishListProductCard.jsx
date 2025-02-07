@@ -7,12 +7,14 @@ import { toast } from "react-toastify";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useRemoveFromWishlistMutation } from "../slices/wishlistApiSlice";
 import { removeFromLocalWishlist } from "../slices/wishlistSlice";
+import useDropDown from "../hooks/useDropDown";
 
 const WishListProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => !!state.auth.userInfo);
   const [removeFromWishlist] = useRemoveFromWishlistMutation();
+  const [_, setIsDropdownOpen] = useDropDown();
 
   const addToCartHandler = () => {
     const itemToAdd = {
@@ -30,7 +32,7 @@ const WishListProductCard = ({ product }) => {
     };
     dispatch(addToCart(itemToAdd));
     toast.success("Item was added to cart successfully!");
-    navigate("/cart");
+    setIsDropdownOpen(true);
   };
 
   const removeFromWishlistHandler = async () => {

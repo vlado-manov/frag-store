@@ -33,12 +33,10 @@ import {
   GET_TOP_BRANDS,
 } from "../../graphql/queries";
 import CartSync from "../../utils/CartSync";
-import {
-  clearLocalWishlist,
-  loadWishlistFromLocalStorage,
-} from "../../slices/wishlistSlice";
+import { clearLocalWishlist } from "../../slices/wishlistSlice";
 import { clearCartItems } from "../../slices/cartSlice";
 import CartDropdown from "../CartDropdown";
+import { useGetWishListProductsQuery } from "../../slices/wishlistApiSlice";
 
 const theme = createTheme({
   palette: {
@@ -71,10 +69,11 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { userInfo } = useSelector((state) => state.auth);
-  useEffect(() => {
-    dispatch(loadWishlistFromLocalStorage());
-  }, [dispatch]);
-  const wishlistLength = useSelector((state) => state.wishlist.items.length);
+  // useEffect(() => {
+  //   dispatch(loadWishlistFromLocalStorage());
+  // }, [dispatch]);
+  const { data: wishlistServer, isLoading } = useGetWishListProductsQuery();
+  const wishlistLength = wishlistServer.products.length;
 
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
