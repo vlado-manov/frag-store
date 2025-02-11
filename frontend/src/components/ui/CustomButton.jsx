@@ -1,23 +1,22 @@
 import React from "react";
 
 const buttonStyles = {
-  type1: "bg-blue-500 text-white hover:bg-blue-600",
-  type2: "bg-green-500 text-white hover:bg-green-600",
-  type3: "bg-red-500 text-white hover:bg-red-600",
-  type4: "bg-yellow-500 text-white hover:bg-yellow-600",
-  type5: "bg-purple-500 text-white hover:bg-purple-600",
+  default: "bg-black text-white",
+  primary: "bg-green-500 text-white hover:bg-green-600",
+  secondary: "bg-red-500 text-white hover:bg-red-600",
+  tertiary:
+    "text-white border-2 border-white rounded-2xl shadow-2xl bg-black bg-opacity-70 hover:bg-opacity-90",
 };
-
-const CustomButton = (props) => {
+const CustomButton = ({ variant, onClick, additionalStyles, title }) => {
   return (
     <button
-      variant={props.variant}
-      onClick={props.onClick}
+      variant={variant}
+      onClick={onClick}
       className={`px-4 py-2 rounded ${
-        buttonStyles[props.variant] || buttonStyles.type1
-      }`}
+        buttonStyles[variant] || buttonStyles.default
+      } ${additionalStyles}`}
     >
-      {props.title}
+      {title}
     </button>
   );
 };

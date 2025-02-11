@@ -127,3 +127,16 @@ h1 {
 .heading-container {
   background: linear-gradient(10deg, #0ea5e9 0%, #6366f1 35%, #f43f5e 80%);
 }
+.custom-swiper .swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #cccccc;
+  opacity: 1;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-swiper .swiper-pagination-bullet-active {
+  background-color: #fff;
+  opacity: 1;
+  transform: scale(1.5);
+}
