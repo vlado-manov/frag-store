@@ -4,10 +4,10 @@ import { ShoppingCart } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import useDropDown from "../hooks/useDropDown";
-import { removeFromCart } from "../slices/cartSlice";
+import useDropDown from "../../hooks/useDropDown";
+import { removeFromCart } from "../../slices/cartSlice";
 
-const CartDropdown = () => {
+const CartDropdown = ({ scrolled }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useDropDown();
   const dropdownRef = useRef(null);
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -34,22 +34,35 @@ const CartDropdown = () => {
 
   return (
     <div
-      className={`${isDropdownOpen ? "bg-white rounded-t " : ""}px-2 relative`}
+      className={`${
+        isDropdownOpen ? "bg-white rounded-t-xl " : ""
+      }px-2 relative py-2`}
       ref={dropdownRef}
     >
       <IconButton
-        color={isDropdownOpen ? "primary" : "inherit"}
+        sx={{
+          color: isDropdownOpen ? "#0ea5e9" : scrolled ? "#fff" : "#6366f1",
+          padding: "12px",
+          "&:hover": {
+            backgroundColor: "rgba(0,0,0,0.05)",
+          },
+        }}
         onClick={toggleDropdown}
       >
         <Badge
           badgeContent={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-          color="info"
+          sx={{
+            ".MuiBadge-badge": {
+              backgroundColor: `${scrolled ? "#00c93c" : "#313131"}`,
+              color: "white",
+            },
+          }}
         >
           <ShoppingCart />
         </Badge>
       </IconButton>
       {isDropdownOpen && (
-        <div className="fixed w-96 shadow-2xl shadow-gray-600 top-[3.5rem] right-2 bg-slate-100 text-black rounded pt-4 pb-2 font-roboto">
+        <div className="fixed w-96 shadow-2xl shadow-gray-600 top-[3.5rem] right-2 bg-slate-100 text-black rounded pt-4 pb-2 font-roboto z-50">
           <h2 className="text-sm px-4 border-b-2 border-slate-200 pb-4 shadow-lg shadow-stone-200">
             Cart items ({cartItems.length})
           </h2>

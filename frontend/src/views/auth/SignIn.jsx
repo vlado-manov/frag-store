@@ -167,21 +167,6 @@ function SignIn() {
             Sign In
           </Button>
         </Box>
-        <Divider
-          sx={{
-            height: "1px",
-            marginY: 1,
-            width: "100%",
-          }}
-        />
-        <Button variant="outlined" sx={{ mt: 1, fontSize: "14px" }}>
-          <FcGoogle style={{ marginRight: 8 }} />
-          Continue with Google
-        </Button>
-        <Button variant="outlined" sx={{ mt: 1, fontSize: "14px" }}>
-          <FaSquareFacebook style={{ marginRight: 8, color: "#1877F2" }} />
-          Continue with Facebook
-        </Button>
       </Box>
       <Grid container sx={{ marginBottom: 4, marginTop: 1 }}>
         <Grid item xs>

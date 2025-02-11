@@ -1,11 +1,11 @@
 import React from "react";
 import ProductsLayout from "./Products";
-// import PromoHome from "../../components/PromoHome";
+import MainCarousel from "../../components/MainCarousel";
 
 const Home = () => {
   return (
     <>
-      {/* <PromoHome /> */}
+      <MainCarousel />
       <ProductsLayout title="Top Sellers" showFilters={false} />
     </>
   );

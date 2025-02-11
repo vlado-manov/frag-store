@@ -1,7 +1,7 @@
 import { Rating } from "@mui/material";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { addToCart } from "../slices/cartSlice";
 import { toast } from "react-toastify";
 import { IoIosCloseCircle } from "react-icons/io";
@@ -11,7 +11,6 @@ import useDropDown from "../hooks/useDropDown";
 
 const WishListProductCard = ({ product }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const isLoggedIn = useSelector((state) => !!state.auth.userInfo);
   const [removeFromWishlist] = useRemoveFromWishlistMutation();
   const [_, setIsDropdownOpen] = useDropDown();

@@ -210,37 +210,6 @@ function SignUp() {
             Sign Up
           </Button>
         </Box>
-
-        <Divider
-          sx={{
-            height: "1px",
-            marginY: 1,
-            width: "100%",
-          }}
-        />
-        <Button variant="outlined" sx={{ marginTop: 1, position: "relative" }}>
-          <FcGoogle
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "10px",
-              transform: "translateY(-50%)",
-            }}
-          />
-          Continue with Google
-        </Button>
-        <Button variant="outlined" sx={{ marginTop: 1 }}>
-          <FaSquareFacebook
-            color="#1877F2"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "10px",
-              transform: "translateY(-50%)",
-            }}
-          />
-          Continue with Facebook
-        </Button>
       </Box>
       <Grid container sx={{ marginBottom: 4, marginTop: 1 }}>
         <Grid item xs>
