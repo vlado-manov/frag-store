@@ -36,20 +36,56 @@ const swipesCarouse2 = [
   {
     image:
       "https://cdn.mos.cms.futurecdn.net/hx2LYQjsSVF5nVqucnwUwM-1280-80.jpg",
+    url: "/products/67879093b1398b87ee6c1c95",
   },
   {
     image: "https://i.makeup.uk/d/dy/dy0dbomgw9x8.jpg",
+    url: "/products/67879093b1398b87ee6c1c1a",
   },
   {
     image:
       "https://parfumerienasreen.com/cdn/shop/collections/Creed-Banner_2048x.jpg",
+    url: "/products/67879093b1398b87ee6c1c1c",
   },
 ];
 
 const MainCarousel = () => {
   return (
     <div className="flex items-center justify-center gap-4 w-full px-6">
-      <div className="w-full md:w-3/4">
+      <div className="w-full md:w-1/4 h-[650px]">
+        <Swiper
+          modules={[Pagination, Autoplay]}
+          direction="vertical"
+          pagination={{ clickable: true }}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          loop={true}
+          className="h-full custom-swiper transform rotate-180"
+        >
+          {swipesCarouse2.map((swipe, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative transform rotate-180">
+                <img
+                  src={swipe.image}
+                  alt={`Slide ${index}`}
+                  className="w-full h-[650px] object-cover shadow-lg"
+                />
+                <CustomButton
+                  variant="tertiary"
+                  to={swipe.url}
+                  tw="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl"
+                >
+                  Check it now
+                </CustomButton>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      <div className="w-full md:w-2/4 h-[650px]">
         <Swiper
           modules={[Pagination, Autoplay]}
           pagination={{ clickable: true }}
@@ -78,11 +114,9 @@ const MainCarousel = () => {
                 >
                   <h1 className="text-black text-xl">{swipe.title}</h1>
                   <p className="max-w-[320px]">{swipe.desc}</p>
-                  <CustomButton
-                    variant="default"
-                    title="Learn more"
-                    additionalStyles="mt-4"
-                  />
+                  <CustomButton variant="default" to={swipe.url} tw="mt-4">
+                    Learn more
+                  </CustomButton>
                 </div>
               </div>
             </SwiperSlide>
@@ -113,9 +147,11 @@ const MainCarousel = () => {
                 />
                 <CustomButton
                   variant="tertiary"
-                  title="Check it now"
-                  additionalStyles="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl"
-                />
+                  tw="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl"
+                  to={swipe.url}
+                >
+                  Check it now
+                </CustomButton>
               </div>
             </SwiperSlide>
           ))}

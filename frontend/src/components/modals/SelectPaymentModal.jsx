@@ -5,6 +5,7 @@ import { FaCcMastercard } from "react-icons/fa";
 import { LiaCcAmex } from "react-icons/lia";
 import { FaCcPaypal } from "react-icons/fa";
 import Slide from "@mui/material/Slide";
+import CustomButton from "../ui/CustomButton";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -37,12 +38,13 @@ const SelectPaymentModal = ({ paymentMethod, onSave }) => {
   };
   return (
     <>
-      <button
-        className="rounded text-black block bg-slate-200 my-2 py-2 px-6"
+      <CustomButton
+        tw="block my-2 px-6"
+        variant="secondary"
         onClick={handleClickOpen}
       >
         Change payment method
-      </button>
+      </CustomButton>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -84,13 +86,13 @@ const SelectPaymentModal = ({ paymentMethod, onSave }) => {
             </div>
           </div>
           <div className="border-t-2 border-slate-200 px-6 pt-4 mt-6">
-            <button
+            <CustomButton
+              tw="text-lg w-full block"
               onClick={handleSave}
               disabled={!selectedMethod}
-              className="text-white bg-black rounded py-2 text-lg w-full block"
             >
               Save payment
-            </button>
+            </CustomButton>
           </div>
         </div>
       </Dialog>

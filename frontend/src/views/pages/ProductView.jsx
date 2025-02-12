@@ -28,6 +28,7 @@ import {
 } from "../../slices/wishlistSlice";
 import { toast } from "react-toastify";
 import useDropDown from "../../hooks/useDropDown";
+import CustomButton from "../../components/ui/CustomButton";
 
 const ProductView = () => {
   const { id: productId } = useParams();
@@ -405,34 +406,41 @@ const ProductView = () => {
                     ${selectedVariant?.price?.toFixed(2)}
                   </div>
                   <div className="mb-6">
-                    <h3 className="text-sm font-bold text-gray-800 mb-2">
+                    <h3 className="text-sm font-roboto text-gray-800 mb-2">
                       Select size
                     </h3>
-                    <div className="flex gap-2">
-                      {product.variants.map((variant, index) => (
-                        <button
-                          key={variant.size}
-                          onClick={() => handleVariantChange(index)}
-                          className={`px-4 py-2 ${
-                            selectedVariant?.size === variant.size
-                              ? "bg-black text-white"
-                              : "bg-white text-gray-800 hover:bg-gray-200"
-                          }`}
-                        >
-                          {variant.size}ml
-                        </button>
+
+                    <div className="flex gap-4">
+                      {product?.variants?.map((variant, index) => (
+                        <div key={variant.size} className="flex items-center">
+                          <input
+                            type="radio"
+                            id={`size-${variant.size}`}
+                            name="size"
+                            value={variant.size}
+                            checked={selectedVariantIndex === index}
+                            onChange={() => handleVariantChange(index)}
+                            className="form-radio h-4 w-4 border-gray-900 checked:border-gray-900 checked:bg-gray-900"
+                          />
+                          <label
+                            htmlFor={`size-${variant.size}`}
+                            className="ml-1 font-roboto text-gray-800"
+                          >
+                            {variant.size}ml
+                          </label>
+                        </div>
                       ))}
                     </div>
-                    <h6 className="text-xs mt-1 text-gray-500">
-                      {selectedVariant &&
-                      selectedVariant.countInStock !== undefined
-                        ? selectedVariant.countInStock === 0
-                          ? "Currently not in stock"
-                          : selectedVariant.countInStock < 5
-                          ? "Currently less than 5 in stock"
-                          : "Currently there are 5 or more in stock"
-                        : "No stock information available"}
-                    </h6>
+                    {selectedVariant.countInStock > 0 && (
+                      <h6 className="text-xs mt-1 text-gray-500">
+                        {selectedVariant &&
+                        selectedVariant.countInStock !== undefined
+                          ? selectedVariant.countInStock < 5
+                            ? "Currently less than 5 in stock"
+                            : "Currently there are 5 or more in stock"
+                          : "No stock information available"}
+                      </h6>
+                    )}
                   </div>
 
                   {selectedVariant.countInStock === 0 ? (
@@ -470,13 +478,13 @@ const ProductView = () => {
                   )}
 
                   <div className="flex gap-4">
-                    <button
-                      className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition"
+                    <CustomButton
                       disabled={selectedVariant.countInStock === 0}
                       onClick={addToCartHandler}
+                      tw="w-full py-3"
                     >
-                      ADD TO CART
-                    </button>
+                      Add to cart
+                    </CustomButton>
                     <button
                       className=" bg-rose-500 py-2 px-5 rounded hover:bg-rose-400  transition-transform duration-100 ease-in-out transform active:scale-110"
                       onClick={

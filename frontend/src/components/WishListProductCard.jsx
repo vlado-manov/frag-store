@@ -8,6 +8,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { useRemoveFromWishlistMutation } from "../slices/wishlistApiSlice";
 import { removeFromLocalWishlist } from "../slices/wishlistSlice";
 import useDropDown from "../hooks/useDropDown";
+import CustomButton from "./ui/CustomButton";
 
 const WishListProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -108,12 +109,9 @@ const WishListProductCard = ({ product }) => {
             <span>${product.variant.price.toFixed(2)}</span>
           )}
         </div>
-        <button
-          className="bg-orange-400 text-white w-full p-2 mt-auto"
-          onClick={addToCartHandler}
-        >
+        <CustomButton variant="wishlist" onClick={addToCartHandler}>
           Add to cart
-        </button>
+        </CustomButton>
       </div>
     </div>
   );

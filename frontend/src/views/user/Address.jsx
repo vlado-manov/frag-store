@@ -11,6 +11,7 @@ import { setCredentials } from "../../slices/authSlice";
 import { toast } from "react-toastify";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import Loader from "../../components/ux/Loader";
+import CustomButton from "../../components/ui/CustomButton";
 
 const Address = () => {
   const [formData, setFormData] = useState({
@@ -158,12 +159,9 @@ const Address = () => {
             label="Set as my primary address"
           />
         </div>
-        <button
-          onClick={submitAddress}
-          className="bg-black rounded py-2 px-4 text-white my-1 mt-4 w-fit"
-        >
+        <CustomButton onClick={submitAddress} tw="my-1 mt-4 w-fit">
           Add address
-        </button>
+        </CustomButton>
       </div>
       <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-6 my-4">
         <h1 className="text-xl font-bold text-left my-1 w-full">
@@ -213,25 +211,27 @@ const Address = () => {
                   ""
                 ) : (
                   <div className="flex py-2 absolute top-4 right-4">
-                    <button
-                      className="rounded bg-red-500 p-2"
+                    <CustomButton
+                      variant="alert"
+                      tw="px-2"
                       onClick={() => deleteAddress(index)}
                     >
                       <RiDeleteBin5Fill color="white" size={20} />
-                    </button>
+                    </CustomButton>
                   </div>
                 )}
                 {address.isPrimary ? (
-                  <button className="rounded px-4 py-2 text-sm mt-2 bg-sky-500 text-white">
+                  <CustomButton variant="primary" tw="text-sm mt-2">
                     Primary
-                  </button>
+                  </CustomButton>
                 ) : (
-                  <button
-                    className="rounded px-4 py-2 text-sm mt-2 bg-gray-200"
+                  <CustomButton
+                    variant="secondary"
+                    tw="text-sm mt-2"
                     onClick={() => makePrimary(index)}
                   >
-                    Make Primary
-                  </button>
+                    Make primary
+                  </CustomButton>
                 )}
               </div>
             ))}

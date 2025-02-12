@@ -181,7 +181,7 @@ const ProductCard = ({ product }) => {
               onClick={() => handleVariantChange(index)}
               className={`text-xs py-1 px-2 font-bold rounded-lg hover:cursor-pointer ${
                 index === variantIndex
-                  ? "bg-slate-800 text-white"
+                  ? "bg-black text-white"
                   : "bg-slate-200 hover:bg-slate-300"
               }`}
             >

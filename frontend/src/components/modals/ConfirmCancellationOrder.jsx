@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Dialog } from "@mui/material";
 import Slide from "@mui/material/Slide";
 import { PiWarningCircleFill } from "react-icons/pi";
+import CustomButton from "../ui/CustomButton";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -23,13 +24,9 @@ const ConfirmCancellationOrder = ({ cancelHandler }) => {
   };
   return (
     <>
-      <button
-        type="button"
-        className="text-white text-sm bg-red-500 py-2 px-6 rounded"
-        onClick={handleClickOpen}
-      >
+      <CustomButton onClick={handleClickOpen} variant="alert" tw="px-6 text-sm">
         Cancel order
-      </button>
+      </CustomButton>
       <Dialog
         open={open}
         TransitionComponent={Transition}
@@ -43,18 +40,12 @@ const ConfirmCancellationOrder = ({ cancelHandler }) => {
             Are you sure you want to cancel this order?
           </h1>
           <div className="flex gap-4 justify-center w-full pb-6">
-            <button
-              className="px-6 py-2 text-white bg-red-500 rounded"
-              onClick={handleCancel}
-            >
+            <CustomButton onClick={handleCancel} variant="alert" tw="px-6">
               Yes, cancel the order
-            </button>
-            <button
-              className="px-6 py-2 text-black bg-slate-200 rounded"
-              onClick={handleClose}
-            >
+            </CustomButton>
+            <CustomButton onClick={handleClose} variant="secondary" tw="px-6">
               No, go back
-            </button>
+            </CustomButton>
           </div>
         </div>
       </Dialog>

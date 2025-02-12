@@ -9,6 +9,7 @@ import { FaCcPaypal } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { savePaymentMethod } from "../../slices/cartSlice";
 import CheckoutCart from "../../components/CheckoutCart";
+import CustomButton from "../../components/ui/CustomButton";
 
 const PaymentView = () => {
   const [selectedMethod, setSelectedMethod] = useState(null);
@@ -75,17 +76,13 @@ const PaymentView = () => {
                 <FaCcPaypal size={32} />
               </div>
             </div>
-            <button
+            <CustomButton
               onClick={handleNextStep}
               disabled={!selectedMethod}
-              className={`rounded py-2 px-4 my-1 mt-4 w-fit ${
-                selectedMethod
-                  ? "bg-black text-white"
-                  : "bg-slate-200 text-slate-400 hover:cursor-not-allowed"
-              }`}
+              tw="mb-1 mt-4 w-fit"
             >
               Next Step
-            </button>
+            </CustomButton>
           </div>
         </div>
         {cart.cartItems.length > 0 && <CheckoutCart cart={cart} />}

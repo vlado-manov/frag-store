@@ -19,6 +19,7 @@ import { ImCancelCircle } from "react-icons/im";
 import SelectPaymentModal from "../../components/modals/SelectPaymentModal";
 import { toast } from "react-toastify";
 import ConfirmCancellationOrder from "../../components/modals/ConfirmCancellationOrder";
+import CustomButton from "../../components/ui/CustomButton";
 
 const OrderView = () => {
   const { id: orderId } = useParams();
@@ -250,12 +251,12 @@ const OrderView = () => {
                     Payment is pending. Please complete the payment to proceed
                     with your order.
                   </h5>
-                  <button className="rounded text-white bg-black py-2 px-6">
+                  <CustomButton tw="px-6">
                     Pay ${order.totalPrice.toFixed(2)} with{" "}
                     {order.paymentMethod === "paypal"
                       ? "Paypal"
                       : "Credit Card"}
-                  </button>
+                  </CustomButton>
                   <SelectPaymentModal
                     paymentMethod={order.paymentMethod}
                     onSave={handlePaymentMethodChange}

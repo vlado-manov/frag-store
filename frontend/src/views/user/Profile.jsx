@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa6";
+import CustomButton from "../../components/ui/CustomButton";
 
 const passwordSchema = z
   .string()
@@ -127,9 +128,7 @@ const Profile = () => {
           {profile?.phone && (
             <h3 className="text-xs text-gray-700">{profile.phone}</h3>
           )}
-          <button className="bg-black rounded py-2 px-4 text-white my-1">
-            Change profile image
-          </button>
+          <CustomButton tw="my-1">Change profile image</CustomButton>
         </div>
         <div className="border-slate-100 bg-stone-50 border-2 p-6 rounded-xl w-full">
           <h1 className="text-xl font-bold text-left my-1 w-full">
@@ -153,12 +152,9 @@ const Profile = () => {
               variant="outlined"
             />
           </div>
-          <button
-            onClick={submitUpdate}
-            className="bg-black rounded py-2 px-4 text-white my-1"
-          >
+          <CustomButton tw="my-1" onClick={submitUpdate}>
             Update
-          </button>
+          </CustomButton>
         </div>
       </div>
       <div className="border-slate-100 bg-stone-50 border-2 p-6 rounded-xl w-full mt-6">
@@ -231,12 +227,9 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <button
-          onClick={submitUpdate}
-          className="bg-black rounded py-2 px-4 text-white my-1"
-        >
+        <CustomButton tw="my-1" onClick={submitUpdate}>
           Update
-        </button>
+        </CustomButton>
       </div>
     </Settings>
   );

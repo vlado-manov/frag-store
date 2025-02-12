@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../../slices/cartSlice";
 import CheckoutCart from "../../components/CheckoutCart";
+import CustomButton from "../../components/ui/CustomButton";
 
 const ShippingView = () => {
   const dispatch = useDispatch();
@@ -146,17 +147,13 @@ const ShippingView = () => {
                   </div>
                 ))}
               </div>
-              <button
+              <CustomButton
                 onClick={submitAddress}
                 disabled={!isFormValid}
-                className={`rounded py-2 px-4 my-1 mt-4 w-fit ${
-                  isFormValid
-                    ? "bg-black text-white"
-                    : "bg-slate-200 text-slate-400 hover:cursor-not-allowed"
-                }`}
+                tw="mb-1 mt-4 w-fit"
               >
                 Next Step
-              </button>
+              </CustomButton>
             </div>
           ) : (
             ""
@@ -212,17 +209,13 @@ const ShippingView = () => {
                 variant="outlined"
               />
             </div>
-            <button
+            <CustomButton
               onClick={submitAddress}
               disabled={!isFormValid}
-              className={`rounded py-2 px-4 my-1 mt-4 w-fit ${
-                isFormValid
-                  ? "bg-black text-white"
-                  : "bg-slate-200 text-slate-400 hover:cursor-not-allowed"
-              }`}
+              tw="mb-1 mt-4 w-fit"
             >
               Next Step
-            </button>
+            </CustomButton>
           </div>
         </div>
         {cart.cartItems.length > 0 && <CheckoutCart cart={cart} />}

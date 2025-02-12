@@ -6,6 +6,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import useDropDown from "../../hooks/useDropDown";
 import { removeFromCart } from "../../slices/cartSlice";
+import CustomButton from "../ui/CustomButton";
 
 const CartDropdown = ({ scrolled }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useDropDown();
@@ -119,22 +120,20 @@ const CartDropdown = ({ scrolled }) => {
                 <span className="font-bold text-lg">${itemsPrice}</span>
               </p>
             )}
-            <button
+            <CustomButton
+              variant="primary"
               disabled={cartItems.length === 0}
-              className=" bg-sky-500 text-white text-lg rounded shadow-lg py-2 w-full mt-2 disabled:bg-sky-100 disabled:text-stone-400 disabled:cursor-not-allowed disabled:pointer-events-none"
+              tw="text-lg shadow-lg w-full mt-2"
               onClick={() => setIsDropdownOpen(false)}
             >
-              <Link to="/shipping" className="block w-full">
-                Checkout
-              </Link>
-            </button>
-            <Link
-              to="/cart"
-              className="block text-center bg-black text-white text-lg rounded shadow-lg py-2 w-full mt-2"
+              <Link to="/shipping">Checkout</Link>
+            </CustomButton>
+            <CustomButton
+              tw="text-lg shadow-lg w-full mt-2"
               onClick={() => setIsDropdownOpen(false)}
             >
-              View cart
-            </Link>
+              <Link to="/cart">View cart</Link>
+            </CustomButton>
           </div>
         </div>
       )}

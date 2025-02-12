@@ -15,6 +15,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { FaCircleMinus } from "react-icons/fa6";
 import { FaCirclePlus } from "react-icons/fa6";
 import CartSync from "../../utils/CartSync.js";
+import CustomButton from "../../components/ui/CustomButton.jsx";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
@@ -140,12 +141,9 @@ const Cart = () => {
               Continue shopping
             </Link>
             {cartItems.length !== 0 && (
-              <button
-                onClick={clearCartHandler}
-                className="bg-black rounded py-2 px-4 text-white my-1 mt-4 w-fit"
-              >
+              <CustomButton onClick={clearCartHandler} tw="my-1">
                 Clear cart
-              </button>
+              </CustomButton>
             )}
           </div>
         </div>
@@ -217,12 +215,13 @@ const Cart = () => {
                   away from free shipping!
                 </p>
               )}
-              <Link
+              <CustomButton
+                variant="primary"
                 to="/shipping"
-                className="block text-center rounded-md mt-4 bg-sky-500 py-4 w-full text-white"
+                tw="block mt-4 py-4 w-full"
               >
                 Checkout
-              </Link>
+              </CustomButton>
             </div>
           )}
         </div>

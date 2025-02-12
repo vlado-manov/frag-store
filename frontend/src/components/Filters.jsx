@@ -16,6 +16,7 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
+import CustomButton from "./ui/CustomButton";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -227,12 +228,10 @@ const Filters = ({ hideFilters = [] }) => {
           ))}
         </div>
       </div> */}
-      <button className="bg-black text-white hover:bg-gray-900 py-2 px-4 w-full block mb-2 mt-6">
-        Search
-      </button>
-      <button className="bg-slate-200 text-black hover:bg-slate-300 py-2 px-4 w-full block">
+      <CustomButton tw="w-full block my-2 mt-6">Search</CustomButton>
+      <CustomButton variant="secondary" tw="w-full block">
         Clear search filters
-      </button>
+      </CustomButton>
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { useCreateOrderMutation } from "../slices/ordersSlice";
 import { clearCartItems, finishOrder } from "../slices/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import CustomButton from "./ui/CustomButton";
 
 const PlaceOrderButton = ({ cart }) => {
   const dispatch = useDispatch();
@@ -29,13 +30,12 @@ const PlaceOrderButton = ({ cart }) => {
     }
   };
   return (
-    <button
+    <CustomButton
       onClick={placeOrderHandler}
       disabled={!cart.shippingAddress || !cart.paymentMethod}
-      className="bg-black text-white rounded py-2 px-6"
     >
       Place order
-    </button>
+    </CustomButton>
   );
 };
 

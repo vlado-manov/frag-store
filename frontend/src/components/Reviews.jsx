@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { formatDistanceToNow, parseISO } from "date-fns";
 import Loader from "./ux/Loader";
 import Message from "./ux/Message";
+import CustomButton from "./ui/CustomButton";
 
 const labels = {
   0: "Useless",
@@ -122,13 +123,13 @@ const Reviews = ({
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             ></textarea>
-            <button
+            <CustomButton
               type="submit"
               disabled={loadingProductReview}
-              className="w-full bg-black text-white py-3 rounded-md hover:bg-gray-800 transition"
+              tw="w-full"
             >
               Submit Review
-            </button>
+            </CustomButton>
           </form>
         ) : (
           <Message severity="info" variant="standard" sx={{ margin: 2 }}>
