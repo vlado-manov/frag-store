@@ -93,12 +93,12 @@ const Address = () => {
 
   return (
     <Settings>
-      <h1 className="text-2xl font-bold text-left my-1">Address</h1>
-      <p className="text-gray-600 text-sm text-left font-thin">
+      <h1 className="text-2xl text-white font-bold text-left my-1">Address</h1>
+      <p className="text-white text-sm text-left font-thin">
         Manage your shipping and billing addresses for a smoother checkout
         experience.
       </p>
-      <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-6 my-4">
+      <div className="border-slate-100 bg-white shadow-lg border-2 rounded-xl flex flex-col justify-center p-6 my-4">
         <h1 className="text-xl font-bold text-left my-1 w-full">
           Add a new address
         </h1>
@@ -163,7 +163,7 @@ const Address = () => {
           Add address
         </CustomButton>
       </div>
-      <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-6 my-4">
+      <div className="border-slate-100 bg-white shadow-lg border-2 rounded-xl flex flex-col justify-center p-6 my-4">
         <h1 className="text-xl font-bold text-left my-1 w-full">
           Your addresses
         </h1>
@@ -179,7 +179,7 @@ const Address = () => {
             {user.addresses?.map((address, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-xl p-6 border-2 relative ${
+                className={`bg-stone-50 rounded-xl p-6 border-2 relative ${
                   address.isPrimary ? "border-sky-500" : "border-slate-100"
                 }`}
               >

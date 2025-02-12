@@ -13,6 +13,7 @@ import Container from "@mui/material/Container";
 import { Link as MuiLink } from "@mui/material";
 import { toast } from "react-toastify";
 import Message from "../../components/ux/Message";
+import CustomButton from "../../components/ui/CustomButton";
 
 export const baseSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -125,103 +126,108 @@ function SignUp() {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <Box
-        sx={{
-          margin: "2rem 0 0 0",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
-        <Typography variant="h4" sx={{ marginBottom: 3 }}>
-          Sign Up
-        </Typography>
-
-        {submitError && (
-          <Message severity="error" variant="outlined">
-            {submitError}
-          </Message>
-        )}
-
-        <Box component="form" onSubmit={handleSubmit} noValidate>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            autoComplete="name"
-            autoFocus
-            error={!!errors.name}
-            helperText={errors.name}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            autoComplete="email"
-            error={!!errors.email}
-            helperText={errors.email}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            value={formData.password}
-            onChange={handleChange}
-            error={!!errors.password}
-            helperText={errors.password}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="confirmPassword"
-            label="Confirm password"
-            type="password"
-            id="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            error={!!errors.confirmPassword}
-            helperText={errors.confirmPassword}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 1, mb: 1 }}
-            disabled={isLoading}
-          >
+    <div className="bg-gradient-to-r from-sky-500 to-rose-500 py-10 px-4">
+      <div className="bg-white shadow-xl rounded-lg p-8 m-auto max-w-lg">
+        <Box
+          sx={{
+            margin: "2rem 0 0 0",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="h4" sx={{ marginBottom: 3 }}>
             Sign Up
-          </Button>
+          </Typography>
+
+          {submitError && (
+            <Message severity="error" variant="outlined">
+              {submitError}
+            </Message>
+          )}
+
+          <Box component="form" onSubmit={handleSubmit} noValidate>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              autoComplete="name"
+              autoFocus
+              error={!!errors.name}
+              helperText={errors.name}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              autoComplete="email"
+              error={!!errors.email}
+              helperText={errors.email}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              value={formData.password}
+              onChange={handleChange}
+              error={!!errors.password}
+              helperText={errors.password}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="confirmPassword"
+              label="Confirm password"
+              type="password"
+              id="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              error={!!errors.confirmPassword}
+              helperText={errors.confirmPassword}
+            />
+            <CustomButton
+              variant="primary"
+              tw="block w-full uppercase font-roboto mt-2 py-3"
+              disabled={isLoading}
+              type="submit"
+            >
+              Sign up
+            </CustomButton>
+          </Box>
         </Box>
-      </Box>
-      <Grid container sx={{ marginBottom: 4, marginTop: 1 }}>
-        <Grid item xs>
-          <MuiLink component={RouterLink} to="/recoverpassword" variant="body2">
-            {"Forgot password?"}
-          </MuiLink>
+        <Grid container sx={{ marginTop: 1 }}>
+          <Grid item xs>
+            <MuiLink
+              component={RouterLink}
+              to="/recoverpassword"
+              variant="body2"
+            >
+              {"Forgot password?"}
+            </MuiLink>
+          </Grid>
+          <Grid item>
+            <MuiLink component={RouterLink} to="/login" variant="body2">
+              {"Already have an account? Sign In"}
+            </MuiLink>
+          </Grid>
         </Grid>
-        <Grid item>
-          <MuiLink component={RouterLink} to="/login" variant="body2">
-            {"Already have an account? Sign In"}
-          </MuiLink>
-        </Grid>
-      </Grid>
-    </Container>
+      </div>
+    </div>
   );
 }
 

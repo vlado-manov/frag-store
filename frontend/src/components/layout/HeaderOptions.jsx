@@ -41,15 +41,24 @@ const HeaderOptions = ({ handleMenuOpen, flexResp, scrolled }) => {
         className="rounded-full hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-500 p-2 flex items-center justify-center gap-1 p-3"
         onClick={handleMenuOpen}
       >
-        <AccountCircle sx={{ color: scrolled ? "white" : "#313131" }} />
         {userInfo ? (
-          <span className={`${!scrolled && "text-black "}text-sm`}>
-            {userInfo.name}
-          </span>
+          <>
+            {userInfo.image ? (
+              <div className="rounded-full w-4 h-4 bg-lime-400"></div>
+            ) : (
+              <AccountCircle sx={{ color: scrolled ? "white" : "#313131" }} />
+            )}
+            <span className={`${!scrolled && "text-black "}text-sm`}>
+              {userInfo.name}
+            </span>
+          </>
         ) : (
-          <span className={`${!scrolled && "text-black "}text-sm`}>
-            Sign in
-          </span>
+          <>
+            <AccountCircle sx={{ color: scrolled ? "white" : "#313131" }} />
+            <span className={`${!scrolled && "text-black "}text-sm`}>
+              Sign in
+            </span>
+          </>
         )}
       </div>
     </div>

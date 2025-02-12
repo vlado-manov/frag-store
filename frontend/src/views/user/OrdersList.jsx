@@ -16,14 +16,16 @@ const OrdersList = () => {
   };
   return (
     <Settings>
-      <h1 className="text-2xl font-bold text-left my-1">Your Orders</h1>
-      <p className="text-gray-600 text-sm text-left font-thin">
+      <h1 className="text-2xl text-white font-bold text-left my-1">
+        Your Orders
+      </h1>
+      <p className="text-white text-sm text-left font-thin">
         Track your order history, manage returns, and view details for each
         purchase.
       </p>
       {data?.orders?.length > 0 ? (
         <div className="flex flex-col gap-1 mt-4">
-          <div className="flex full-w gap-4 border-2 border-stone-200 rounded-xl px-4 py-2">
+          <div className="flex full-w gap-4 border-2 border-stone-200 text-white shadow-xl rounded-lg px-4 py-2">
             <div className="flex-[4] text-sm p-1 w-full">Order ID</div>
             <div className="flex-[1] text-sm text-center p-1 w-full">Items</div>
             <div className="flex-[2] text-sm text-center p-1 w-full">Total</div>
@@ -38,7 +40,7 @@ const OrdersList = () => {
             <div
               key={index}
               className={`${
-                index % 2 ? "bg-white" : "bg-stone-100"
+                index % 2 ? "bg-white" : "bg-stone-100 shadow-lg"
               } border-slate-100 border-2 rounded-xl p-4 w-full text-left`}
             >
               <Link className="flex gap-4" to={`/orders/${order._id}`}>
@@ -79,11 +81,13 @@ const OrdersList = () => {
       ) : (
         <p>NO ORDERS YET</p>
       )}
-      <CustomPagination
-        pages={data?.pages}
-        page={Number(data?.page) || 1}
-        setPage={handlePageChange}
-      />
+      <div className="bg-white border-slate-100 border-2 rounded-xl mt-2 p-2 shadow-lg">
+        <CustomPagination
+          pages={data?.pages}
+          page={Number(data?.page) || 1}
+          setPage={handlePageChange}
+        />
+      </div>
     </Settings>
   );
 };

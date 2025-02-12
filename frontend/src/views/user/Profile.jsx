@@ -105,12 +105,14 @@ const Profile = () => {
 
   return (
     <Settings>
-      <h1 className="text-2xl font-bold text-left my-1">User profile</h1>
-      <p className="text-gray-600 text-sm text-left font-thin">
+      <h1 className="text-2xl text-white font-bold text-left my-1">
+        User profile
+      </h1>
+      <p className="text-white text-sm text-left font-thin">
         Manage your details, view your orders status and change your password.
       </p>
       <div className="flex gap-5 mt-4">
-        <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col items-center justify-center p-6 min-w-64">
+        <div className="border-slate-100 bg-white shadow-xl border-2 rounded-xl flex flex-col items-center justify-center p-6 min-w-64">
           {profile?.image ? (
             <img
               src={profile?.image}
@@ -130,7 +132,7 @@ const Profile = () => {
           )}
           <CustomButton tw="my-1">Change profile image</CustomButton>
         </div>
-        <div className="border-slate-100 bg-stone-50 border-2 p-6 rounded-xl w-full">
+        <div className="border-slate-100 bg-white shadow-xl border-2 p-6 rounded-xl w-full">
           <h1 className="text-xl font-bold text-left my-1 w-full">
             General Information
           </h1>
@@ -157,7 +159,7 @@ const Profile = () => {
           </CustomButton>
         </div>
       </div>
-      <div className="border-slate-100 bg-stone-50 border-2 p-6 rounded-xl w-full mt-6">
+      <div className="border-slate-100 bg-white shadow-xl border-2 p-6 rounded-xl w-full mt-6">
         <h1 className="text-xl font-bold text-left my-1 w-full">Security</h1>
         <div className="w-full flex gap-2 py-4">
           <TextField

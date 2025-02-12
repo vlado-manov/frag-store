@@ -154,16 +154,16 @@ const OrderView = () => {
         </Message>
       ) : (
         <>
-          <h1 className="text-2xl font-bold text-left my-1">
+          <h1 className="text-2xl text-white font-bold text-left my-1">
             Order #{order._id}
           </h1>
-          <p className="text-gray-600 text-sm text-left font-thin">
+          <p className="text-slate-100 text-sm text-left font-thin">
             Created on {format(new Date(order.createdAt), "dd/MM/yyyy HH:mm")}
           </p>
-          <p className="text-gray-600 text-sm text-left font-thin">
+          <p className="text-slate-100 text-sm text-left font-thin">
             Total price: ${order.totalPrice.toFixed(2)}
           </p>
-          <div className="flex justify-center items-center py-6 px-24 my-6">
+          <div className="flex justify-center items-center py-6 px-24 mt-6 mb-4 border-slate-100 bg-white shadow-lg border-2 rounded-xl">
             <div className="text-center relative group">
               <div className="rounded-full py-4 bg-orange-400 min-w-24 w-24 h-24 flex items-center justify-center border-4 border-white">
                 <BsFillClockFill size={40} color="white" />
@@ -287,7 +287,7 @@ const OrderView = () => {
             )}
           </div>
           <div className="flex gap-4">
-            <div className="flex-[6] border-slate-100 bg-stone-50 border-2 rounded-xl p-6">
+            <div className="flex-[6] border-slate-100 bg-white shadow-lg border-2 rounded-xl p-6">
               <h1 className="text-lg font-bold text-left my-1 w-full">
                 Shipping address
               </h1>
@@ -301,7 +301,7 @@ const OrderView = () => {
                   `, ${order.shippingAddress.addressLine2}`}
               </p>
             </div>
-            <div className="flex-[6] border-slate-100 bg-stone-50 border-2 rounded-xl p-6">
+            <div className="flex-[6] border-slate-100 bg-white shadow-lg border-2 rounded-xl p-6">
               <h1 className="text-lg font-bold text-left my-1 w-full">
                 Payment method
               </h1>
@@ -360,7 +360,7 @@ const OrderView = () => {
               )}
             </div>
           </div>
-          <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col justify-center p-6 my-4">
+          <div className="border-slate-100 bg-white shadow-lg border-2 rounded-xl flex flex-col justify-center p-6 my-4">
             <h1 className="text-lg font-bold text-left my-1 w-full">
               Ordered items
             </h1>

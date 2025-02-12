@@ -14,11 +14,13 @@ const WishList = () => {
     <>
       {isLoggedIn ? (
         <Settings>
-          <h1 className="text-2xl font-bold text-left my-1">Wishlist</h1>
-          <p className="text-gray-600 text-sm text-left font-thin">
+          <h1 className="text-2xl text-white font-bold text-left my-1">
+            Wishlist
+          </h1>
+          <p className="text-white text-sm text-left font-thin">
             Save your favorite products and easily access them anytime.
           </p>
-          <div className="border-slate-100 bg-stone-50 border-2 p-6 rounded-xl w-full mt-4">
+          <div className="border-slate-100 bg-white shadow-lg border-2 p-6 rounded-xl w-full mt-4">
             {isLoading ? (
               <Loader />
             ) : (

@@ -33,7 +33,7 @@ const Settings = ({ children }) => {
     }
   };
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center py-10 bg-gradient-to-r from-sky-500 to-rose-500">
       <div className="px-4 w-full max-w-max md:max-w-7xl">
         <div className="flex py-16 px-10 rounded w-full gap-10 font-roboto">
           <div className="flex-[3] w-full relative">
@@ -52,7 +52,7 @@ const Settings = ({ children }) => {
               )}
               {/* <div className="w-24 h-24 bg-slate-200 border-white border-4 rounded-full"></div> */}
             </div>
-            <ul className="rounded-xl bg-slate-200">
+            <ul className="rounded-xl bg-slate-200 shadow-xl">
               {links.map((link, index) => (
                 <li
                   key={index}
