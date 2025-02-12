@@ -10,9 +10,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { Divider, Link as MuiLink } from "@mui/material";
-import { FaSquareFacebook } from "react-icons/fa6";
-import { FcGoogle } from "react-icons/fc";
+import { Link as MuiLink } from "@mui/material";
 import { toast } from "react-toastify";
 import Message from "../../components/ux/Message";
 

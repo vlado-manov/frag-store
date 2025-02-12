@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Settings from "./Settings";
 import {
   useCancelOrderMutation,
   useGetOrderByIdQuery,
+  useGetPayPalClientIdQuery,
+  usePayOrderMutation,
   useUpdatePaymentMethodMutation,
 } from "../../slices/ordersSlice";
 import { Link, useParams } from "react-router-dom";
@@ -20,6 +22,8 @@ import SelectPaymentModal from "../../components/modals/SelectPaymentModal";
 import { toast } from "react-toastify";
 import ConfirmCancellationOrder from "../../components/modals/ConfirmCancellationOrder";
 import CustomButton from "../../components/ui/CustomButton";
+import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import { useSelector } from "react-redux";
 
 const OrderView = () => {
   const { id: orderId } = useParams();
@@ -31,6 +35,86 @@ const OrderView = () => {
   } = useGetOrderByIdQuery(orderId);
   const [updatePaymentMethod] = useUpdatePaymentMethodMutation();
   const [cancelOrder] = useCancelOrderMutation();
+  const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
+  const {
+    data: paypal,
+    isLoading: loadingPayPal,
+    error: errorPayPal,
+  } = useGetPayPalClientIdQuery();
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!errorPayPal && !loadingPayPal && paypal.clientId) {
+      const loadPayPalScript = async () => {
+        paypalDispatch({
+          type: "resetOptions",
+          value: {
+            "client-id": paypal.clientId,
+            currency: "USD",
+          },
+        });
+        paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+      };
+
+      if (order && !order.isPaid) {
+        if (!window.paypal) {
+          loadPayPalScript();
+        }
+      }
+    }
+  }, [order, paypal, paypalDispatch, loadingPayPal, errorPayPal]);
+  async function onApproveTest() {
+    await payOrder({
+      orderId,
+      details: {
+        payer: {
+          email_address: "payer@example.com", // Тук подаваш правилния email за PayPal
+        },
+        paymentMethod: "paypal",
+        id: "some-paypal-id",
+        status: "approved",
+        update_time: "2025-02-12T12:00:00Z",
+      },
+    });
+    refetch();
+    toast.success("Плащането беше успешно!");
+  }
+  function createOrder(data, actions) {
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: {
+              value: order.totalPrice,
+            },
+          },
+        ],
+      })
+      .then((orderId) => {
+        return orderId;
+      });
+  }
+  function onApprove(data, actions) {
+    return actions.order.capture().then(async function (details) {
+      try {
+        const paymentDetails = {
+          ...details,
+          paymentMethod: "paypal",
+        };
+
+        await payOrder({ orderId, details: paymentDetails });
+        refetch();
+        toast.success("Плащането беше успешно!");
+      } catch (err) {
+        toast.error(err?.data?.message || err.message);
+      }
+    });
+  }
+  function onError(err) {
+    toast.error(err.message);
+  }
+
   const handlePaymentMethodChange = async (newPaymentMethod) => {
     try {
       await updatePaymentMethod({
@@ -88,7 +172,7 @@ const OrderView = () => {
                 className={`${
                   order.orderStatus === "pending"
                     ? "font-bold"
-                    : "text-slate-200"
+                    : "text-gray-600"
                 }`}
               >
                 Pending
@@ -120,7 +204,8 @@ const OrderView = () => {
               </p>
               {order.orderStatus === "paid" && (
                 <div className="absolute p-2 bg-black text-white text-xs font-thin rounded -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap hidden group-hover:block">
-                  Payment received on 11/04/2991 13:21
+                  Payment received on{" "}
+                  {format(new Date(order.paidAt), "dd/MM/yyyy HH:mm")}
                 </div>
               )}
             </div>
@@ -239,7 +324,8 @@ const OrderView = () => {
               ) : order.isPaid ? (
                 <>
                   <h5 className="mt-1 text-emerald-500">
-                    Payment received on 11/04/2025 12:32
+                    Payment received on{" "}
+                    {format(new Date(order.paidAt), "dd/MM/yyyy HH:mm")}
                   </h5>
                   <h5 className="mt-1">
                     Total: ${order.totalPrice.toFixed(2)}
@@ -251,12 +337,21 @@ const OrderView = () => {
                     Payment is pending. Please complete the payment to proceed
                     with your order.
                   </h5>
-                  <CustomButton tw="px-6">
-                    Pay ${order.totalPrice.toFixed(2)} with{" "}
-                    {order.paymentMethod === "paypal"
-                      ? "Paypal"
-                      : "Credit Card"}
-                  </CustomButton>
+                  {order.paymentMethod === "paypal" ? (
+                    <PayPalButtons
+                      fundingSource="paypal"
+                      createOrder={createOrder}
+                      onApprove={onApprove}
+                      onError={onError}
+                    ></PayPalButtons>
+                  ) : (
+                    <CustomButton
+                      tw="px-6 w-full block mb-2"
+                      onClick={onApproveTest}
+                    >
+                      Pay ${order.totalPrice.toFixed(2)} with Credit card
+                    </CustomButton>
+                  )}
                   <SelectPaymentModal
                     paymentMethod={order.paymentMethod}
                     onSave={handlePaymentMethodChange}

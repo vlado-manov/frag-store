@@ -6,7 +6,6 @@ import {
   TextField,
   Button,
   Grid,
-  Divider,
   Link as MuiLink,
 } from "@mui/material";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
@@ -20,8 +19,6 @@ import {
 } from "../../slices/wishlistApiSlice";
 import { clearLocalWishlist } from "../../slices/wishlistSlice";
 import Message from "../../components/ux/Message";
-import { FaSquareFacebook } from "react-icons/fa6";
-import { FcGoogle } from "react-icons/fc";
 
 function SignIn() {
   const [formData, setFormData] = useState({

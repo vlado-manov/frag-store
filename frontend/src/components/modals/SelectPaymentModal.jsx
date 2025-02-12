@@ -39,7 +39,7 @@ const SelectPaymentModal = ({ paymentMethod, onSave }) => {
   return (
     <>
       <CustomButton
-        tw="block my-2 px-6"
+        tw="block mb-2 px-6 py-3 w-full"
         variant="secondary"
         onClick={handleClickOpen}
       >

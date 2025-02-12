@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Settings from "./Settings";
 import { Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useSelector } from "react-redux";

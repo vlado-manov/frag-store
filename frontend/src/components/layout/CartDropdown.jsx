@@ -27,7 +27,7 @@ const CartDropdown = ({ scrolled }) => {
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  }, [setIsDropdownOpen]);
 
   const removeFromCartHandler = async (item) => {
     dispatch(removeFromCart(item));

@@ -1,11 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  calculateItemsPrice,
-  calculatePromoCodeDiscount,
-  calculateShipping,
-  calculateSubtotal,
-  updateCart,
-} from "../utils/cartUtils";
+import { updateCart } from "../utils/cartUtils";
 
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))

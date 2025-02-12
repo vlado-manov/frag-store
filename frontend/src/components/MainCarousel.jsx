@@ -51,7 +51,7 @@ const swipesCarouse2 = [
 
 const MainCarousel = () => {
   return (
-    <div className="flex items-center justify-center gap-4 w-full px-6">
+    <div className="flex items-center justify-center gap-4 w-full px-4">
       <div className="w-full md:w-1/4 h-[650px]">
         <Swiper
           modules={[Pagination, Autoplay]}

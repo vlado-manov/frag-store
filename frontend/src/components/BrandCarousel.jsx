@@ -52,7 +52,7 @@ const BrandCarousel = () => {
       if (!isAnimating) startAnimation();
     }, 4000);
     return () => clearInterval(interval);
-  }, [activeIndex, isAnimating]);
+  }, [activeIndex, isAnimating, startAnimation]);
 
   return (
     <div className="h-[550px] relative overflow-hidden rounded-lg max-w-4xl m-auto">

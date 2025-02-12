@@ -1,7 +1,7 @@
 import React from "react";
 import ProductsLayout from "./Products";
 import MainCarousel from "../../components/MainCarousel";
-import BrandCarousel from "../../components/BrandCarousel";
+// import BrandCarousel from "../../components/BrandCarousel";
 
 const Home = () => {
   return (

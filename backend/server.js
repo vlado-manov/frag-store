@@ -48,6 +48,11 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", ordersRoutes);
 app.use("/api/wishlist", wishlistRoutes);
+app.get("/api/config/paypal", (req, res) =>
+  res.send({
+    clientId: process.env.PAYPAL_CLIENT_ID,
+  })
+);
 
 const server = new ApolloServer({
   typeDefs,

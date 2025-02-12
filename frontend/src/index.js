@@ -7,7 +7,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import { ThemeProvider } from "@mui/material";
 import { Provider } from "react-redux";
 import store from "./store.js";
 import App from "./App.js";
@@ -26,12 +25,12 @@ import ShippingView from "./views/user/ShippingView.jsx";
 import SignIn from "./views/auth/SignIn.jsx";
 import SignUp from "./views/auth/SignUp.jsx";
 import RecoverPassword from "./views/auth/RecoverPassword.jsx";
-import { lightTheme } from "./styles/theme.js";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
 import { ApolloProvider } from "@apollo/client";
 import client from "./apolloClient";
 import Address from "./views/user/Address.jsx";
 import Cart from "./views/pages/Cart.jsx";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -77,9 +76,9 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <ThemeProvider theme={lightTheme}>
+        <PayPalScriptProvider deferLoading={true}>
           <RouterProvider router={router} />
-        </ThemeProvider>
+        </PayPalScriptProvider>
       </Provider>
     </ApolloProvider>
   </React.StrictMode>

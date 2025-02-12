@@ -115,6 +115,44 @@ const getOrders = asyncHandler(async (req, res) => {
   res.status(200).json(orders);
 });
 
+// @desc    Update order to paid
+// @route   PUT /api/orders/:id/pay
+// @access  Private
+const updateOrderToPaid = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+  console.log("ORDER IN BE IS:", order);
+  console.log("REQ BODY IN BE IS:", req.body);
+  if (!order) {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+
+  if (req.body.paymentMethod === "creditCard") {
+    order.paymentResult.stripe = {
+      paymentIntentId: req.body.paymentIntentId,
+      status: req.body.status,
+      receiptUrl: req.body.receiptUrl,
+    };
+  } else if (req.body.paymentMethod === "paypal") {
+    order.paymentResult.paypal = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.payer.email_address,
+    };
+  } else {
+    res.status(400);
+    throw new Error("Invalid payment method");
+  }
+
+  order.orderStatus = "paid";
+  order.isPaid = true;
+  order.paidAt = Date.now();
+
+  const updatedOrder = await order.save();
+  res.status(200).json(updatedOrder);
+});
+
 export {
   addOrderItems,
   getMyOrders,
@@ -122,4 +160,5 @@ export {
   getOrderById,
   updatePaymentMethod,
   cancelOrder,
+  updateOrderToPaid,
 };
