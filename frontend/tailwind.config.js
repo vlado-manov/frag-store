@@ -7,6 +7,10 @@ module.exports = {
       },
       fontFamily: {
         roboto: ["Roboto", "sans-serif"],
+        comfortaa: ["Comfortaa", "cursive"],
+        outfit: ["Outfit", "sans-serif"],
+        poiret: ["Poiret One", "cursive"],
+        tinos: ["Tinos", "sans-serif"],
       },
     },
   },

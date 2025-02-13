@@ -29,9 +29,13 @@ const OrdersList = () => {
             <div className="flex-[4] text-sm p-1 w-full">Order ID</div>
             <div className="flex-[1] text-sm text-center p-1 w-full">Items</div>
             <div className="flex-[2] text-sm text-center p-1 w-full">Total</div>
-            <div className="flex-[3] text-sm text-center p-1 w-full">Date</div>
-            <div className="flex-[1] text-sm text-center p-1 w-full">Paid</div>
-            <div className="flex-[1] text-sm text-right p-1 pr-2 w-full">
+            <div className="hidden md:block flex-[3] text-sm text-center p-1 w-full">
+              Date
+            </div>
+            <div className="hidden md:block flex-[1] text-sm text-center p-1 w-full">
+              Paid
+            </div>
+            <div className="hidden md:block flex-[1] text-sm text-right p-1 pr-2 w-full">
               Delivered
             </div>
           </div>
@@ -57,17 +61,17 @@ const OrdersList = () => {
                 <div className="flex-[2] text-sm text-center p-1 w-full">
                   ${order.totalPrice.toFixed(2)}
                 </div>
-                <div className="flex-[3] text-sm text-center p-1 w-full">
+                <div className="hidden md:block flex-[3] text-sm text-center p-1 w-full">
                   {format(new Date(order.createdAt), "dd/MM/yyyy HH:mm")}
                 </div>
-                <div className="flex-[1] flex justify-center p-1 w-full">
+                <div className="hidden md:block flex-[1] flex justify-center p-1 w-full">
                   {order.isPaid ? (
                     <FaCheck color="green" size={24} />
                   ) : (
                     <RiCloseLargeFill color="red" size={24} />
                   )}
                 </div>
-                <div className="flex-[1] flex justify-center p-1 w-full">
+                <div className="hidden md:block flex-[1] flex justify-center p-1 w-full">
                   {order.isDelivered ? (
                     <FaCheck color="green" size={24} />
                   ) : (

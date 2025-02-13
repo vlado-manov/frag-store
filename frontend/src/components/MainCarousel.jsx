@@ -9,7 +9,7 @@ import CustomButton from "./ui/CustomButton";
 const swipesCarousel = [
   {
     image: "https://i.makeup.uk/d/dy/dy0dbomgw9x8.jpg",
-    title: "Prada lhomme intense",
+    title: "Prada l'homme",
     desc: "A sophisticated fragrance blending notes of neroli, geranium, and patchouli.",
     direction: "right",
     url: "/products/brands/prada",
@@ -51,8 +51,8 @@ const swipesCarouse2 = [
 
 const MainCarousel = () => {
   return (
-    <div className="flex items-center justify-center gap-4 w-full px-4">
-      <div className="w-full md:w-1/4 h-[650px]">
+    <div className="flex items-center justify-center flex-col md:flex-row gap-1 md:gap-4 w-full px-4">
+      <div className="w-full md:w-1/4 h-[240px] md:h-[650px]">
         <Swiper
           modules={[Pagination, Autoplay]}
           direction="vertical"
@@ -71,7 +71,7 @@ const MainCarousel = () => {
                 <img
                   src={swipe.image}
                   alt={`Slide ${index}`}
-                  className="w-full h-[650px] object-cover shadow-lg"
+                  className="w-full h-[240px] md:h-[650px] object-cover shadow-lg"
                 />
                 <CustomButton
                   variant="tertiary"
@@ -106,15 +106,22 @@ const MainCarousel = () => {
                   className="w-full h-[650px] object-cover shadow-lg"
                 />
                 <div
-                  className={`absolute bg-white py-6 shadow-2xl flex flex-col top-1/2 -translate-y-1/2  ${
-                    swipe.direction === "right"
-                      ? "right-0 pr-20 pl-6 items-end text-right"
-                      : "left-0 pl-20 pr-6 items-start"
-                  }`}
+                  className={`absolute bg-black bg-opacity-40 backdrop-blur-sm p-6 shadow-lg flex flex-col top-1/2 -translate-y-1/2  w-full md:w-fit md:border-white
+                    
+                    ${
+                      swipe.direction === "right"
+                        ? "right-0 md:pr-20 md:pl-6 justify-center text-center md:items-end md:text-right md:border-r-[24px]"
+                        : "left-0 md:pl-20 md:pr-6 justify-center text-center md:text-left md:items-start md:border-l-[24px]"
+                    }
+                  `}
                 >
-                  <h1 className="text-black text-xl">{swipe.title}</h1>
-                  <p className="max-w-[320px]">{swipe.desc}</p>
-                  <CustomButton variant="default" to={swipe.url} tw="mt-4">
+                  <h1 className="text-white text-3xl font-poiret font-extrabold uppercase drop-shadow">
+                    {swipe.title}
+                  </h1>
+                  <p className="max-w-[320px] text-white font-outfit drop-shadow">
+                    {swipe.desc}
+                  </p>
+                  <CustomButton variant="primary" to={swipe.url} tw="mt-4">
                     Learn more
                   </CustomButton>
                 </div>
@@ -124,7 +131,7 @@ const MainCarousel = () => {
         </Swiper>
       </div>
 
-      <div className="w-full md:w-1/4 h-[650px]">
+      <div className="hidden md:block md:w-1/4 h-[650px]">
         <Swiper
           modules={[Pagination, Autoplay]}
           direction="vertical"

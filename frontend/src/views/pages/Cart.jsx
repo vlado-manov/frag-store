@@ -86,7 +86,7 @@ const Cart = () => {
                           <p className="hidden md:block text-xs">
                             {item.brand}
                           </p>
-                          <p className="text-md md:text-lg break-words">
+                          <p className="text-sm md:text-lg break-words">
                             {item.name}
                           </p>
                         </Link>
@@ -95,16 +95,13 @@ const Cart = () => {
                     <div className="flex-[2] w-full text-sm">
                       {item.variant?.size}ml
                     </div>
-                    <div className="flex-[3] w-full text-sm flex items-center gap-4">
+                    <div className="flex-[3] w-full text-sm flex items-center gap-2 md:gap-4">
                       <button
                         onClick={() =>
                           decrementQty({ _id: item._id, variant: item.variant })
                         }
                       >
-                        <FaCircleMinus
-                          size={20}
-                          className="hover:text-slate-800 hover:cursor-pointer"
-                        />
+                        <FaCircleMinus className="hover:text-slate-800 hover:cursor-pointer text-sm md:text-xl" />
                       </button>
                       <span>{item.quantity}</span>
                       <button
@@ -112,10 +109,7 @@ const Cart = () => {
                           incrementQty({ _id: item._id, variant: item.variant })
                         }
                       >
-                        <FaCirclePlus
-                          size={20}
-                          className="hover:text-slate-800 hover:cursor-pointer"
-                        />
+                        <FaCirclePlus className="hover:text-slate-800 hover:cursor-pointer text-sm md:text-xl" />
                       </button>
                     </div>
                     <div className="flex-[2] w-full text-sm">
@@ -125,7 +119,7 @@ const Cart = () => {
                       className="flex-[1] w-full hover:cursor-pointer"
                       onClick={() => removeFromCartHandler(item)}
                     >
-                      <IoMdCloseCircle size={24} />
+                      <IoMdCloseCircle className="md:text-2xl" />
                     </div>
                   </div>
                 ))}
@@ -151,46 +145,40 @@ const Cart = () => {
           {cartItems.length === 0 ? (
             ""
           ) : (
-            <div>
+            <div className="text-center md:text-left">
               <h1 className="text-left text-xl font-thin hidden md:block">
                 Summary
               </h1>
-              <h1 className="text-left font-bold text-2xl block mb-4 md:hidden">
+              <h1 className="text-center md:text-left font-bold text-2xl block mb-4 md:hidden">
                 Cart status
               </h1>
-              <div className="flex gap-2 md:justify-between py-2 items-center">
-                <p className="text-base md:text-sm">Number of items:</p>
+              <div className="flex gap-2 justify-center md:justify-between py-2 items-center">
+                <p className="text-sm md:text-base">Number of items:</p>
                 <p className="font-bold text-lg md:text-base">
                   {cartItems.length}
                 </p>
               </div>
-              <div className="flex gap-2 md:justify-between py-2 items-center">
-                <p className="text-base md:text-sm">Items price:</p>
-                <p className="font-bold text-lg md:text-base">
-                  ${itemsPrice.toFixed(2)}
-                </p>
+              <div className="flex gap-2 justify-center md:justify-between py-2 items-center">
+                <p className="text-sm md:text-base">Items price:</p>
+                <p className="font-bold md:text-lg">${itemsPrice.toFixed(2)}</p>
               </div>
-              <div className="flex gap-2 md:justify-between py-2 items-center">
-                <p className="text-base md:text-sm">Shipping:</p>
-                <p className="font-bold text-lg md:text-base">
-                  ${shipping.toFixed(2)}
-                </p>
+              <div className="flex gap-2 justify-center md:justify-between py-2 items-center">
+                <p className="text-sm md:text-base">Shipping:</p>
+                <p className="font-bold md:text-lg">${shipping.toFixed(2)}</p>
               </div>
               {discount && discount > 0 ? (
-                <div className="flex gap-2 md:justify-between py-2 items-center">
-                  <p className="text-base md:text-sm">Promo code:</p>
-                  <p className="font-bold text-red-500 text-lg md:text-base">
+                <div className="flex gap-2 justify-center md:justify-between py-2 items-center">
+                  <p className="text-sm md:text-base">Promo code:</p>
+                  <p className="font-bold text-red-500 md:text-lg">
                     -${discount.toFixed(2)}
                   </p>
                 </div>
               ) : (
                 ""
               )}
-              <div className="flex gap-2 md:justify-between py-2 items-center">
-                <p className="text-base md:text-sm">Subtotal:</p>
-                <p className="font-bold text-lg md:text-base">
-                  ${subtotal.toFixed(2)}
-                </p>
+              <div className="flex gap-2 justify-center md:justify-between py-2 items-center">
+                <p className="text-sm md:text-base">Subtotal:</p>
+                <p className="font-bold md:text-lg">${subtotal.toFixed(2)}</p>
               </div>
               <div className="py-2 w-full">
                 <TextField
@@ -203,7 +191,7 @@ const Cart = () => {
                 />
               </div>
               {itemsPrice >= 600 ? (
-                <p className="text-xs text-sky-500 mt-4">
+                <p className="text-xs text-green-500 mt-4">
                   Woohoo! You've scored free shipping.
                 </p>
               ) : (

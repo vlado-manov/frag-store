@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Container from "../../components/layout/Container";
 import CheckoutStepper from "../../components/CheckoutStepper";
 import { TextField } from "@mui/material";
 import { useGetProfileQuery } from "../../slices/userSlice";
@@ -9,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveShippingAddress } from "../../slices/cartSlice";
 import CheckoutCart from "../../components/CheckoutCart";
 import CustomButton from "../../components/ui/CustomButton";
+import ContainerGradient from "../../components/layout/ContainerGradient";
 
 const ShippingView = () => {
   const dispatch = useDispatch();
@@ -94,7 +94,7 @@ const ShippingView = () => {
       formData.country);
 
   return (
-    <Container>
+    <ContainerGradient>
       <CheckoutStepper step1 step2 />
       <div className="flex gap-2">
         <div className="w-full flex-[9]">
@@ -164,7 +164,7 @@ const ShippingView = () => {
                 ? "...Or add a new address"
                 : "Add your address"}
             </h1>
-            <div className="w-full flex gap-4 py-2">
+            <div className="w-full flex flex-col md:flex-row gap-4 py-2 mt-4 md:mt-0">
               <TextField
                 name="country"
                 value={formData.country}
@@ -190,7 +190,7 @@ const ShippingView = () => {
                 required
               />
             </div>
-            <div className="w-full flex gap-4">
+            <div className="w-full flex flex-col md:flex-row gap-4">
               <TextField
                 fullWidth
                 name="addressLine1"
@@ -220,7 +220,7 @@ const ShippingView = () => {
         </div>
         {cart.cartItems.length > 0 && <CheckoutCart cart={cart} />}
       </div>
-    </Container>
+    </ContainerGradient>
   );
 };
 

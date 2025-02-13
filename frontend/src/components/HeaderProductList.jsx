@@ -55,7 +55,7 @@ const HeaderProductList = ({ setSortBy, setSortOrder, sortBy, sortOrder }) => {
             />
           </Stack>
         </div>
-        <div className="flex-[3] w-1/2 ml-auto md:ml-0">
+        <div className="flex-[3] w-full md:w-1/2 ml-auto md:ml-0">
           <FormControl fullWidth size="small">
             <InputLabel>Sort by...</InputLabel>
             <Select id="sort-select" value={value} onChange={handleSortChange}>

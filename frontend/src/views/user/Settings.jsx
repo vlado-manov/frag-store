@@ -8,7 +8,7 @@ import { clearCartItems } from "../../slices/cartSlice";
 import { clearLocalWishlist } from "../../slices/wishlistSlice";
 
 const links = [
-  { label: "User profile", path: "profile" },
+  { label: "Profile", path: "profile" },
   { label: "Orders", path: "orders" },
   { label: "Address", path: "address" },
   // { label: "Payment methods", path: "payment-methods" },
@@ -34,10 +34,10 @@ const Settings = ({ children }) => {
   };
   return (
     <div className="flex justify-center py-10 bg-gradient-to-r from-sky-500 to-rose-500">
-      <div className="px-4 w-full max-w-max md:max-w-7xl">
-        <div className="flex py-16 px-10 rounded w-full gap-10 font-roboto">
+      <div className="md:px-4 w-full max-w-max md:max-w-7xl">
+        <div className="flex py-16 px-6 md:px-10 rounded w-full gap-10 font-roboto flex-col md:flex-row">
           <div className="flex-[3] w-full relative">
-            <div className="absolute -top-20 left-1/2 -translate-x-1/2 -z-0">
+            <div className="absolute -top-[90px] md:-top-20 left-1/2 -translate-x-1/2 -z-0">
               {user?.image ? (
                 <img
                   src={user?.image}
@@ -52,16 +52,16 @@ const Settings = ({ children }) => {
               )}
               {/* <div className="w-24 h-24 bg-slate-200 border-white border-4 rounded-full"></div> */}
             </div>
-            <ul className="rounded-xl bg-slate-200 shadow-xl">
+            <ul className="w-fit m-auto px-4 gap-1 md:gap-0 md:w-auto md:px-0 rounded-xl bg-slate-200 shadow-xl flex items-center justify-center md:block">
               {links.map((link, index) => (
                 <li
                   key={index}
-                  className="border-b-4 border-white  last-of-type:border-none"
+                  className="md:border-b-4 border-white last-of-type:border-none"
                 >
                   <NavLink
                     to={`/${link.path}`}
                     className={({ isActive }) =>
-                      `p-4 text-sm w-full block hover:cursor-pointer  ${
+                      `px-2 py-3 md:p-4 text-sm w-full block hover:cursor-pointer  ${
                         isActive
                           ? "bg-sky-500 text-white hover:text-gray-200"
                           : "hover:text-sky-500"
@@ -73,7 +73,7 @@ const Settings = ({ children }) => {
                 </li>
               ))}
               <li
-                className="border-b-4 border-white  last-of-type:border-none p-4 text-sm w-full hover:cursor-pointer hover:text-blue-500"
+                className="hidden md:block border-b-4 border-white last-of-type:border-none md:p-4 text-sm w-full hover:cursor-pointer hover:text-blue-500"
                 onClick={logoutHandler}
               >
                 Sign Out

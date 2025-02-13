@@ -20,7 +20,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 120) {
+      if (window.scrollY > 96) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -45,14 +45,16 @@ const Header = () => {
     setDrawerOpen(open);
   };
 
-  const appBarStyles = {
-    transition: "all 0.2s ease-in-out",
-    background: scrolled
-      ? "linear-gradient(10deg, #0ea5e9 0%, #6366f1 50%, #f43f5e 100%)"
-      : "rgba(255,255,255,1)",
-    boxShadow: scrolled ? "0px 4px 10px rgba(0, 0, 0, 0.3)" : "none",
-    padding: scrolled ? "0 16px" : "0 16px 8px 16px",
-  };
+  // const appBarStyles = {
+  //   transition: "all 0.2s ease-in-out",
+  //   background: scrolled
+  //     ? "linear-gradient(10deg, #0ea5e9 0%, #6366f1 50%, #f43f5e 100%)"
+  //     : "rgba(255,255,255,1)",
+  //   boxShadow: scrolled
+  //     ? "0px 4px 10px rgba(0, 0, 0, 0.3)"
+  //     : "0 2px 45px rgba(0,0,0,0.1)",
+  //   padding: scrolled ? "0 16px" : "0 16px 8px 16px",
+  // };
 
   const headingTitleStyles = {
     textDecoration: "none",
@@ -63,7 +65,10 @@ const Header = () => {
 
   return (
     <>
-      <AppBar position={scrolled ? "sticky" : "relative"} sx={appBarStyles}>
+      <AppBar
+        position={scrolled ? "sticky" : "relative"}
+        className={`header ${scrolled ? "scrolled" : "placedTop"}`}
+      >
         <div className="flex items-center gap-2 px-2 w-full flex-col sm:flex-row">
           <div className="flex items-stretch flex-[3] sm:items-center w-full sm:py-4">
             <div className="flex items-center flex-[6]">

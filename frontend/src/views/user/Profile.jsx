@@ -111,8 +111,8 @@ const Profile = () => {
       <p className="text-white text-sm text-left font-thin">
         Manage your details, view your orders status and change your password.
       </p>
-      <div className="flex gap-5 mt-4">
-        <div className="border-slate-100 bg-white shadow-xl border-2 rounded-xl flex flex-col items-center justify-center p-6 min-w-64">
+      <div className="md:flex gap-5 mt-4">
+        <div className="border-slate-100 bg-white shadow-xl border-2 rounded-xl flex flex-col items-center justify-center p-6 w-full md:min-w-64">
           {profile?.image ? (
             <img
               src={profile?.image}
@@ -132,11 +132,11 @@ const Profile = () => {
           )}
           <CustomButton tw="my-1">Change profile image</CustomButton>
         </div>
-        <div className="border-slate-100 bg-white shadow-xl border-2 p-6 rounded-xl w-full">
+        <div className="border-slate-100 bg-white shadow-xl border-2 p-6 rounded-xl w-full mt-2 md:mt-0">
           <h1 className="text-xl font-bold text-left my-1 w-full">
             General Information
           </h1>
-          <div className="w-full flex flex-col gap-8 py-4">
+          <div className="w-full flex flex-col gap-2 md:gap-8 py-4">
             <TextField
               fullWidth
               name="name"
@@ -159,9 +159,9 @@ const Profile = () => {
           </CustomButton>
         </div>
       </div>
-      <div className="border-slate-100 bg-white shadow-xl border-2 p-6 rounded-xl w-full mt-6">
+      <div className="border-slate-100 bg-white shadow-xl border-2 p-6 rounded-xl w-full mt-2 md:mt-6">
         <h1 className="text-xl font-bold text-left my-1 w-full">Security</h1>
-        <div className="w-full flex gap-2 py-4">
+        <div className="w-full flex flex-col md:flex-row gap-2 py-4">
           <TextField
             fullWidth
             name="email"
@@ -186,15 +186,13 @@ const Profile = () => {
             >
               {showPassword ? (
                 <FaEye
-                  color="#996f99"
                   size={30}
-                  className="p-1 rounded-full hover:bg-gray-200 hover:cursor-pointer"
+                  className="p-1 rounded-full text-gray-800 hover:bg-gray-200 hover:cursor-pointer"
                 />
               ) : (
                 <FaEyeSlash
-                  color="#996f99"
                   size={30}
-                  className="p-1 rounded-full hover:bg-gray-200 hover:cursor-pointer"
+                  className="p-1 rounded-full text-gray-400 hover:bg-gray-200 hover:cursor-pointer"
                 />
               )}
             </div>
@@ -215,15 +213,13 @@ const Profile = () => {
             >
               {showPassword ? (
                 <FaEye
-                  color="#996f99"
                   size={30}
-                  className="p-1 rounded-full hover:bg-gray-200 hover:cursor-pointer"
+                  className="p-1 rounded-full text-gray-800 hover:bg-gray-200 hover:cursor-pointer"
                 />
               ) : (
                 <FaEyeSlash
-                  color="#996f99"
                   size={30}
-                  className="p-1 rounded-full hover:bg-gray-200 hover:cursor-pointer"
+                  className="p-1 rounded-full text-gray-400 hover:bg-gray-200 hover:cursor-pointer"
                 />
               )}
             </div>

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Container from "../../components/layout/Container";
+import ContainerGradient from "../../components/layout/ContainerGradient";
 import CheckoutStepper from "../../components/CheckoutStepper";
 import CheckoutCart from "../../components/CheckoutCart";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ const OrderSummary = () => {
   }, [cart.shippingAddress, cart.paymentMethod, cart.orderCompleted, navigate]);
 
   return (
-    <Container>
+    <ContainerGradient>
       <CheckoutStepper step1 step2 step3 step4 />
       <div className="flex gap-2">
         <div className="w-full flex-[9]">
@@ -104,7 +104,7 @@ const OrderSummary = () => {
                   </>
                 )}
               </div>
-              <div className="p-2 mb-4 pr-6 flex gap-2 justify-end items-center">
+              <div className="p-2 mb-4 md:pr-6 flex gap-2 justify-end items-center">
                 <h5 className="">Sub total:</h5>
                 <p className="text-xl font-bold">${cart.subtotal.toFixed(2)}</p>
               </div>
@@ -116,7 +116,7 @@ const OrderSummary = () => {
         </div>
         {cart.cartItems.length > 0 && <CheckoutCart cart={cart} />}
       </div>
-    </Container>
+    </ContainerGradient>
   );
 };
 

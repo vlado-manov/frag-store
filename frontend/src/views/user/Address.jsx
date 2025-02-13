@@ -102,7 +102,7 @@ const Address = () => {
         <h1 className="text-xl font-bold text-left my-1 w-full">
           Add a new address
         </h1>
-        <div className="w-full flex gap-4 py-2">
+        <div className="w-full flex flex-col md:flex-row gap-2 md:gap-4 py-2">
           <TextField
             name="country"
             value={formData.country}
@@ -128,7 +128,7 @@ const Address = () => {
             required
           />
         </div>
-        <div className="w-1/2 flex gap-4">
+        <div className="w-full md:w-1/2 flex flex-col md:flex-row gap-2 md:gap-4">
           <TextField
             fullWidth
             name="addressLine1"

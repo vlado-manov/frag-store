@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CheckoutStepper from "../../components/CheckoutStepper";
-import Container from "../../components/layout/Container";
+import ContainerGradient from "../../components/layout/ContainerGradient";
 import { useNavigate } from "react-router-dom";
 import { FaCcVisa } from "react-icons/fa";
 import { FaCcMastercard } from "react-icons/fa";
@@ -40,7 +40,7 @@ const PaymentView = () => {
     }
   };
   return (
-    <Container>
+    <ContainerGradient>
       <CheckoutStepper step1 step2 step3 />
       <div className="flex gap-2">
         <div className="w-full flex-[9]">
@@ -87,7 +87,7 @@ const PaymentView = () => {
         </div>
         {cart.cartItems.length > 0 && <CheckoutCart cart={cart} />}
       </div>
-    </Container>
+    </ContainerGradient>
   );
 };
 

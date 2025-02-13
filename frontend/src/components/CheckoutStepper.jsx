@@ -9,21 +9,21 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
     <div className="flex justify-center items-center font-roboto gap-2 py-4">
       <div className="flex items-center gap-2">
         <div className="relative pb-8 overflow-visible">
-          <IoCheckmark className="text-sky-500" size={20} />
-          <h2 className="text-sky-400 absolute -left-1/2 -translate-x-1/2 bottom-0 w-full whitespace-nowrap">
+          <IoCheckmark className="text-sky-400" size={20} />
+          <h2 className="text-white absolute -left-1/2 -translate-x-1/2 bottom-0 w-full whitespace-nowrap">
             Sign in
           </h2>
         </div>
-        <div className="bg-sky-500 w-28 h-0.5 rounded-full mb-8"></div>
+        <div className="bg-sky-500 w-12 md:w-28 h-0.5 rounded-full mb-8"></div>
       </div>
       <div className="flex items-center gap-2">
         <div className="relative pb-8 overflow-visible hover:cursor-pointer">
           <Link to="/shipping">
             {step2 & step3 ? (
-              <IoCheckmark className="text-sky-500" size={20} />
+              <IoCheckmark className="text-sky-400" size={20} />
             ) : step2 ? (
               <GoDotFill
-                className="text-sky-500 transition-colors duration-300 ease-in-out"
+                className="text-sky-400 transition-colors duration-300 ease-in-out"
                 size={20}
               />
             ) : (
@@ -34,7 +34,7 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
             )}
             <h2
               className={`absolute -left-1/2 -translate-x-1/2 bottom-0 w-full whitespace-nowrap transition-colors duration-300 ease-in-out ${
-                step3 ? "text-sky-400" : "text-sky-500 font-bold"
+                step3 ? "text-white" : "text-white font-bold"
               }`}
             >
               Shipping
@@ -42,7 +42,7 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
           </Link>
         </div>
         <div
-          className={`w-28 h-0.5 rounded-full mb-8 transition-colors duration-300 ease-in-out ${
+          className={`w-12 md:w-28 h-0.5 rounded-full mb-8 transition-colors duration-300 ease-in-out ${
             step3 ? "bg-sky-500" : "bg-slate-300"
           }`}
         ></div>
@@ -56,10 +56,10 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
             }}
           >
             {step3 & step4 ? (
-              <IoCheckmark className="text-sky-500" size={20} />
+              <IoCheckmark className="text-sky-400" size={20} />
             ) : step3 ? (
               <GoDotFill
-                className="text-sky-500 transition-colors duration-300 ease-in-out"
+                className="text-sky-400 transition-colors duration-300 ease-in-out"
                 size={20}
               />
             ) : (
@@ -71,9 +71,9 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
             <h2
               className={`absolute -left-1/2 -translate-x-1/2 bottom-0 w-full whitespace-nowrap transition-colors duration-300 ease-in-out ${
                 step4
-                  ? "text-sky-400"
+                  ? "text-white"
                   : step3
-                  ? "text-sky-500 font-bold"
+                  ? "text-white font-bold"
                   : "text-slate-300"
               }`}
             >
@@ -82,7 +82,7 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
           </Link>
         </div>
         <div
-          className={`w-28 h-0.5 rounded-full mb-8 transition-colors duration-300 ease-in-out ${
+          className={`w-12 md:w-28 h-0.5 rounded-full mb-8 transition-colors duration-300 ease-in-out ${
             step4 ? "bg-sky-500" : "bg-slate-300"
           }`}
         ></div>
@@ -91,7 +91,7 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
         <div className="relative pb-8 overflow-visible">
           {step4 ? (
             <MdSend
-              className="text-sky-500 transition-colors duration-300 ease-in-out"
+              className="text-sky-400 transition-colors duration-300 ease-in-out"
               size={20}
             />
           ) : (
@@ -102,7 +102,7 @@ const CheckoutStepper = ({ step1, step2, step3, step4 }) => {
           )}
           <h2
             className={`absolute -left-1/2 -translate-x-1/2 bottom-0 w-full whitespace-nowrap transition-colors duration-300 ease-in-out ${
-              step4 ? "text-sky-500 font-bold" : "text-slate-300"
+              step4 ? "text-white font-bold" : "text-slate-300"
             }`}
           >
             Summary

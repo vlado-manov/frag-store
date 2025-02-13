@@ -1,4 +1,4 @@
-/* src/index.css */
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Outfit:wght@100..900&family=Poiret+One&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -139,4 +139,50 @@ h1 {
   background-color: #fff;
   opacity: 1;
   transform: scale(1.5);
+}
+/* Header.css */
+@keyframes fadeInHeader {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutHeader {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+.header {
+  transition: all 0.3s ease-in-out; /* Плавно преливане за всички промени */
+}
+
+.header.scrolled {
+  animation: fadeInHeader 0.5s ease-in-out forwards;
+  background: linear-gradient(10deg, #0ea5e9 0%, #6366f1 50%, #f43f5e 100%);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 0 16px;
+}
+
+/* .header.placedTop {
+  animation: fadeOutHeader 0.25s ease-in-out forwards;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 45px rgba(0, 0, 0, 0.1);
+  padding: 0 16px 8px 16px;
+} */
+
+.header:not(.scrolled) {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 45px rgba(0, 0, 0, 0.1);
+  padding: 0 16px 8px 16px;
 }

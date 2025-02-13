@@ -10,7 +10,7 @@ const SearchHeader = ({ scrolled }) => {
   };
 
   return (
-    <div className="flex items-center flex-[12] sm:flex-[6] w-full pb-2 sm:py-4">
+    <div className="flex items-center flex-[12] sm:flex-[6] w-full pb-4 sm:py-4">
       <Box
         display="flex"
         justifyContent="center"

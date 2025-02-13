@@ -141,7 +141,6 @@ const OrderView = () => {
       toast.error(error?.data?.message || error.message);
     }
   };
-  //TODO: Pay order w/ Paypal
   //TODO: Pay order w/ Stripe
 
   return (
@@ -163,17 +162,20 @@ const OrderView = () => {
           <p className="text-slate-100 text-sm text-left font-thin">
             Total price: ${order.totalPrice.toFixed(2)}
           </p>
-          <div className="flex justify-center items-center py-6 px-24 mt-6 mb-4 border-slate-100 bg-white shadow-lg border-2 rounded-xl">
-            <div className="text-center relative group">
-              <div className="rounded-full py-4 bg-orange-400 min-w-24 w-24 h-24 flex items-center justify-center border-4 border-white">
-                <BsFillClockFill size={40} color="white" />
+          <div className="flex justify-between md:justify-center items-center py-6 px-4 md:px-24 mt-6 mb-4 border-slate-100 bg-white shadow-lg border-2 rounded-xl">
+            <div className="flex items-center flex-col relative group">
+              <div className="rounded-full p-2 md:py-4 md:px-0 bg-orange-400 min-w-12 w-12 h-12 md:min-w-24 md:w-24 md:h-24 flex items-center justify-center md:border-4 border-white">
+                <BsFillClockFill
+                  className="text-2xl md:text-4xl"
+                  color="white"
+                />
               </div>
               <p
                 className={`${
                   order.orderStatus === "pending"
                     ? "font-bold"
                     : "text-gray-600"
-                }`}
+                } text-xs md:text-base`}
               >
                 Pending
               </p>
@@ -185,20 +187,20 @@ const OrderView = () => {
             <div
               className={`${
                 order.isPaid ? "bg-orange-400 " : "bg-orange-100 "
-              }w-full h-2`}
+              }w-full h-2 hidden md:block`}
             ></div>
-            <div className="text-center relative group">
+            <div className="flex items-center flex-col relative group">
               <div
                 className={`${
                   order.isPaid ? "bg-amber-400 " : "bg-amber-100 "
-                }rounded-full py-4 min-w-24 w-24 h-24 flex items-center justify-center border-4 border-white`}
+                }rounded-full p-2 md:py-4 md:px-0 min-w-12 w-12 h-12 md:min-w-24 md:w-24 md:h-24 flex items-center justify-center md:border-4 border-white`}
               >
-                <FaPiggyBank size={40} color="white" />
+                <FaPiggyBank className="text-2xl md:text-4xl" color="white" />
               </div>
               <p
                 className={`${
                   order.orderStatus === "paid" ? "font-bold" : "text-slate-200"
-                }`}
+                } text-xs md:text-base`}
               >
                 Paid
               </p>
@@ -214,24 +216,24 @@ const OrderView = () => {
                 order.orderStatus === "shipped"
                   ? "bg-amber-400 "
                   : "bg-amber-100 "
-              }w-full h-2`}
+              }w-full h-2 hidden md:block`}
             ></div>
-            <div className="text-center relative group">
+            <div className="flex items-center flex-col relative group">
               <div
                 className={`${
                   order.orderStatus === "shipped"
                     ? "bg-sky-400 "
                     : "bg-sky-100 "
-                }rounded-full py-4 min-w-24 w-24  h-24 flex items-center justify-center border-4 border-white`}
+                }rounded-full p-2 md:py-4 md:px-0 min-w-12 w-12 h-12 md:min-w-24 md:w-24 md:h-24 flex items-center justify-center md:border-4 border-white`}
               >
-                <FaTruckMoving size={40} color="white" />
+                <FaTruckMoving className="text-2xl md:text-4xl" color="white" />
               </div>
               <p
                 className={`${
                   order.orderStatus === "shipped"
                     ? "font-bold"
                     : "text-slate-200"
-                }`}
+                } text-xs md:text-base`}
               >
                 Shipped
               </p>
@@ -244,22 +246,22 @@ const OrderView = () => {
             <div
               className={`${
                 order.isDelivered ? "bg-sky-400 " : "bg-sky-100 "
-              }w-full h-2`}
+              }w-full h-2 hidden md:block`}
             ></div>
-            <div className="text-center relative group">
+            <div className="flex items-center flex-col relative group">
               <div
                 className={`${
                   order.isDelivered ? "bg-emerald-400 " : "bg-emerald-100 "
-                }rounded-full py-4 min-w-24 w-24  h-24 flex items-center justify-center border-4 border-white`}
+                }rounded-full p-2 md:py-4 md:px-0 min-w-12 w-12 h-12 md:min-w-24 md:w-24 md:h-24 flex items-center justify-center md:border-4 border-white`}
               >
-                <IoHome size={40} color="white" />
+                <IoHome className="text-2xl md:text-4xl" color="white" />
               </div>
               <p
                 className={`${
                   order.orderStatus === "delivered"
                     ? "font-bold"
                     : "text-slate-200"
-                }`}
+                } text-xs md:text-base`}
               >
                 Delivered
               </p>
@@ -272,12 +274,17 @@ const OrderView = () => {
 
             {order.orderStatus === "cancelled" && (
               <>
-                <div className="w-full h-2 bg-red-500"></div>
-                <div className="text-center relative group">
-                  <div className="bg-red-500 rounded-full py-4 min-w-24 w-24  h-24 flex items-center justify-center border-4 border-white">
-                    <ImCancelCircle size={40} color="white" />
+                <div className="w-full h-2 bg-red-500 hidden md:block"></div>
+                <div className="flex items-center flex-col relative group">
+                  <div className="bg-red-500 rounded-full p-2 md:py-4 md:px-0 min-w-12 w-12 h-12 md:min-w-24 md:w-24 md:h-24 flex items-center justify-center md:border-4 border-white">
+                    <ImCancelCircle
+                      className="text-2xl md:text-4xl"
+                      color="white"
+                    />
                   </div>
-                  <p className="font-bold text-red-400">Cancelled</p>
+                  <p className="font-bold text-red-400 text-xs md:text-base">
+                    Cancelled
+                  </p>
                   <div className="absolute p-2 bg-black text-white text-xs font-thin rounded -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap hidden group-hover:block">
                     Cancelled on{" "}
                     {format(new Date(order.updatedAt), "dd/MM/yyyy HH:mm")}
@@ -286,7 +293,7 @@ const OrderView = () => {
               </>
             )}
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-col-reverse md:flex-row gap-4">
             <div className="flex-[6] border-slate-100 bg-white shadow-lg border-2 rounded-xl p-6">
               <h1 className="text-lg font-bold text-left my-1 w-full">
                 Shipping address
@@ -415,7 +422,7 @@ const OrderView = () => {
                       <span className="line-through text-xs">
                         ${(item.variant?.price).toFixed(2)}
                       </span>
-                      <span className="text-red-500 font-bold block text-base">
+                      <span className="text-red-500 font-bold block text-sm md:text-base">
                         ${item.variant.discountPrice.toFixed(2)}
                       </span>
                     </>
@@ -425,7 +432,7 @@ const OrderView = () => {
                 </div>
               </div>
             ))}
-            <div className="pt-2 pr-6 flex gap-2 justify-end items-center">
+            <div className="pt-2 md:pr-6 flex gap-2 justify-end items-center">
               <h5 className="">Sub total:</h5>
               <p className="text-lg font-bold">
                 ${order.totalPrice.toFixed(2)}

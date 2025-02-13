@@ -38,7 +38,7 @@ const HeaderOptions = ({ handleMenuOpen, flexResp, scrolled }) => {
       </Link>
       <CartDropdown scrolled={scrolled} />
       <div
-        className="rounded-full hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-500 p-2 flex items-center justify-center gap-1 p-3"
+        className="rounded-full hover:cursor-pointer hover:bg-opacity-10 hover:bg-gray-500 p-[2px] md:p-2 flex items-center justify-center gap-1"
         onClick={handleMenuOpen}
       >
         {userInfo ? (
@@ -54,7 +54,6 @@ const HeaderOptions = ({ handleMenuOpen, flexResp, scrolled }) => {
           </>
         ) : (
           <>
-            <AccountCircle sx={{ color: scrolled ? "white" : "#313131" }} />
             <span className={`${!scrolled && "text-black "}text-sm`}>
               Sign in
             </span>

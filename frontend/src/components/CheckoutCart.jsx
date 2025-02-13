@@ -4,7 +4,7 @@ import PlaceOrderButton from "./PlaceOrderButton";
 
 const CheckoutCart = ({ cart }) => {
   return (
-    <div className="border-slate-100 bg-stone-50 border-2 rounded-xl flex flex-col p-6 my-4 flex-[3] w-full font-roboto">
+    <div className="border-slate-100 bg-stone-50 border-2 rounded-xl hidden md:flex flex-col p-6 my-4 flex-[3] w-full font-roboto">
       <div className="flex justify-between items-center">
         <h2 className="text-lg">
           Items ({cart.cartItems.reduce((sum, item) => sum + item.quantity, 0)})

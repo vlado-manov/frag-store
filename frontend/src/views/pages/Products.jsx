@@ -51,7 +51,7 @@ const ProductsLayout = ({
       />
       <div className="flex justify-center">
         {showFilters && <Filters hideFilters={hideFilters} />}
-        <div className="grid grid-cols-1 max-w-max md:max-w-6xl sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 max-w-max md:max-w-6xl md:grid-cols-3 lg:grid-cols-4 gap-6">
           {data?.products?.length > 0 ? (
             data.products.map((product) => (
               <ProductCard key={product._id} product={product} />
