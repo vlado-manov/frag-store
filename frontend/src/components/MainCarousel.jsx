@@ -76,7 +76,7 @@ const MainCarousel = () => {
                 <CustomButton
                   variant="tertiary"
                   to={swipe.url}
-                  tw="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl"
+                  tw="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-lg"
                 >
                   Check it now
                 </CustomButton>
@@ -106,12 +106,13 @@ const MainCarousel = () => {
                   className="w-full h-[650px] object-cover shadow-lg"
                 />
                 <div
-                  className={`absolute bg-black bg-opacity-40 backdrop-blur-sm p-6 shadow-lg flex flex-col top-1/2 -translate-y-1/2  w-full md:w-fit md:border-white
+                  className={`absolute bg-black bg-opacity-40 backdrop-blur-md md:backdrop-blur-sm hover:backdrop-blur-md duration-300 
+                    backdrop-brightness-125 backdrop-contrast-125 p-6 shadow-lg flex flex-col top-1/2 -translate-y-1/2  w-full md:w-fit
                     
                     ${
                       swipe.direction === "right"
-                        ? "right-0 md:pr-20 md:pl-6 justify-center text-center md:items-end md:text-right md:border-r-[24px]"
-                        : "left-0 md:pl-20 md:pr-6 justify-center text-center md:text-left md:items-start md:border-l-[24px]"
+                        ? "right-0 md:pr-20 md:pl-6 justify-center text-center md:items-end md:text-right"
+                        : "left-0 md:pl-20 md:pr-6 justify-center text-center md:text-left md:items-start"
                     }
                   `}
                 >
@@ -121,7 +122,7 @@ const MainCarousel = () => {
                   <p className="max-w-[320px] text-white font-outfit drop-shadow">
                     {swipe.desc}
                   </p>
-                  <CustomButton variant="primary" to={swipe.url} tw="mt-4">
+                  <CustomButton variant="tertiary" to={swipe.url} tw="mt-4">
                     Learn more
                   </CustomButton>
                 </div>
@@ -154,7 +155,7 @@ const MainCarousel = () => {
                 />
                 <CustomButton
                   variant="tertiary"
-                  tw="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xl"
+                  tw="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-lg"
                   to={swipe.url}
                 >
                   Check it now

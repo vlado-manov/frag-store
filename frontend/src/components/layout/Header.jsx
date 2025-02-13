@@ -45,17 +45,6 @@ const Header = () => {
     setDrawerOpen(open);
   };
 
-  // const appBarStyles = {
-  //   transition: "all 0.2s ease-in-out",
-  //   background: scrolled
-  //     ? "linear-gradient(10deg, #0ea5e9 0%, #6366f1 50%, #f43f5e 100%)"
-  //     : "rgba(255,255,255,1)",
-  //   boxShadow: scrolled
-  //     ? "0px 4px 10px rgba(0, 0, 0, 0.3)"
-  //     : "0 2px 45px rgba(0,0,0,0.1)",
-  //   padding: scrolled ? "0 16px" : "0 16px 8px 16px",
-  // };
-
   const headingTitleStyles = {
     textDecoration: "none",
     color: `${scrolled ? "white" : "black"}`,
@@ -80,8 +69,9 @@ const Header = () => {
                   <MenuIcon />
                 </IconButton>
               )}
-              <Link to="/" style={headingTitleStyles}>
-                FragStore
+              <Link to="/" style={headingTitleStyles} className="text-2xl">
+                <span className="font-outfit uppercase font-bold">Frag</span>
+                <span className="font-outfit font-thin">Store</span>
               </Link>
             </div>
             {isMobile && (
@@ -109,7 +99,11 @@ const Header = () => {
         openMenu={openMenu}
       />
 
-      <CustomDrawer drawerOpen={drawerOpen} toggleDrawer={toggleDrawer} />
+      <CustomDrawer
+        drawerOpen={drawerOpen}
+        toggleDrawer={toggleDrawer}
+        scrolled={scrolled}
+      />
       {!isMobile && <SubHeader toggleDrawer={toggleDrawer} />}
       <CartSync />
     </>
